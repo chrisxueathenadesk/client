@@ -1,0 +1,34 @@
+<template>
+  <require from="./request.css"></require>
+  <section>
+    <h3>${request.data.title}</h3>
+    <div class="source">
+      <label>
+        Source:
+        <span>
+          ${request.data.source.name}
+        </span>
+      </label>
+    </div>
+    <div class="destination">
+      <label>
+        Destination:
+        <span>
+          ${request.data.destination.name}
+        </span>
+      </label>
+    </div>
+    <div class="image">
+      
+    </div>
+    <div class="url">
+      <label>
+        Url:
+        <span>
+          ${request.data.url}
+        </span>
+      </label>
+    </div>
+
+  </section>
+</template>

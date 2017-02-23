@@ -1,0 +1,21 @@
+<template>
+  <require from="./requests.css"></require>
+  <require from="./components/request-card/request-card"></require>
+  <require from="./components/search/search"></require>
+  <require from="./components/countries/countries"></require>
+
+  <div class="search-bar">
+    <search model="requests.params.where" onChange="getrequests"></search>
+  </div>
+  <div class="search-filters">
+    <countries store.bind="requests" values.bind="countries.data" change.call="getRequests(params)">
+    </countries>
+    <!-- <sort model="requests.params.sort" values="requests.sort" onChange="getrequests"></sort> -->
+  </div>
+  <div class="request-list">
+    <div class="cards">
+      <request-card repeat.for="request of requests.data" class="request-card" request.bind="request"></request-card>
+    </div>
+  </div>
+  <pagination page="requestCollection.page.number" total="requestCollection.total"></pagination>
+</template>

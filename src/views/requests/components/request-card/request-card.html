@@ -1,0 +1,30 @@
+<template>
+  <require from="./request-card.css"></require>
+
+  <div class="card">
+    <a route-href="route: request; params.bind: {request_id: request.id}">
+      <div class="card-image">
+        <img src.bind="request.poster" alt="">
+      </div>
+      <div class="card-header">
+        ${request.title}
+      </div>
+    </a>
+    <div class="card-copy">
+      <div class="button-group">
+        <label>
+          <input type="radio" name="${request.id}" value="item">
+          <span class="button-group-item">Approve</span>
+        </label>
+        <label>
+          <input type="radio" name="${request.id}" value="other-item">
+          <span class="button-group-item">Reject</span>
+        </label>
+        <label>
+          <input type="radio" name="${request.id}" value="other-item">
+          <span class="button-group-item">Respond</span>
+        </label>
+      </div>
+    </div>
+  </div>
+</template>

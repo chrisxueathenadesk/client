@@ -1,0 +1,8 @@
+<template>
+  <label>
+    ${label}
+    <select value.bind="changedValue" change.trigger="onChange(changedValue)">
+      <option repeat.for="value of values" model.bind="value.id">${value.name}</option>
+    </select>
+  </label>
+</template>
