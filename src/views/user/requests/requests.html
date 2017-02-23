@@ -1,0 +1,12 @@
+<template>
+  <require from="./requests.css"></require>
+  <a class="button" route-href="route: create-request">Create</a>
+  <ul>
+    <li repeat.for="request of requests.data">
+      <span>${request.title}</span>
+    </li>
+  </ul>
+  <div >
+
+  </div>
+</template>
