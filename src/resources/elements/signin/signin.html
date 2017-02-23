@@ -1,0 +1,23 @@
+<template>
+  <require from="./signin.css"></require>
+  <ai-dialog class="modal-sm active">
+    <div class="modal-container">
+      <ai-dialog-body class="modal-body">
+        <div class="content">
+          <div class="form-group">
+            <label class="form-label" for="email">Email</label>
+            <input attach-focus="true" class="form-input" type="email" value.bind="person.email" placeholder="email">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="password">Password</label>
+            <input class="form-input" type="password" value.bind="person.password" placeholder="password">
+          </div>
+        </div>
+      </ai-dialog-body>
+      <ai-dialog-footer class="modal-footer">
+        <button class="btn btn-link" click.delegate="controller.cancel()">Cancel</button>
+        <button class="btn btn-primary" click.delegate="login(user)">Sign In</button>
+      </ai-dialog-footer>
+    </div>
+  </ai-dialog>
+</template>

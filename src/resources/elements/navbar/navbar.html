@@ -1,0 +1,25 @@
+<template>
+  <require from="./navbar.css"></require>
+  <header role="banner">
+    <nav class="nav-container" role="navigation">
+      <div class="logo">
+        Radship
+      </div>
+
+      <ul class="tab inline-flex main-nav">
+        <li class="tab-item ${row.isActive ? 'active': ''} " repeat.for="row of router.navigation | authFilter: auth.isAuthenticated()">
+          <a href.bind="row.href">${row.title}</a>
+        </li>
+      </ul>
+
+      <div if.bind="userStore.user" class="signup">
+        <a href="#" route-href="route: user">${userStore.user.name}</a>
+        <a href="#" click.delegate="logout()">Logout</a>
+      </div>
+      <div if.bind="!userStore.user" class="signup">
+        <a href="#" route-href="route: user">${userStore.user.name}</a>
+        <a route-href="route: auth">Login/Register</a>
+      </div>
+    </nav>
+  </header>
+</template>
