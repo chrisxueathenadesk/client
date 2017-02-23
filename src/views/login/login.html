@@ -1,0 +1,17 @@
+<template>
+  <require from="./login.css"></require>
+
+  <form class="login" submit.delegate="login()">
+    <label for="email">Email</label>
+    <input type="email" class="email" name="email" value.bind="email">
+    <label for="password">Password</label>
+    <input type="password" name="password" value.bind="password">
+    <button type="submit">Login</button>
+  </form>
+  <div>
+    Don't have an account? <a route-href="route: signup">Signup</a>!
+  </div>
+  <div>
+    <a route-href="route: reset">Forgot password?</a>
+  </div>
+</template>
