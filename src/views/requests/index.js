@@ -3,8 +3,8 @@ export class RequestsRouter {
 
   configureRouter(config, router) {
     config.map([
-      {route: '', moduleId: './requests', nav: true, title: 'Requests'},
-      {route: '/:request_id', name: 'request', moduleId: './request/index', title: 'Request'}
+      {route: '', moduleId: './requests', nav: true },
+      {route: '/:request_id', name: 'request', moduleId: './request/index' }
     ]);
   }
 }
