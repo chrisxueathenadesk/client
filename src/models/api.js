@@ -27,7 +27,7 @@ export class Api {
       query = `${query}${buildQueryString(Api.formatFilters(params.filter, 'where'))}`;
     }
 
-    if (params.include.length) {
+    if (params.include && params.include.length) {
       let includeQuery = {include: `[${params.include.join(',')}]`};
       query = `${query}&${buildQueryString(includeQuery)}`;
     }

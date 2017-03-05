@@ -10,7 +10,7 @@ const configForDevelopment = {
 
 const configForProduction = {
   responseTokenProp: 'token',
-  baseUrl: 'https://radship.herokuapp.com',
+  baseUrl: 'https://novelship.herokuapp.com',
   logoutRedirect: '/#/auth/login',
   profileUrl: '/me',
   tokenPrefix: ''
