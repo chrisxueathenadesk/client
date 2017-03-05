@@ -1,5 +1,5 @@
 export default {
   debug: false,
   testing: false,
-  base: 'https://radship.herokuapp.com/'
+  base: 'https://novelship.herokuapp.com/'
 };
