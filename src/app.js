@@ -42,6 +42,11 @@ export class App {
         title: 'Home'
       },
       {
+        route: 'product/:product_id',
+        name: 'product',
+        moduleId: 'views/product/index'
+      },
+      {
         route: 'requests',
         name: 'requests',
         moduleId: 'views/requests/index',
