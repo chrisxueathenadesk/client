@@ -27,7 +27,7 @@ export class App {
   }
 
   configureRouter(config, router) {
-    config.title = 'Rad Ship';
+    config.title = 'Novelship';
     config.addPipelineStep('authorize', AuthorizeStep);
     config.map([
       {
@@ -45,6 +45,11 @@ export class App {
         route: 'product/:product_id',
         name: 'product',
         moduleId: 'views/product/index'
+      },
+      {
+        route: 'search',
+        name: 'search',
+        moduleId: 'views/search/index'
       },
       {
         route: 'requests',
