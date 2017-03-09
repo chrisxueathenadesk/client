@@ -27,12 +27,29 @@ export class App {
   }
 
   configureRouter(config, router) {
-    config.title = 'Rad Ship';
+    config.title = 'Novelship';
     config.addPipelineStep('authorize', AuthorizeStep);
     config.map([
       {
         route: '',
-        redirect: 'requests'
+        redirect: 'home'
+      },
+      {
+        route: 'home',
+        name: 'home',
+        moduleId: 'views/home/index',
+        nav: true,
+        title: 'Home'
+      },
+      {
+        route: 'product/:product_id',
+        name: 'product',
+        moduleId: 'views/product/index'
+      },
+      {
+        route: 'search',
+        name: 'search',
+        moduleId: 'views/search/index'
       },
       {
         route: 'requests',

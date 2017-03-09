@@ -1,0 +1,23 @@
+<template>
+  <require from="./product-card.css"></require>
+
+  <div class="card">
+    <!-- a card will have a product picture on the left-->
+    <!--  product title on the right -->
+    <!--  product price below the name -->
+    <!--  product price below the name -->
+    <a route-href="route: product; params.bind: {product_id: product.id}">
+      <div class="card-image">
+        <img src.bind="product.gallery[0]" alt="">
+      </div>
+      <div class="card-header">
+        ${product.name}
+      </div>
+    </a>
+    <div class="card-copy">
+      <div>
+        ${product.price} SGD
+      </div>
+    </div>
+  </div>
+</template>
