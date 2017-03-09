@@ -3,5 +3,20 @@
   <h1>
     ${product.data.name}
   </h1>
-  <button type="submit">Place Order</button>
+  <h3>SGD ${product.data.price}</h3>
+  <select value.bind="request.color">
+    <option repeat.for="color of product.data.colors" model.bind="color">${color.name}</option>
+  </select>
+  <select value.bind="request.size">
+    <option repeat.for="size of product.data.sizes" model.bind="size">${size.name}</option>
+  </select>
+  <div>
+    <label>
+      <input type="checkbox" name="delivery" model.bind="pickup" checked.bind="request.delivery">
+      Pickup
+    </label>
+  </div>
+  <!-- if not logged in/signed up, log in/signup -->
+  <!-- confirm with final price -->
+  <button type="submit" click.delegate="confirm()">Place Order</button>
 </template>
