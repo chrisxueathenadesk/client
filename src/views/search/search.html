@@ -2,6 +2,6 @@
   <require from="./search.css"></require>
 
   <div repeat.for="product of search.data">
-    ${product.name}
+    <a route-href="route: product; params.bind: {product_id: product.id}">${product.name}</a>
   </div>
 </template>
