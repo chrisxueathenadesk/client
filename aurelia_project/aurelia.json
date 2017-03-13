@@ -1,5 +1,5 @@
 {
-  "name": "novelship",
+  "name": "client_updated",
   "type": "project:application",
   "platform": {
     "id": "web",
@@ -19,8 +19,8 @@
     "source": "src/**/*.js"
   },
   "markupProcessor": {
-    "id": "none",
-    "displayName": "None",
+    "id": "minimum",
+    "displayName": "Minimal Minification",
     "fileExtension": ".html",
     "source": "src/**/*.html"
   },
@@ -31,8 +31,8 @@
     "source": "src/**/*.scss"
   },
   "editor": {
-    "id": "vscode",
-    "displayName": "Visual Studio Code"
+    "id": "none",
+    "displayName": "None"
   },
   "unitTestRunner": {
     "id": "none",
@@ -72,8 +72,7 @@
     },
     "options": {
       "minify": "stage & prod",
-      "sourcemaps": "dev & stage",
-      "rev": "stage & prod"
+      "sourcemaps": "dev & stage"
     },
     "bundles": [
       {
@@ -87,6 +86,7 @@
         "name": "vendor-bundle.js",
         "prepend": [
           "node_modules/bluebird/js/browser/bluebird.core.js",
+          "node_modules/aurelia-cli/lib/resources/scripts/configure-bluebird.js",
           "node_modules/requirejs/require.js"
         ],
         "dependencies": [
@@ -113,16 +113,6 @@
           "aurelia-templating-binding",
           "text",
           {
-            "name": "aurelia-auth",
-            "path": "../node_modules/aurelia-auth/dist/amd",
-            "main": "aurelia-auth"
-          },
-          {
-            "name": "aurelia-fetch-client",
-            "path": "../node_modules/aurelia-fetch-client/dist/amd",
-            "main": "aurelia-fetch-client"
-          },
-          {
             "name": "aurelia-templating-resources",
             "path": "../node_modules/aurelia-templating-resources/dist/amd",
             "main": "aurelia-templating-resources"
@@ -139,14 +129,22 @@
             "env": "dev"
           },
           {
-            "name": "aurelia-dialog",
-            "path": "../node_modules/aurelia-dialog/dist/amd",
-            "main": "aurelia-dialog"
+            "name": "aurelia-auth",
+            "main": "aurelia-auth",
+            "path": "../node_modules/aurelia-auth/dist/amd",
+            "resources": []
           },
           {
-            "name": "objection-find-query",
-            "path": "../node_modules/objection-find-query/",
-            "main": "index"
+            "name": "aurelia-dialog",
+            "main": "aurelia-dialog",
+            "path": "../node_modules/aurelia-dialog/dist/amd",
+            "resources": []
+          },
+          {
+            "name": "aurelia-fetch-client",
+            "main": "aurelia-fetch-client",
+            "path": "../node_modules/aurelia-fetch-client/dist/amd",
+            "resources": []
           }
         ]
       }
