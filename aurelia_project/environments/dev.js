@@ -1,4 +1,5 @@
 export default {
   debug: true,
-  testing: true
+  testing: true,
+  base: 'http://localhost:3000/'
 };

@@ -2,14 +2,6 @@ import environment from './environment';
 import {HttpClient} from 'aurelia-fetch-client';
 import authConfig from './auth-config';
 
-//Configure Bluebird Promises.
-Promise.config({
-  longStackTraces: environment.debug,
-  warnings: {
-    wForgottenReturn: false
-  }
-});
-
 export function configure(aurelia) {
   aurelia.use
     .standardConfiguration()
