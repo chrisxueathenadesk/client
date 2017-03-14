@@ -9,6 +9,7 @@ before_deploy:
 - mkdir deploy
 - cp index.html deploy/
 - cp -R scripts deploy/
+- rm -rf scripts
 deploy:
   provider: s3
   region: ap-southeast-1
