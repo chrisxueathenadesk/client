@@ -1,16 +1,24 @@
 language: node_js
 node_js:
-  - 7
-
-addons:
-  artifacts:
-    s3_region: "ap-southeast-1"
-    paths:
-      - ./scripts
-      - ./index.html
-
+- 7
 install:
-  - npm install
-
+- npm install
 script:
-  - npm run build
+- npm run build
+before_deploy:
+- mkdir deploy
+- cp index.html
+- cp -R scripts deploy/
+deploy:
+  provider: s3
+  region: ap-southeast-1
+  bucket: novelship
+  local_dir: deploy
+  cache_control: max-age=31536000
+  skip_cleanup: true
+  secret_access_key:
+    secure: PcdE4VWA/O4DB16q2PKPgLvIozLhvQJvD5vcQms3HWW97QHL7znG+lVwOrQdBAbFBmfXQFj7kJmdefanB4Xd6md4tcnfv5RTkNDvEJbs8TaJmWPjfLKs4V33gZG20OEMWOD32GXaUm/vs2178ec9FPH30X2OjbZxofYBivhj9Jc6gMlKxEjADSV6kudhBZronMjTO9DP/pdYPlOe80wXmj8k4Vfh3HA4/qHzHk896zbNF8jEAH6lQmO4oA5tBxrXsWa7Gzn74b9eDcIvitPv7f0q+561B1YOsPo8wYhE9vLjp597tsWjkk1FON5z924IGz7s0z408Fh7uaADrYIOw5NB8HAyGxKzw0/C1Njohn/V3gyGYuUOJfJbz+TjR08fXlsrJx69ebMdNVux3TWF28mjadodaStR8VNXd7QwamtgLGPZXXj/b+egaBgPQLsfenuOkQOeDoyAU3x+7V3ir4jf+0uHU42DYnUvCK/8I0ah/Ur4Oi+JrQiH/QtVg8o9+Ff+04liAekPEcs/+JBcI/vP6TNFd7ddeEsZs63TnsJw+IFM6SCJu3EjkSTn5bIMbtkljrBYdCYuv/mqARfesAL6cUbTz52t4rD8Rzae92EfFEuF35pU/5K6ptX9wFMmyLDdrIBYo4EJrLlfNn5TkdmxdLVN/brr5IHG8zdUv38=
+  access_key_id:
+    secure: YPv8QbY+vdVBLoTdZF38Sb1ngINhQbzeJ9HM+kxMV4axDasq/QoguXiiZrI3yVwFjA5viCzZQPvbeHJKgAMeVceNWGywO504kMD0LgLHOuHg/oXTuly4w+Lv5FVH4fx13W6XsVflXRlOr8Y+umz8V1ui1u7vJyF83eRLHpQPVFMxYKSFWe7U41k7qpRdpcqmDqSE57WUb2wmrTgCGzE8wU+Cx7eO3N37qulORXQNEUpEe1WPlWW8DLrXlhmR/mLvg8wAMF6YJwWM466gsspaJQDenmOOQ0olic00PVhfKkQIKiJYI/TCYrG3YOnVGWlSjduNEgYZPLELRdXj6rk3LAxykzlB8WMMA+3PmPsa8E7Y4GvE6WpG5vlRAAejeMnJ3TKyly2WyX9KQUJMosvQm42K10tzdZ9TgeNnxhAkwBvRDN36LAwEwf0JNvwLSjG4uzQyFg8fH9QZVVlFu/+SMKGc6V75hgxiJhCcpOI3Hiumf1xyG9xHBzBqHwPljkf5I3lnOwHwQxJ/65rX0/Rrcw8hkE5eZpoXmiKYpBAntBE8+TF1+RKPvmls4oqFm8OYehvosNsF0/VPQHlmQb6n7LFMp0BSdUWSi4oz1KL5utYU/gRChClHp7cgV7TjUmCryjshNXWj1GyU12mQucDCOQnfzOI44g7Ynk+h8kh+vV0=
+after_deploy:
+- rm -rf deploy
