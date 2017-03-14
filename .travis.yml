@@ -7,7 +7,7 @@ script:
 - npm run build
 before_deploy:
 - mkdir deploy
-- cp index.html
+- cp index.html deploy/
 - cp -R scripts deploy/
 deploy:
   provider: s3
