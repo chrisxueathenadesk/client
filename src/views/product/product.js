@@ -12,7 +12,7 @@ export class ProductView {
     this.currentUser = currentUser;
     this.product = {
       params: {
-        include: []
+        include: ['source']
       }
     };
     this.request = {};
@@ -20,7 +20,7 @@ export class ProductView {
 
   getProduct(id) {
     this.api
-    .fetch(`products/${id}`)
+    .fetch(`products/${id}`, this.product.params)
     .then(product => {
       this.product.data = product;
       this.request = {
