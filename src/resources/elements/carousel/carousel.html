@@ -1,0 +1,8 @@
+<template>
+  <require from="./carousel.css"></require>
+  <div class="carousel" ref="carousel">
+    <i click.delegate="prev()" class="icon ion-chevron-left"></i>
+    <img class="carousel-image" repeat.for="image of images" src.bind="image" show.bind="$index === activeimage" />
+    <i click.delegate="next()" class="icon ion-chevron-right"></i>
+  </div>
+</template>
