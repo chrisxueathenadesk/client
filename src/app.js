@@ -52,11 +52,10 @@ export class App {
         moduleId: 'views/search/index'
       },
       {
-        route: 'requests',
-        name: 'requests',
-        moduleId: 'views/requests/index',
-        nav: true,
-        title: 'Requests'
+        route: 'admin',
+        name: 'admin',
+        moduleId: 'views/admin/index',
+        title: 'Admin'
       },
       {
         route: 'user',
