@@ -1,11 +1,14 @@
 <template>
   <require from="./signup.css"></require>
 
-  <label for="email">Email</label>
-  <input type="email" class="email" name="email" value="">
-  <label for="password">Password</label>
-  <input type="password" name="password" value="">
-  <label for="repeat">Repeat Password</label>
-  <input type="password" name="repeat" value="">
-  <button type="submit">Signup</button>
+  <form class="signup" submit.delegate="login(user)">
+    <label for="email">Email</label>
+    <input type="email" class="email" name="email" value.bind="user.email">
+    <label for="password">Password</label>
+    <input type="password" name="password" value.bind="user.password">
+    <label for="repeat">Repeat Password</label>
+    <input type="password" name="repeat" value.bind="user.repeat">
+    <button type="submit">Signup</button>
+  </form>
+
 </template>
