@@ -1,0 +1,13 @@
+<template>
+  <require from="./create.css"></require>
+
+  <form submit.delegate="create()">
+    <label>Name
+      <input type="text" value.bind="product.name" />
+    </label>
+    <label>Url
+      <input type="text" value.bind="product.url" />
+    </label>
+    <button type="submit">Create</button>
+  </form>
+</template>
