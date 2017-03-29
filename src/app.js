@@ -38,8 +38,28 @@ export class App {
         route: 'home',
         name: 'home',
         moduleId: 'views/home/index',
-        nav: true,
         title: 'Home'
+      },
+      {
+        route: 'deals',
+        name: 'deals',
+        moduleId: 'views/home/index',
+        nav: true,
+        title: 'Deals'
+      },
+      {
+        route: 'categories',
+        name: 'categories',
+        moduleId: 'views/home/index',
+        nav: true,
+        title: 'Categories'
+      },
+      {
+        route: 'shops',
+        name: 'shops',
+        moduleId: 'views/home/index',
+        nav: true,
+        title: 'Shops'
       },
       {
         route: 'product/:product_id',
@@ -63,11 +83,13 @@ export class App {
         moduleId: 'views/user/index',
         nav: true,
         auth: true,
-        title: 'Dashboard'
+        title: 'Account'
       },
       {
         route: 'auth',
         name: 'auth',
+        auth: false,
+        nav: true,
         moduleId: 'views/login/index',
         title: 'Login'
       }

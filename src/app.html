@@ -2,14 +2,13 @@
   <require from="resources/elements/navbar/navbar"></require>
   <require from="./app.css"></require>
 
-  <div class="navbar">
-    <navbar router.bind="router"></navbar>
-  </div>
-  <div class="searchbar">
-    <searchbar></searchbar>
-  </div>
+  <div class="page-container">
+    <div class="navbar">
+      <navbar router.bind="router"></navbar>
+    </div>
 
-  <div class="page-host">
-    <router-view></router-view>
+    <div class="page-host">
+      <router-view></router-view>
+    </div>
   </div>
 </template>
