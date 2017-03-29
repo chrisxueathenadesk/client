@@ -1,25 +1,25 @@
 @import '../../../app';
 
-.search-bar {
-  display: inline-block;
-  margin: 1em 1em 1em 1em;
-  min-width: 50%;
-}
-
-.search-filters {
-  display: inline-block;
-}
-
-.request-list {
-}
-
-.request-card {
-  @include outer-container;
-  @include span-columns(4);
-}
-
-.cards {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
+// .search-bar {
+//   display: inline-block;
+//   margin: 1em 1em 1em 1em;
+//   min-width: 50%;
+// }
+//
+// .search-filters {
+//   display: inline-block;
+// }
+//
+// .request-list {
+// }
+//
+// .request-card {
+//   @include outer-container;
+//   @include span-columns(4);
+// }
+//
+// .cards {
+//   display: flex;
+//   flex-wrap: wrap;
+//   justify-content: space-between;
+// }
