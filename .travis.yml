@@ -17,7 +17,7 @@ deploy:
   region: ap-southeast-1
   bucket: novelship
   local_dir: deploy
-  cache_control: max-age=31536000
+  cache_control: max-age=21600
   skip_cleanup: true
   acl: public_read
   secret_access_key:
