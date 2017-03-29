@@ -2,23 +2,16 @@
   <require from="./navbar.css"></require>
   <header role="banner">
     <nav class="nav-container" role="navigation">
-      <div class="logo">
-        Novelship
-      </div>
+      <div class="nav-menu">
+        <div class="logo">
+          <picture>
+            <source srcset="images/logo-big.svg" media="(min-width: 600px)">
+            <img class="logo-image" src="images/logo-small.svg" alt=""/>
+          </picture>
+        </div>
 
-      <ul class="tab inline-flex main-nav">
-        <li class="tab-item ${row.isActive ? 'active': ''} " repeat.for="row of router.navigation | authFilter: auth.isAuthenticated()">
-          <a href.bind="row.href">${row.title}</a>
-        </li>
-      </ul>
-
-      <div if.bind="userStore.user" class="signup">
-        <a href="#" route-href="route: user">${userStore.user.name}</a>
-        <a href="#" click.delegate="logout()">Logout</a>
-      </div>
-      <div if.bind="!userStore.user" class="signup">
-        <a href="#" route-href="route: user">${userStore.user.name}</a>
-        <a route-href="route: auth">Login/Register</a>
+        <a class="nav-item ${row.isActive ? 'active': ''} " repeat.for="row of router.navigation | authFilter: auth.isAuthenticated()" href.bind="row.href">${row.title}</a>
+        <!-- <a class="nav&#45;item" href="#" click.delegate="logout()">Logout</a> -->
       </div>
     </nav>
   </header>
