@@ -8,6 +8,62 @@
     <label>Url
       <input type="text" value.bind="product.url" />
     </label>
-    <button type="submit">Create</button>
+    <label>Description
+      <textarea type="text" value.bind="product.description">
+      </textarea>
+    </label>
+    <label>Images
+      <input type="file" files.bind="gallery | toArray" accept="image/*" multiple/>
+    </label>
+    <label>
+      Source Country
+      <select value.bind="product.source_id">
+        <option model.bind="null">Choose</option>
+        <option repeat.for="country of countries" model.bind="country.id">${country.name}</option>
+      </select>
+    </label>
+    <label>
+      Category
+      <select value.bind="product.category_id">
+        <option model.bind="null">Choose</option>
+        <option repeat.for="category of categories" model.bind="category.id">${category.name}</option>
+      </select>
+    </label>
+    <label>
+      Brand
+      <select value.bind="product.brand_id">
+        <option model.bind="null">Choose</option>
+        <option repeat.for="brand of brands" model.bind="brand.id">${brand.name}</option>
+      </select>
+    </label>
+    <label>Price
+      <input type="number" value.bind="product.price" />
+    </label>
+    <button click.delegate="add('sizes', 'size')">Add Size</button>
+      <div repeat.for="i of counter.size">
+        <label>Size ${i + 1}
+        <input placeholder="name" type="text" value.bind="product.sizes[$index].name" />
+        <input placeholder="size" type="text" value.bind="product.sizes[$index].size" />
+        <input placeholder="height, weight, length" type="text" value.bind="product.sizes[$index].dimensions" />
+        <input placeholder="delta" type="number" value.bind="product.sizes[$index].delta" />
+        <button click.delegate="remove($index, 'sizes', 'size')">Remove Size</button>
+      </div>
+    </label>
+    <button click.delegate="add('colors', 'color')">Add Color</button>
+    <div repeat.for="i of counter.color">
+      <label>Color ${i + 1}
+        <input placeholder="name" type="text" value.bind="product.colors[$index].name" />
+        <div>
+          <input placeholder="pictures" type="file" value.bind="product.colors[$index].gallery" />
+        </div>
+        <input placeholder="hex" type="text" value.bind="product.colors[$index].color" />
+        <input placeholder="delta" type="number" value.bind="product.size.delta" />
+        <button click.delegate="remove($index, 'colors', 'color')">Remove Color</button>
+      </label>
+    </div>
+
+    <div>
+      <button type="submit">Create</button>
+    </div>
   </form>
 </template>

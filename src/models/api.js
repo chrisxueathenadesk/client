@@ -40,6 +40,10 @@ export class Api {
       query = `${query}&sort=${params.sort}`;
     }
 
+    if (params.folder_name || params.file_name) {
+      query = `${query}&folder_name=${params.folder_name}&file_name=${params.file_name}`;
+    }
+
     return query;
   }
 
