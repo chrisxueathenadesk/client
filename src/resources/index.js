@@ -1,7 +1,9 @@
 import elements from './elements/index';
+import valueConverters from './value-converters/index';
 
 const resources = {
-  elements
+  elements,
+  valueConverters
 };
 
 const allResources = Object.values(resources).reduce((all, resource) => all.concat(resource), []);
