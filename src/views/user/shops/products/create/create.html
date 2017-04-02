@@ -37,7 +37,7 @@
       </select>
     </label>
     <label>Price
-      <input type="number" value.bind="product.price" />
+      <input type="number" value.bind="product.price | toNumber" />
     </label>
     <button click.delegate="add('sizes', 'size')">Add Size</button>
       <div repeat.for="i of counter.size">
@@ -45,7 +45,7 @@
         <input placeholder="name" type="text" value.bind="product.sizes[$index].name" />
         <input placeholder="size" type="text" value.bind="product.sizes[$index].size" />
         <input placeholder="height, weight, length" type="text" value.bind="product.sizes[$index].dimensions" />
-        <input placeholder="delta" type="number" value.bind="product.sizes[$index].delta" />
+        <input placeholder="delta" type="number" value.bind="product.sizes[$index].delta | toNumber" />
         <button click.delegate="remove($index, 'sizes', 'size')">Remove Size</button>
       </div>
     </label>
@@ -57,7 +57,7 @@
           <input placeholder="pictures" type="file" value.bind="product.colors[$index].gallery" />
         </div>
         <input placeholder="hex" type="text" value.bind="product.colors[$index].color" />
-        <input placeholder="delta" type="number" value.bind="product.size.delta" />
+        <input placeholder="delta" type="number" value.bind="product.colors[$index].delta | toNumber" />
         <button click.delegate="remove($index, 'colors', 'color')">Remove Color</button>
       </label>
     </div>
