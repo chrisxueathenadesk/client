@@ -2,3 +2,16 @@
 @import "neat";
 @import "style/base";
 
+.page-container {
+  @include grid-container;
+}
+
+.page-host {
+  @include grid-column(12);
+  margin-top: 1em;
+  @include grid-media($desktop) {
+    @include grid-shift(1);
+    @include grid-column(10);
+  }
+}
+
