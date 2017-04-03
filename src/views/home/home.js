@@ -47,8 +47,8 @@ export class HomeView {
   getProducts(container) {
     this.api
       .fetch('products', container.params)
-      .then(items => {
-        container.data = items.results;
+      .then(response => {
+        container.data = response.results;
       })
       .catch(error => {
         container.error = error;
@@ -58,8 +58,8 @@ export class HomeView {
   getCountries() {
     this.api
       .fetch('countries')
-      .then(items => {
-        this.countries.data = items.results;
+      .then(response => {
+        this.countries.data = response.results;
       })
       .catch(error => {
         this.countries.error = error;

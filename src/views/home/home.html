@@ -1,6 +1,8 @@
 <template>
   <require from="./home.css"></require>
 
+  <searchbar></searchbar>
+
   <!-- featured products -->
   <!-- gallery -->
   <section class="featured">
@@ -10,15 +12,15 @@
     </div>
   </section>
 
+  <!-- popular products -->
+  <section class="most-popular">
+    <label for="popular">Most Popular</label>
+    <div class="cards">
+      <product-card repeat.for="product of popular.data" class="product-card" product.bind="product"></product-card>
+    </div>
+  </section>
+
   <!-- latest products -->
-  <!-- <section class="most&#45;popular"> -->
-  <!--   <label for="popular">Most Popular</label> -->
-  <!--   <div class="cards"> -->
-  <!--     <product&#45;card repeat.for="product of popular.data" class="product&#45;card" product.bind="product"></product&#45;card> -->
-  <!--   </div> -->
-  <!-- </section> -->
-  <!--  -->
-  <!-- trending products -->
   <section class="latest">
     <label for="latest">Latest</label>
     <div class="cards">
