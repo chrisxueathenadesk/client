@@ -20,7 +20,7 @@
   border: $card-border;
   border-radius: $base-border-radius;
   box-shadow: 0 2px 4px darken($base-background-color, 10%);
-  flex-basis: 17em;
+  flex-basis: 20em;
   flex-grow: 1;
   margin: 0 $card-margin $base-spacing $card-margin;
   position: relative;
@@ -75,4 +75,3 @@
     }
   }
 }
-

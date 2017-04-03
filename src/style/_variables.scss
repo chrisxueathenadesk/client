@@ -2,6 +2,15 @@
 $medium-screen: 600px;
 $large-screen: 900px;
 
+// Grids
+$desktop: (
+  media: $large-screen
+);
+$tablet: (
+  media: $medium-screen
+);
+
+
 // Typography
 $base-font-family: $font-stack-system;
 $heading-font-family: $base-font-family;
