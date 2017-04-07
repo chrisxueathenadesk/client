@@ -17,11 +17,11 @@ export class Carousel {
   }
 
   next() {
-    this.activeimage = Math.min(this.activeimage + 1, this.images.length - 1);
+    this.goTo(this.activeImage + 1);
   }
 
   prev() {
-    this.activeimage = Math.max(this.activeimage - 1, 0);
+    this.goTo(this.activeImage - 1);
   }
 
   goTo(index) {

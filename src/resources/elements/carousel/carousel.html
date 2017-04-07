@@ -1,8 +1,18 @@
 <template>
   <require from="./carousel.css"></require>
-  <div class="carousel" ref="carousel">
-    <i click.delegate="prev()" class="icon ion-chevron-left"></i>
-    <img class="carousel-image" repeat.for="image of images" src.bind="image" show.bind="$index === activeimage" />
-    <i click.delegate="next()" class="icon ion-chevron-right"></i>
+  <div class="carousel-container">
+    <div class="carousel" ref="carousel">
+      <div repeat.for="image of images">
+        <img class="carousel-image" src.bind="image" show.bind="$index === activeimage" />
+      </div>
+      <ul class="carousel-dots">
+        <li repeat.for="image of images" class="carousel-dot ${$index === activeimage ? 'active': null}" click.delegate="goTo($index)"></li>
+      </ul>
+    </div>
+    <div class="carousel-preview-container">
+      <span repeat.for="image of images" class="carousel-preview ${$index === activeimage ? active: null}">
+        <img click.delegate="goTo($index)" src.bind="image" alt=""/>
+      </span>
+    </div>
   </div>
 </template>

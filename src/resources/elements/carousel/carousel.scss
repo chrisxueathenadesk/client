@@ -1,12 +1,47 @@
-@import "../../../app";
+@import "../../../style/base";
+
+// .carousel-container {
+//   position: relative;
+// }
 
 .carousel {
   display: inline-flex;
   align-items: center;
-  justify-content: center
+  justify-content: center;
+  position: relative;
+
+  .icon {
+    cursor: pointer;
+    font-size: 2em;
+  }
+  .carousel-image {
+    height: 40vh;
+  }
 }
 
-.carousel > .icon {
-  cursor: pointer;
-  font-size: 2em;
+.carousel-dots {
+  margin-top: 0.5em;
+  position: absolute;
+  bottom: 1em;
+  .carousel-dot {
+    display: inline-block;
+    width: 0.5em;
+    height: 0.5em;
+    margin-left: 0.5em;
+    border-radius: 50%;
+    opacity: 0.4;
+    background-color: grey;
+
+    .active {
+      opacity: 1;
+      border: 1px solid black;
+    }
+  }
 }
+
+.carousel-preview {
+  img {
+    height: 10vh;
+  }
+}
+
