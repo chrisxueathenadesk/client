@@ -1,6 +1,7 @@
 import {inject} from 'aurelia-framework';
 import {Api} from '~/models/api';
 import {ExternalHttp} from '~/services/external-http';
+import {notify} from '~/services/notification';
 
 @inject(Api, ExternalHttp)
 export class CreateProduct {
@@ -63,10 +64,12 @@ export class CreateProduct {
     })
     .then(response => this.api.create(`me/shops/${this.product.shop_id}/products`, this.product))
     .then(response => {
-      console.log(response);
+      notify().log('Successfully created!');
+      this.product = {};
+      this.gallery = [];
     })
     .catch(err => {
-      console.log(err);
+      notify().log('Product creation failed');
     });
   }
 
