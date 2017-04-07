@@ -147,6 +147,14 @@
             "path": "../node_modules/aurelia-fetch-client/dist/amd",
             "resources": []
           },
+          {
+            "name": "humane-js",
+            "main": "humane",
+            "path": "../node_modules/humane-js",
+            "resources": [
+              "themes/flatty.css"
+            ]
+          },
           "hammerjs"
         ]
       }
