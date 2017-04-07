@@ -1,5 +1,35 @@
 @import '../../style/base';
 
+.product-info, .product-variations, .product-details{
+  box-shadow: 0 1px 3px rgba(0,0,0,.1);
+  border-radius: 0.2em;
+  background: darken(#FFFFFF, 2%);
+  padding: 10px;
+  margin: 10px;
+}
+
+.product-info-container {
+  margin-left: 1em;
+}
+
 .product-gallery {
-  max-height: 20em;
+  text-align: center;
+}
+.product-header {
+  font-size: 2em;
+}
+.product-price {
+  font-size: 1.6em;
+}
+
+.product-source {
+  display: inline-block;
+}
+
+.product-description {
+  margin-bottom: 1em;
+}
+
+.product-ordercount {
+  float: right;
 }

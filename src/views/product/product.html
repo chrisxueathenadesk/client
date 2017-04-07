@@ -6,39 +6,44 @@
   </section>
 
   <section class="product-info" name="product-info">
-    <h1>${product.data.name}</h1>
-    <h3>${user.country.currency} ${product.data.price}</h3>
-    <label for="From">From</label>
-    <h3>${product.data.source.name}</h3>
-    <span>${product.data.order_count}</span>
-    <span>${product.data.delivery}</span>
+    <div class="product-info-container">
+      <h1 class="product-header">${product.data.name}</h1>
+      <h3 class="product-price">
+        <i class="icon ion-social-usd"></i>
+        ${product.data.price}
+      </h3>
+      <label class="product-source" for="From">
+        <h3>
+          <i class="icon ion-location"></i>
+          ${product.data.source.name}
+        </h3>
+      </label>
+      <span class="product-ordercount">${product.data.order_count} people have ordered this</span>
+      <div>
+        <button type="submit" click.delegate="confirm()">Place Order</button>
+      </div>
+    </div>
   </section>
 
-  <section class="product-details" name="product-details">
+  <section if.bind="product.data.sizes.length || product.data.colors.length || product.data.editions.length" class="product-variations" name="product-variations">
     <!-- variations -->
     <div class="product-selection">
       <h2>Selection</h2>
-      <div class="product-color">
+      <div if.bind="product.data.colors.length" class="product-color">
         <label for="color">Color</label>
         <select name="color" value.bind="request.color">
           <option repeat.for="color of product.data.colors" model.bind="color">${color.name}</option>
         </select>
       </div>
-      <div class="product-size">
+      <div if.bind="product.data.sizes.length" class="product-size">
         <label for="size">Size</label>
         <select for="size" value.bind="request.size">
           <option repeat.for="size of product.data.sizes" model.bind="size">${size.name}</option>
         </select>
       </div>
-
-      <div class="product-delivery-selection">
-        <label>
-          <input type="checkbox" name="delivery" model.bind="pickup" checked.bind="request.delivery">
-          Pickup
-        </label>
-      </div>
     </div>
-
+  </section>
+  <section class="product-details">
     <div class="product-description">
       <h2>Description</h2>
       <div class="product-description-content">
@@ -49,15 +54,8 @@
     <div class="product-delivery">
       <h2>Delivery</h2>
       <div class="product-delivery-content">
-        The product will be available withoun ${product.data.delivery} of ordering the item.
+        The product will be available within ${product.data.delivery} of ordering the item.
       </div>
-    </div>
-  </section>
-
-  <section class="product-cta" name="product-cta">
-    <div>
-      <!-- if not logged in/signed up, log in/signup -->
-      <button type="submit" click.delegate="confirm()">Place Order</button>
     </div>
   </section>
 </template>
