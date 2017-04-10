@@ -28,6 +28,8 @@ export class App {
 
   configureRouter(config, router) {
     config.title = 'Novelship';
+    config.options.pushState = true;
+    config.options.root = '/';
     config.addPipelineStep('authorize', AuthorizeStep);
     config.map([
       {
