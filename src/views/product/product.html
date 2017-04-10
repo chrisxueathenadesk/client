@@ -10,7 +10,7 @@
       <h1 class="product-header">${product.data.name}</h1>
       <h3 class="product-price">
         <i class="icon ion-social-usd"></i>
-        ${product.data.price}
+        ${request.total_price}
       </h3>
       <label class="product-source" for="From">
         <h3>
@@ -31,13 +31,15 @@
       <h2>Selection</h2>
       <div if.bind="product.data.colors.length" class="product-color">
         <label for="color">Color</label>
-        <select name="color" value.bind="request.color">
+        <select name="color" value.bind="request.color" change.delegate="getPrice()">
+          <option model.bind="null">Choose</option>
           <option repeat.for="color of product.data.colors" model.bind="color">${color.name}</option>
         </select>
       </div>
       <div if.bind="product.data.sizes.length" class="product-size">
         <label for="size">Size</label>
-        <select for="size" value.bind="request.size">
+        <select for="size" value.bind="request.size" change.delegate="getPrice()">
+          <option model.bind="null">Choose</option>
           <option repeat.for="size of product.data.sizes" model.bind="size">${size.name}</option>
         </select>
       </div>

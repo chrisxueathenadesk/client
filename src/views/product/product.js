@@ -1,21 +1,21 @@
 import {inject} from 'aurelia-framework';
+import {Router} from 'aurelia-router';
 import {Api} from '~/models/api';
-import {DialogService} from 'aurelia-dialog';
-import {OrderDialog} from './order-dialog';
 import {UserService} from '../../services/user';
 
-@inject(Api, DialogService, UserService)
+@inject(Router, Api, UserService)
 export class ProductView {
-  constructor(api, dialog, currentUser) {
+  product = {
+    params: {
+      include: ['source']
+    }
+  };
+  request = {};
+  selections = {};
+
+  constructor(router, api) {
+    this.router = router;
     this.api = api;
-    this.dialog = dialog;
-    this.currentUser = currentUser;
-    this.product = {
-      params: {
-        include: ['source']
-      }
-    };
-    this.request = {};
   }
 
   getProduct(id) {
@@ -24,11 +24,7 @@ export class ProductView {
     .then(product => {
       this.product.data = product;
       this.request = {
-        source_id: product.source_id,
-        destination_id: this.currentUser.user.country_id,
-        product_id: product.id,
-        base_price: product.price,
-        total_price: 5 + (product.price + product.price * 0.1)
+        total_price: product.price
       };
     })
     .catch(error => {
@@ -36,23 +32,42 @@ export class ProductView {
     });
   }
 
+  getPrice() {
+    this.request.total_price = this.product.data.price + this.getDelta(this.request);
+  }
+
+  getDelta(request) {
+    let delta = 0;
+    if (request.size && request.size.delta) {
+      delta = delta + request.size.delta;
+    }
+    if (request.color && request.color.delta) {
+      delta = delta + request.color.delta;
+    }
+    if (request.edition && request.edition.delta) {
+      delta = delta + request.edition.delta;
+    }
+    return delta;
+  }
+
+  getParameters(product, request) {
+    const selections = {};
+    if (product.colors) {
+      selections.color = product.colors.map(color => color.name).indexOf(request.color.name);
+    }
+    if (product.sizes) {
+      selections.size = product.sizes.map(size => size.name).indexOf(request.size.name);
+    }
+    if (product.editions) {
+      selections.edition = product.editions.map(edition => edition.name).indexOf(request.edition.name);
+    }
+    return selections;
+  }
+
   confirm() {
-    const model = {
-      product: this.product.data,
-      request: this.request
-    };
-    this.dialog.open({ viewModel: OrderDialog, model: model}).then(response => {
-      if (!response.wasCancelled) {
-        this.request.status = 'confirmed';
-        this.api
-        .create('requests', this.request)
-        .then(success => console.log(success))
-        .catch(error => console.log(error));
-      } else {
-        console.log('bad');
-      }
-      console.log(response.output);
-    });
+    const selections = this.getParameters(this.product.data, this.request);
+    console.log(selections);
+    this.router.navigateToRoute('checkout', selections);
   }
 
   activate(params) {
