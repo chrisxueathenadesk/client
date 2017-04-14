@@ -1,12 +1,22 @@
 <template>
   <require from="./checkout.css"></require>
-      <h2>Confirm</h2>
-      <p>You are buying ${product.name}</p>
-      <p if.bind="request.size">Size: ${request.size.name}</p>
-      <p if.bind="request.color">Color: ${request.color.name}</p>
-      <p if.bind="request.edition">Edition: ${request.edition.name}</p>
-      <h4 if.bind="request.count">: ${request.edition.name}</h4>
-      <h3>Total Cost: ${request.total_price}</h3>
-
-      <button click.trigger="create()">Confirm</button>
+  <div class="checkout-container ${inflight? 'blur': ''}">
+    <h2>Confirm</h2>
+    <p>You are buying ${product.name}</p>
+    <p if.bind="request.size">Size: ${request.size.name}</p>
+    <p if.bind="request.color">Color: ${request.color.name}</p>
+    <p if.bind="request.edition">Edition: ${request.edition.name}</p>
+    <h4 if.bind="request.count">: ${request.edition.name}</h4>
+    <h3>Total Cost: ${request.total_price}</h3>
+    <div>
+      <payment-form save.call="save(token)"></payment-form>
+    </div>
+  </div>
+  <div if.bind="inflight" class="loading">
+    Processing. Please do not navigate away from this page.
+    <div class="sk-wandering-cubes">
+      <div class="sk-cube sk-cube1"></div>
+      <div class="sk-cube sk-cube2"></div>
+    </div>
+  </div>
 </template>

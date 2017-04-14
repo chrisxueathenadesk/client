@@ -58,7 +58,6 @@ export class Api {
       .fetch(path, {
         method: 'POST',
         body: json(body)
-      })
-      .then(response => response.json());
+      });
   }
 }
