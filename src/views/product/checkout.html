@@ -9,6 +9,15 @@
     <h4 if.bind="request.count">: ${request.edition.name}</h4>
     <h3>Total Cost: ${request.total_price}</h3>
     <div>
+      <label>
+        Destination Country
+        <select value.bind="request.destination_id">
+          <option model.bind="null">Choose</option>
+          <option repeat.for="country of countries" model.bind="country.id">${country.name}</option>
+        </select>
+      </label>
+    </div>
+    <div>
       <payment-form save.call="save(token)"></payment-form>
     </div>
   </div>

@@ -15,6 +15,14 @@ export class CheckoutVM {
     this.payment = payment;
   }
 
+  activate(params) {
+    this.product_id = Number(params.product_id);
+    this.getProduct(params.product_id, params);
+    this.api.fetch('countries')
+    .then(countries => this.countries = countries.results)
+    .catch(err => console.log(err));
+  }
+
   getProduct(id, selections) {
     this.api
       .fetch(`products/${id}`)
@@ -104,10 +112,5 @@ export class CheckoutVM {
       delta = delta + request.edition.delta;
     }
     return delta;
-  }
-
-  activate(params) {
-    this.product_id = Number(params.product_id);
-    this.getProduct(params.product_id, params);
   }
 }
