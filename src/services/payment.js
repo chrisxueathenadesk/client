@@ -8,10 +8,12 @@ export class Payment {
   }
 
   saveCard(token) {
-    return this.api.create('me/cards', {token: token});
+    return this.api.create('me/cards', {token: token})
+      .then(response => response.json());
   }
 
-  charge(amount, currency) {
-    return this.api.create('me/charge', {amount, currency});
+  charge(amount, currency, source) {
+    return this.api.create('me/charge', {amount, currency, source})
+      .then(response => response.json());
   }
 }

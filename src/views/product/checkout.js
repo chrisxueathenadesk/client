@@ -13,14 +13,22 @@ export class CheckoutVM {
     this.api = api;
     this.user = user.user;
     this.payment = payment;
+
+    this.state = {
+      addcard: false
+    };
   }
 
   activate(params) {
     this.product_id = Number(params.product_id);
     this.getProduct(params.product_id, params);
     this.api.fetch('countries')
-    .then(countries => this.countries = countries.results)
-    .catch(err => console.log(err));
+      .then(countries => this.countries = countries.results)
+      .catch(err => console.log(err));
+
+    this.api.fetch('me/cards')
+      .then(cards => this.cards = cards.data)
+      .catch(err => console.log(err));
   }
 
   getProduct(id, selections) {
@@ -43,16 +51,18 @@ export class CheckoutVM {
   }
 
   save(token) {
-    this.inflight = true;
+    this.state.inflight = true;
     this.payment.saveCard(token)
       .then(response => {
         // charge the user
         console.log('successfully saved card');
+        console.log(response);
         const currency = 'SGD';
         return this.payment.charge(this.request.total_price, currency);
       })
       .then(response => {
         console.log('successfully charged card');
+        console.log(response);
         this.request.stripe_charge_id = response.id;
         return this.createOrder(this.request);
       })
@@ -62,15 +72,16 @@ export class CheckoutVM {
         console.log(response);
       })
       .catch(error => {
-        this.inflight = false;
+        this.state.inflight = false;
         // send error to admin
         console.log(error);
       });
   }
 
   charge() {
+    this.state.inflight = true;
     this.payment
-      .charge(this.request.total_price)
+      .charge(this.request.total_price, 'SGD', this.card)
       .then(response => {
         this.request.charge_id = response.id;
         return this.createOrder(this.request);
@@ -78,9 +89,11 @@ export class CheckoutVM {
       .then(response => {
         // redirect to payment confirmation page
         console.log(response);
+        this.router.navigateToRoute('acknowledge');
       })
       .catch(error => {
         // send error to admin
+        this.state.inflight = false;
         console.log(error);
       });
   }

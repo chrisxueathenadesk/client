@@ -1,6 +1,6 @@
 <template>
   <require from="./checkout.css"></require>
-  <div class="checkout-container ${inflight? 'blur': ''}">
+  <div class="checkout-container ${state.inflight? 'blur': ''}">
     <h2>Confirm</h2>
     <p>You are buying ${product.name}</p>
     <p if.bind="request.size">Size: ${request.size.name}</p>
@@ -8,6 +8,18 @@
     <p if.bind="request.edition">Edition: ${request.edition.name}</p>
     <h4 if.bind="request.count">: ${request.edition.name}</h4>
     <h3>Total Cost: ${request.total_price}</h3>
+    <div>
+      <label for="">Address
+        Line 1
+        <input value.bind="request.shipping_address.first_line" type="text" />
+        Line 2
+        <input value.bind="request.shipping_address.second_line" type="text" />
+        City
+        <input value.bind="request.shipping_address.city" type="text" />
+        Zip
+        <input value.bind="request.shipping_address.zip" type="text" />
+      </label>
+    </div>
     <div>
       <label>
         Destination Country
@@ -17,11 +29,23 @@
         </select>
       </label>
     </div>
-    <div>
+    <div if.bind="cards.length">
+      <label>
+        Pay using:
+        <select value.bind="selectedCard">
+          <option model.bind="null">Choose</option>
+          <option repeat.for="card of cards" model.bind="card.id">${card.brand} ending with ${card.last4}</option>
+        </select>
+      </label>
+      <button click.delegate="charge()">Pay ${request.total_price}</button>
+      <button if.bind="!state.addcard" click.delegate="state.addcard = true">Add New Card</button>
+    </div>
+    <div if.bind="state.addcard || !cards.length">
       <payment-form save.call="save(token)"></payment-form>
+      <button if.bind="cards.length" click.delegate="state.addcard = false">Cancel</button>
     </div>
   </div>
-  <div if.bind="inflight" class="loading">
+  <div if.bind="state.inflight" class="loading">
     Processing. Please do not navigate away from this page.
     <div class="sk-wandering-cubes">
       <div class="sk-cube sk-cube1"></div>
