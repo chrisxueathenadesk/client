@@ -155,7 +155,8 @@
               "themes/flatty.css"
             ]
           },
-          "hammerjs"
+          "hammerjs",
+          "humanize"
         ]
       }
     ]
