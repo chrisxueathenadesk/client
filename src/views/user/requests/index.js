@@ -1,10 +1,10 @@
-export class RequestsRouter {
+export class UserRequestsRouter {
   heading = 'Requests';
 
   configureRouter(config, router) {
     config.map([
-      {route: '', moduleId: './requests', nav: true, title: 'Requests'},
-      {route: '/create', name: 'create-request', moduleId: './create', nav: true, title: 'Create'}
+      {route: '', name: 'userRequestList', moduleId: './list'},
+      {route: ':request_id', name: 'userRequest', moduleId: './request'}
     ]);
   }
 }
