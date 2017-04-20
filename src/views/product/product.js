@@ -66,7 +66,6 @@ export class ProductView {
 
   confirm() {
     const selections = this.getParameters(this.product.data, this.request);
-    console.log(selections);
     this.router.navigateToRoute('checkout', selections);
   }
 

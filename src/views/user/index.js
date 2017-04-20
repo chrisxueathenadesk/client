@@ -3,10 +3,10 @@ export class UserRouter {
 
   configureRouter(config, router) {
     config.map([
-      { route: '', redirect: 'requests' },
-      {route: 'trips', moduleId: './trips/index', nav: true, title: 'Trips'},
-      {route: 'requests', moduleId: './requests/index', nav: true },
-      {route: 'shops', moduleId: './shops/index', nav: true }
+      {route: '', moduleId: './dashboard'},
+      {route: 'trips', moduleId: './trips/index'},
+      {route: 'requests', moduleId: './requests/index'},
+      {route: 'shops/:shop_id', moduleId: './shops/index'}
     ]);
   }
 }
