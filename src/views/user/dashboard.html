@@ -1,0 +1,43 @@
+<template>
+  <require from="./dashboard.css"></require>
+
+  <section if.bind="user">
+    <h1>Info</h1>
+    <div>
+      ${user.email}
+    </div>
+    <div>
+      ${user.phone}
+    </div>
+    <div>
+      <span>${user.address.line_one}</span>
+      <span>${user.address.line_two}</span>
+      <span>${user.address.zip}</span>
+    </div>
+    <div>
+      <span>${user.country.name}</span>
+    </div>
+  </section>
+
+  <section if.bind="shops.data" class="shops">
+    <h1>Shops</h1>
+    <ul>
+      <li repeat.for="shop of shops.data">
+        <a href.bind="'user/shops/' + shop.id" >${shop.name}</a>
+      </li>
+    </ul>
+  </section>
+
+  <section if.bind="requests.data" class="requests">
+    <h1>Requests</h1>
+    <table>
+      <tbody>
+        <tr repeat.for="request of requests.data">
+          <td><a href.bind="'user/requests/' + request.id" >${request.product.name}</a></td>
+          <td>${request.status}</td>
+          <td>${request.created_at | toDate:'human'}</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+</template>
