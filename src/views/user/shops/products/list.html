@@ -1,3 +1,16 @@
 <template>
-  <h1>Shop product list</h1>
+  <section>
+    <h1>Shop product list</h1>
+    <a href.bind="'user/shops/' + shop.data.id + '/products/create'">Create</a>
+  </section>
+  <section>
+    <table>
+      <tr repeat.for="product of products.data">
+        <td>
+          <a href.bind="'user/shops/' + shop.data.id + '/products/' + product.id + '/edit'" >${product.name}</a>
+        </td>
+        <td>${product.created_at | toDate:'human'}</td>
+      </tr>
+    </table>
+  </section>
 </template>
