@@ -1,0 +1,16 @@
+<template>
+  <section>
+    <div>
+      <label>Ordered By</label>
+      ${request.data.customer.email}
+    </div>
+    <div>
+      <label>Product</label>
+      ${request.data.product.name}
+    </div>
+    <div>
+      <label>Ordered At</label>
+      ${request.data.created_at | toDate:'date'}
+    </div>
+  </section>
+</template>

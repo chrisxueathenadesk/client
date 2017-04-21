@@ -1,3 +1,9 @@
 <template>
-  <h1>List of requests</h1>
+  <section>
+    <table>
+      <tr repeat.for="request of requests.data">
+        <td><a href.bind="'product/' + request.product.id">${request.product.name}</a></td>
+      </tr>
+    </table>
+  </section>
 </template>
