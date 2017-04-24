@@ -2,8 +2,9 @@ import {inject} from 'aurelia-framework';
 import {Router} from 'aurelia-router';
 import {Api} from '~/models/api';
 import {UserService} from '~/services/user';
+import {AuthService} from 'aurelia-auth';
 
-@inject(Api, Router, UserService)
+@inject(Api, Router, UserService, AuthService)
 export class DashboardView {
   requests = {
     params: {
@@ -11,10 +12,11 @@ export class DashboardView {
     }
   };
   shops = {};
-  constructor(api, router, userStore) {
+  constructor(api, router, userStore, auth) {
     this.api = api;
     this.router = router;
     this.user = userStore.user;
+    this.auth = auth;
   }
 
   activate() {
