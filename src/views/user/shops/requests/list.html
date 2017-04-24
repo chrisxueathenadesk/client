@@ -2,7 +2,7 @@
   <section>
     <table>
       <tr repeat.for="request of requests.data">
-        <td><a href.bind="'product/' + request.product.id">${request.product.name}</a></td>
+        <td><a href.bind="'user/shops/' + shop.data.id + '/requests/' + request.id">${request.product.name}</a></td>
       </tr>
     </table>
   </section>
