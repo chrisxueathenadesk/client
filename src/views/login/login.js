@@ -13,11 +13,8 @@ export class Login {
 
   login() {
     return this.auth.login(this.email, this.password)
-      .then(response => {
-        this.auth.getMe()
-          .then(user => this.user.save(user))
-          .catch(err => console.log(err));
-      })
+      .then(response => this.auth.getMe())
+      .then(user => this.user.save(user))
       .catch(err => console.log(err));
   }
 }
