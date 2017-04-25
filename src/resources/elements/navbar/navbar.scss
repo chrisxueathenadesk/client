@@ -1,18 +1,13 @@
 @import "../../../style/base";
 
 .nav-container {
-  // display: flex;
-  // background-color: $red;
-  // flex-flow: row nowrap;
-  // justify-content: space-between;
-  // font-size: 1.2em;
 }
 
 .nav-menu {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: $red;
+  background-color: $primary-color;
   font-size: 1.2em;
 }
 
@@ -21,7 +16,7 @@
   padding: 0.3em;
   &:hover {
     background-color: white;
-    color: $red;
+    color: $primary-color;
   }
 
   a {
@@ -35,7 +30,7 @@
 
 .active {
   background-color: white;
-  color: $red;
+  color: $primary-color;
 }
 
 .logo {
