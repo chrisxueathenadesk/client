@@ -1,6 +1,6 @@
 // Breakpoints
-$medium-screen: 600px;
-$large-screen: 900px;
+$medium-screen: 900px;
+$large-screen: 1200px;
 
 // Grids
 $desktop: (
@@ -29,6 +29,10 @@ $small-spacing: $base-spacing / 2;
 $base-z-index: 0;
 
 // Colors
+// $primary-color: #4C9689;
+// $secondary-color: #EDA778;
+$primary-color: #343681;
+$secondary-color: #6B5001;
 $blue: #1565c0;
 $dark-gray: #333;
 $medium-gray: #999;
@@ -58,4 +62,5 @@ $base-timing: ease;
 // Spinkit
 $spinkit-spinner-margin: 40px auto !default;
 $spinkit-size: 40px !default;
-$spinkit-spinner-color: #333 !default;
+$spinkit-spinner-color: teal;
+
