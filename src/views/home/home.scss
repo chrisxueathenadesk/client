@@ -4,7 +4,7 @@ section {
   @include grid-container;
 }
 .card {
-  @include grid-column(6);
+  @include grid-column(12);
   @include grid-media($tablet) {
     @include grid-column(4);
   }
