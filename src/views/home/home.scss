@@ -1,7 +1,14 @@
 @import '../../style/base';
 
-.cards {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+section {
+  @include grid-container;
+}
+.card {
+  @include grid-column(6);
+  @include grid-media($tablet) {
+    @include grid-column(4);
+  }
+  @include grid-media($desktop) {
+    @include grid-column(3);
+  }
 }

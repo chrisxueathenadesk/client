@@ -2,35 +2,37 @@ import {inject} from 'aurelia-framework';
 import {Api} from '~/models/api';
 
 @inject(Api)
-export class HomeView {
+export class HomeVM {
   commonParameters = {
     page: {
-      size: 6,
+      size: 12,
       number: 0
     }
   };
+  countries = {};
 
-  constructor(api) {
+  constructor(api, router) {
     this.api = api;
-    this.countries = {};
-    const today = new Date();
-    const lastMonth = new Date((new Date()).setDate(today.getDate() - 30));
 
     this.featured = {
       params: {
         filter: {
           'featured:eq': true
         },
+        include: ['source'],
         sort: '-id'
       }
     };
 
+    // popular over a period of time?
     this.popular = {
       params: {
         filter: {
           'active:eq': true,
-          'created_at:gt': lastMonth.toISOString()
-        }
+          'order_count:gt': 0
+        },
+        include: ['source'],
+        sort: '-order_count'
       }
     };
 
@@ -39,7 +41,8 @@ export class HomeView {
         filter: {
           'active:eq': true
         },
-        sort: '-id'
+        include: ['source'],
+        sort: '-created_at'
       }
     };
   }
