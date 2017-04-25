@@ -1,6 +1,10 @@
-import {bindable, containerless} from 'aurelia-framework';
+import {inject, bindable} from 'aurelia-framework';
+import {Router} from 'aurelia-router';
 
-@containerless()
+@inject(Router)
 export class ProductCard {
   @bindable product;
+  constructor(router) {
+    this.router = router;
+  }
 }

@@ -1,77 +1,93 @@
 @import "../../../style/base";
 
+$border-radius: 0.2rem;
+$border-color: #f0f1f4;
+$border-width: 0.1rem;
+$bg-color-light: white;
+$body-font-color: #667189;
+$font-size-sm: 1.2rem;
+$layout-padding-lg: 1.5rem;
+$base-transparency: 0.8;
+$inverted-text-color: white;
+$padding-sm: 0.1rem;
+$padding-md: 0.5rem;
 .card {
-  $base-border-color: gainsboro !default;
-  $base-border-radius: 3px !default;
-  $base-background-color: white !default;
-  $base-spacing: 1.5em !default;
-  $action-color: #477DCA !default;
-  $dark-gray: #333 !default;
-  $base-font-color: $dark-gray !default;
-  $card-border-color: $base-border-color;
-  $card-border: 1px solid $card-border-color;
-  $card-background: lighten($card-border-color, 10%);
-  $card-header-background: $card-background;
-  $card-margin: 1em;
-  $card-image-hover-opacity: 0.7;
-  $card-image-hover-color: #F8F2B4;
-
-  background-color: $card-background;
-  border: $card-border;
-  border-radius: $base-border-radius;
+  background: $bg-color-light;
+  border: $border-width solid $border-color;
+  border-radius: $border-radius;
   box-shadow: 0 2px 4px darken($base-background-color, 10%);
-  flex-basis: 20em;
-  flex-grow: 1;
-  margin: 0 $card-margin $base-spacing $card-margin;
+  display: block;
+  margin-bottom: 0.5rem;
   position: relative;
-  transition: all 0.2s ease-in-out;
+
+  .card-header,
+  .card-body,
+  .card-footer {
+    padding: $layout-padding-lg;
+    padding-bottom: 0;
+
+    &:last-child {
+      padding-bottom: $layout-padding-lg;
+    }
+  }
+
+  .card-price {
+    font-weight: bold;
+  }
+
+  .card-ribbon {
+    position: absolute;
+    top: 20px;
+    color: white;
+    background: $secondary-color;
+    border-radius: $border-radius;
+    opacity: $base-transparency;
+    padding: $padding-sm;
+    padding-left: $padding-md;
+    padding-right: $padding-md;
+  }
 
   .card-image {
-    background-color: $card-image-hover-color;
-    height: 150px;
-    max-height: 150px;
+    padding-top: $layout-padding-lg;
+
+    &:first-child {
+      padding-top: 0;
+
+      img {
+        object-fit: cover;
+        height: 20rem;
+        width: 100%;
+        border-top-left-radius: $border-radius;
+        border-top-right-radius: $border-radius;
+      }
+    }
+
+    &:last-child {
+      img {
+        border-bottom-left-radius: $border-radius;
+        border-bottom-right-radius: $border-radius;
+      }
+    }
+  }
+
+  .card-title {
     overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 2rem;
+  }
 
-    img {
-      @include border-top-radius($base-border-radius);
-      opacity: 1;
-      transition: all 0.2s ease-in-out;
-      width: 100%;
+  .card-subtitle {
+    color: lighten($body-font-color, 40%);
+    font-size: $font-size-sm;
+  }
+
+  .card-footer {
+    .card-cta {
+      button {
+        width: 100%;
+      }
     }
   }
 
-  .card-header {
-    background-color: $card-header-background;
-    border-bottom: $card-border;
-    border-radius: $base-border-radius $base-border-radius 0 0;
-    font-weight: bold;
-    line-height: 1.5em;
-    padding: ($base-spacing / 3) ($base-spacing / 2);
-    transition: all 0.2s ease-in-out;
-  }
-
-  .card-copy {
-    font-size: 0.9em;
-    line-height: 1.5em;
-    padding: ($base-spacing / 2) ($base-spacing / 2);
-
-    p {
-      margin: 0 0 ($base-spacing / 2);
-    }
-  }
-
-  &:focus,
-  &:hover {
-    img {
-      opacity: $card-image-hover-opacity;
-    }
-  }
-
-  &:active {
-    background-color: $card-background;
-
-    .card-header {
-      background-color: $card-background;
-    }
-  }
 }

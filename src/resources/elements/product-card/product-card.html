@@ -6,20 +6,36 @@
     <!--  product title on the right -->
     <!--  product price below the name -->
     <!--  product price below the name -->
-    <a route-href="route: product; params.bind: {product_id: product.id}">
-      <div class="card-image">
+    <div class="card-image">
+      <a route-href="route: product; params.bind: {product_id: product.id}">
         <img src.bind="product.gallery[0]" alt="">
+      </a>
+    </div>
+    <div if.bind="product.order_count" class="card-ribbon">
+      <i class="icon ion-flame"></i>
+      ${product.order_count} people ordered this
+    </div>
+    <div class="card-header">
+      <div class="card-title">
+        <a route-href="route: product; params.bind: {product_id: product.id}">
+          ${product.name}
+        </a>
       </div>
-      <div class="card-header">
-        ${product.name}
+      <div class="card-subtitle">
       </div>
-    </a>
-    <div class="card-copy">
-      <div>
+    </div>
+    <div class="card-body">
+      <div class="card-price">
         ${product.price} SGD
       </div>
-      <div>
+      <div class="card-source">
+        <i class="icon ion-ios-location"></i>
         ${product.source.name}
+      </div>
+    </div>
+    <div class="card-footer">
+      <div class="card-cta">
+        <button click.delegate="router.navigateToRoute('product', {product_id: product.id})">Show Details</button>
       </div>
     </div>
   </div>
