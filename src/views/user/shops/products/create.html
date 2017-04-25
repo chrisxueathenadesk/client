@@ -39,6 +39,9 @@
     <label>Price
       <input type="number" value.bind="product.price | toNumber" />
     </label>
+    <label>Seed Order Count
+      <input type="number" value.bind="product.order_count | toNumber" />
+    </label>
     <button click.delegate="add('sizes', 'size')">Add Size</button>
       <div repeat.for="i of counter.size">
         <label>Size ${i + 1}
