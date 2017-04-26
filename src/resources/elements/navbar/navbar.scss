@@ -1,14 +1,21 @@
 @import "../../../style/base";
 
 .nav-container {
+  background-color: $primary-color;
+  @include grid-container;
 }
 
 .nav-menu {
   display: flex;
   justify-content: space-between;
+  max-width: 1000px;
   align-items: center;
-  background-color: $primary-color;
   font-size: 1.2em;
+  @include grid-media($desktop) {
+    @include grid-shift(1);
+    @include grid-column(10);
+    margin-left: 40px;
+  }
 }
 
 .nav-item {
