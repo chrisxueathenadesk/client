@@ -24,5 +24,10 @@
 }
 
 .home-search {
+  max-width: 100%;
+  margin: auto;
   margin-bottom: 1em;
+  @media screen and (min-width: $large-screen) {
+    max-width: 50%;
+  }
 }

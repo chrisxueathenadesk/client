@@ -42,6 +42,9 @@
     <label>Seed Order Count
       <input type="number" value.bind="product.order_count | toNumber" />
     </label>
+    <label>Estimated Delivery Time
+      <input value.bind="product.delivery" />
+    </label>
     <button click.delegate="add('sizes', 'size')">Add Size</button>
       <div repeat.for="i of counter.size">
         <label>Size ${i + 1}
