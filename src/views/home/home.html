@@ -1,16 +1,18 @@
 <template>
   <require from="./home.css"></require>
 
-  <searchbar></searchbar>
+  <div class="home-search">
+    <searchbar></searchbar>
+  </div>
 
   <!-- featured products -->
   <!-- gallery -->
-  <section class="featured">
-    <label for="featured">Featured</label>
-    <div class="cards">
-      <product-card repeat.for="product of featured.data" class="product-card" product.bind="product"></product-card>
-    </div>
-  </section>
+  <!-- <section class="featured"> -->
+  <!--   <label for="featured">Featured</label> -->
+  <!--   <div class="cards"> -->
+  <!--     <product&#45;card repeat.for="product of featured.data" class="product&#45;card" product.bind="product"></product&#45;card> -->
+  <!--   </div> -->
+  <!-- </section> -->
 
   <!-- popular products -->
   <section class="most-popular">
@@ -29,7 +31,7 @@
   </section>
 
   <!-- categories (like newegg)-->
-  <section class="categories">
-    <label for="categories">Categories</label>
-  </section>
+  <!-- <section class="categories"> -->
+  <!--   <label for="categories">Categories</label> -->
+  <!-- </section> -->
 </template>
