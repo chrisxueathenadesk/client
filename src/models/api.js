@@ -60,4 +60,13 @@ export class Api {
         body: json(body)
       });
   }
+
+  edit(path, body) {
+    console.log(body);
+    return this.http
+      .fetch(path, {
+        method: 'PUT',
+        body: json(body)
+      });
+  }
 }
