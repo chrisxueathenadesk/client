@@ -12,7 +12,6 @@ export class PaymentForm {
   }
 
   attached() {
-    console.log(this.save);
     this.createCheckoutButton();
   }
 
@@ -37,7 +36,7 @@ export class PaymentForm {
         lineHeight: '24px',
         fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
         fontSmoothing: 'antialiased',
-        fontSize: '16px',
+        fontSize: '1.4rem',
         '::placeholder': {
           color: '#aab7c4'
         }
