@@ -5,23 +5,22 @@
     <carousel images.bind="product.data.gallery"></carousel>
   </section>
 
-  <section class="product-info" name="product-info">
-    <div class="product-info-container">
-      <h1 class="product-header">${product.data.name}</h1>
-      <h3 class="product-price">
-        <i class="icon ion-social-usd"></i>
-        ${request.total_price}
-      </h3>
-      <label class="product-source" for="From">
-        <h3>
-          <i class="icon ion-location"></i>
-          ${product.data.source.name}
-        </h3>
+  <section class="product-info">
+    <h1 class="product-info__header">${product.data.name}</h1>
+    <h3 class="product-info__price">
+      SGD ${request.total_price}
+    </h3>
+    <div class="product-info__source" for="From">
+      <i class="icon ion-location"></i>
+      From ${product.data.source.name}
+    </div>
+    <span class="product-info__ordercount" if.bind="product.data.order_count">${product.data.order_count} people have ordered this</span>
+    <div class="product-info__cta">
+      <button type="submit" click.delegate="confirm()">Place Order</button>
+      <label>
+        Quantity:
+        <input change.trigger="getPrice()" type="number" value.bind="count" min="1" max="99">
       </label>
-      <span class="product-ordercount">${product.data.order_count} people have ordered this</span>
-      <div>
-        <button type="submit" click.delegate="confirm()">Place Order</button>
-      </div>
     </div>
   </section>
 
