@@ -12,6 +12,7 @@ export class ProductView {
   };
   request = {};
   selections = {};
+  count = 1;
 
   constructor(router, api) {
     this.router = router;
@@ -33,7 +34,7 @@ export class ProductView {
   }
 
   getPrice() {
-    this.request.total_price = this.product.data.price + this.getDelta(this.request);
+    this.request.total_price = this.count * this.product.data.price + this.getDelta(this.request);
   }
 
   getDelta(request) {
@@ -51,17 +52,18 @@ export class ProductView {
   }
 
   getParameters(product, request) {
-    const selections = {};
+    const params = {};
     if (product.colors) {
-      selections.color = product.colors.map(color => color.name).indexOf(request.color.name);
+      params.color = product.colors.map(color => color.name).indexOf(request.color.name);
     }
     if (product.sizes) {
-      selections.size = product.sizes.map(size => size.name).indexOf(request.size.name);
+      params.size = product.sizes.map(size => size.name).indexOf(request.size.name);
     }
     if (product.editions) {
-      selections.edition = product.editions.map(edition => edition.name).indexOf(request.edition.name);
+      params.edition = product.editions.map(edition => edition.name).indexOf(request.edition.name);
     }
-    return selections;
+    params.count = this.count;
+    return params;
   }
 
   confirm() {
