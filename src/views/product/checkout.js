@@ -7,7 +7,15 @@ import {Router} from 'aurelia-router';
 @inject(Router, Api, UserService, Payment)
 export class CheckoutVM {
   error = {};
-  request = {};
+  request = {
+    shipping_address: {}
+  };
+  companyAddress = {
+    line_1: '195 Pearl’s Hill Terrace',
+    line_2: '#02-03A',
+    zip: 'S168976',
+    city: 'Singapore'
+  };
   constructor(router, api, user, payment) {
     this.router = router;
     this.api = api;
@@ -20,8 +28,7 @@ export class CheckoutVM {
   }
 
   activate(params) {
-    this.product_id = Number(params.product_id);
-    this.getProduct(params.product_id, params);
+    this.getProduct(Number(params.product_id), params);
     this.api.fetch('countries')
       .then(countries => this.countries = countries.results)
       .catch(err => console.log(err));
@@ -40,7 +47,9 @@ export class CheckoutVM {
           source_id: product.source_id,
           base_price: product.price,
           destination_id: this.user.country_id,
-          shipping_address: this.user.address
+          collection_method: 'pickup',
+          count: Number(selections.count),
+          shipping_address: this.companyAddress || {}
         };
         this.selectOptions(selections);
         this.getPrice();
@@ -50,26 +59,49 @@ export class CheckoutVM {
       });
   }
 
+  // TODO: consolidate charge and save
+  charge() {
+    this.state.inflight = true;
+    this.saveAddress(this.request.shipping_address);
+    this.saveCountry(this.request.destination_id);
+    this.payment
+      .charge(this.request.total_price, 'SGD', this.card)
+      .then(response => {
+        this.request.stripe_charge_id = response.id;
+        return this.api.create(`products/${this.product.id}/requests`, this.request);
+      })
+      .then(() => {
+        return this.api.edit(`products/${this.product.id}`, {order_count: this.product.order_count ? this.product.order_count + 1 : 1});
+      })
+      .then(response => {
+        this.router.navigateToRoute('acknowledge');
+      })
+      .catch(error => {
+        // send error to admin
+        this.state.inflight = false;
+        console.log(error);
+      });
+  }
+
   save(token) {
     this.state.inflight = true;
+    this.saveAddress(this.request.shipping_address);
+    this.saveCountry(this.request.destination_id);
     this.payment.saveCard(token)
       .then(response => {
-        // charge the user
-        console.log('successfully saved card');
-        console.log(response);
         const currency = 'SGD';
         return this.payment.charge(this.request.total_price, currency);
       })
       .then(response => {
-        console.log('successfully charged card');
-        console.log(response);
         this.request.stripe_charge_id = response.id;
-        return this.createOrder(this.request);
+        return this.api.create(`products/${this.product.id}/requests`, this.request);
+      })
+      .then(() => {
+        return this.api.edit(`products/${this.product.id}`, {order_count: this.product.order_count ? this.product.order_count + 1 : 1});
       })
       .then(response => {
         // redirect to payment confirmation page
         this.router.navigateToRoute('acknowledge');
-        console.log(response);
       })
       .catch(error => {
         this.state.inflight = false;
@@ -78,29 +110,28 @@ export class CheckoutVM {
       });
   }
 
-  charge() {
-    this.state.inflight = true;
-    this.payment
-      .charge(this.request.total_price, 'SGD', this.card)
-      .then(response => {
-        this.request.charge_id = response.id;
-        return this.createOrder(this.request);
-      })
-      .then(response => {
-        // redirect to payment confirmation page
-        console.log(response);
-        this.router.navigateToRoute('acknowledge');
-      })
-      .catch(error => {
-        // send error to admin
-        this.state.inflight = false;
-        console.log(error);
-      });
+  saveAddress(address) {
+    if (!this.user.address) {
+      this.user.address = address;
+      this.api.edit('me', { address: address })
+        .then(success => console.log(success));
+    }
   }
 
-  createOrder(request) {
-    return this.api
-      .create(`products/${this.product_id}/requests`, request);
+  saveCountry(countryId) {
+    if (!this.user.country_id) {
+      this.user.country_id = countryId;
+      this.api.edit('me', { country_id: countryId })
+        .then(success => console.log(success));
+    }
+  }
+
+  toggleAddress() {
+    if (this.request.collection_method === 'pickup') {
+      this.request.shipping_address = this.companyAddress;
+    } else {
+      this.request.shipping_address = this.user.address;
+    }
   }
 
   selectOptions(selections) {
@@ -110,7 +141,7 @@ export class CheckoutVM {
   }
 
   getPrice() {
-    this.request.total_price = this.product.price + this.getDelta(this.request);
+    this.request.total_price = this.request.count * (this.product.price + this.getDelta(this.request));
   }
 
   getDelta(request) {
