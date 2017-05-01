@@ -1,0 +1,56 @@
+<template>
+  <require from="./filter.css"></require>
+  <div class="filter-container">
+    <section class="filter-search-container">
+      <input change.delegate="getProducts()" class="filter-search-container__search" type="search" placeholder="Search" value.bind="products.params.filter['name:search'] & throttle">
+    </section>
+    <section class="filters">
+      <label class="filters__origin">
+        Origin
+        <select value.bind="products.params.filter['source_id:eq']" change.delegate="getProducts()">
+          <option model.bind="null">Choose</option>
+          <option repeat.for="country of countries" model.bind="country.id">${country.name}</option>
+        </select>
+      </label>
+      <label class="filters__category">
+        Category
+        <select value.bind="products.params.filter['category_id:eq']" change.delegate="getProducts()">
+          <option model.bind="null">Choose</option>
+          <option repeat.for="category of categories" model.bind="category.id">${category.name}</option>
+        </select>
+      </label>
+      <label class="filters__order">
+        Order By
+        <select value.bind="products.params.sort" change.delegate="getProducts()">
+          <option model.bind="-id">Latest</option>
+          <option model.bind="-order_count">Popularity</option>
+          <option value="price">Price</option>
+        </select>
+      </label>
+    </section>
+    <section >
+      <ul class="filter-result-container">
+        <li class="filter-result" repeat.for="product of products.data">
+          <div class="filter-result__image">
+            <a route-href="route: product; params.bind: {product_id: product.id}"><img src.bind="product.gallery[0]" alt=""/></a>
+          </div>
+          <div class="filter-result__content">
+            <div class="filter-result__content__title">
+              <a route-href="route: product; params.bind: {product_id: product.id}">${product.name}</a>
+            </div>
+            <div class="filter-result__content__shop">
+              By ${product.shop.name}
+            </div>
+            <div class="filter-result__content__price">
+              ${product.currency} ${product.price}
+            </div>
+            <div class="filter-result__content__from">
+              From ${product.source.name}
+            </div>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+  </div>
+</template>

@@ -1,0 +1,58 @@
+@import '../../style/base';
+
+.filter-container {
+  @include grid-container();
+}
+
+.filter-search-container {
+  margin-top: 0.5rem;
+  margin-left: 20px;
+  @media screen and (min-width: $medium-screen) {
+    @include grid-shift(4);
+    max-width: 30rem;
+  }
+}
+
+.filters {
+  @include grid-container();
+  @include grid-media($tablet) {
+    @include grid-column(4);
+  }
+
+  &__order, &__category, &__origin {
+    @include grid-column(4);
+    @include grid-media($tablet) {
+      @include grid-column(12);
+    }
+  }
+}
+
+.filter-result-container {
+  @include grid-column(12);
+  margin-top: 1.4rem;
+  @include grid-media($tablet) {
+    @include grid-column(8);
+  }
+}
+
+.filter-result {
+  display: table;
+  margin-bottom: 1rem;
+
+  &__image {
+    display: table-cell;
+    padding-right: 1rem;
+    img {
+      height: 5rem;
+      width: auto;
+    }
+  }
+
+  &__content {
+    display: table-cell;
+    vertical-align: top;
+    &__shop {
+      font-size: 0.7rem;
+    }
+  }
+}
