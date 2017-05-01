@@ -69,9 +69,9 @@ export class App {
         moduleId: 'views/product/index'
       },
       {
-        route: 'search',
-        name: 'search',
-        moduleId: 'views/search/index'
+        route: 'filter',
+        name: 'filter',
+        moduleId: 'views/filter/index'
       },
       {
         route: 'admin',

@@ -8,6 +8,6 @@ export class Searchbar {
   }
 
   showResults() {
-    this.router.navigateToRoute('search', {search: this.query});
+    this.router.navigateToRoute('filter', {search: this.query});
   }
 }
