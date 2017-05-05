@@ -1,0 +1,15 @@
+<template>
+  <div>
+    <div if.bind="!edit" click.delegate="showSelectionBox()">
+      ${displayValue.name}
+      <span>Click to Edit</span>
+    </div>
+    <div if.bind="edit">
+      <select value.bind="tempSelection">
+        <option repeat.for="choice of choices" model.bind="choice.id">${choice.name}</option>
+      </select>
+      <button click.delegate="execute()">Save</button>
+      <button click.delegate="cancel()">Cancel</button>
+    </div>
+  </div>
+</template>
