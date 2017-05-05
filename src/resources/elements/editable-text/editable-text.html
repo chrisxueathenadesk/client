@@ -1,0 +1,13 @@
+<template>
+  <div>
+    <div if.bind="!edit" click.delegate="showInputBox()">
+      ${store}
+      <span>Click to Edit</span>
+    </div>
+    <div if.bind="edit">
+      <input placeholder.bind="placeholder" value.bind="tempStore" ref="textbox">
+      <button click.delegate="execute()">Save</button>
+      <button click.delegate="cancel()">Cancel</button>
+    </div>
+  </div>
+</template>
