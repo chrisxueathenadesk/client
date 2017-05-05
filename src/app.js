@@ -1,22 +1,23 @@
 import {inject} from 'aurelia-framework';
-import {Router} from 'aurelia-router';
 import {FetchConfig, AuthorizeStep} from 'aurelia-auth';
 import {AuthService} from 'aurelia-auth';
 import {UserService} from '~/services/user';
+import {Api} from '~/models/api';
 
-@inject(Router, FetchConfig, AuthService, UserService)
+@inject(FetchConfig, AuthService, UserService, Api)
 export class App {
-  constructor(router, fetchConfig, auth, user) {
+  constructor(fetchConfig, auth, user, api) {
     this.fetchConfig = fetchConfig;
     this.auth = auth;
     this.user = user;
+    this.api = api;
   }
 
   activate() {
     this.fetchConfig.configure();
 
     if (this.auth.isAuthenticated()) {
-      this.auth.getMe()
+      this.api.fetch('me', {include: ['country']})
       .then(profile => {
         this.user.save(profile);
       })
