@@ -12,8 +12,17 @@ export class Payment {
       .then(response => response.json());
   }
 
+  getCards() {
+    return this.api.fetch('me/cards');
+  }
+
   charge(amount, currency, source) {
     return this.api.create('me/charge', {amount, currency, source})
+      .then(response => response.json());
+  }
+
+  deleteCard(cardId) {
+    return this.api.remove(`me/cards/${cardId}`)
       .then(response => response.json());
   }
 }
