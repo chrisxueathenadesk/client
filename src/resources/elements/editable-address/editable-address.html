@@ -1,0 +1,24 @@
+<template>
+  <div if.bind="!edit" click.delegate="showEditable()">
+    <div>
+      ${address.line_1}
+    </div>
+    <div>
+      ${address.line_2}
+    </div>
+    <div>
+      ${address.zip}
+    </div>
+    <div>
+      ${address.city}
+    </div>
+  </div>
+  <div if.bind="edit">
+    <input placeholder="First Line" value.bind="tempAddress.line_1" ref="firstLine">
+    <input placeholder="Second Line" value.bind="tempAddress.line_2">
+    <input placeholder="Zip" value.bind="tempAddress.zip">
+    <input placeholder="City" value.bind="tempAddress.city">
+    <button click.delegate="saveAddress()">Save</button>
+    <button click.delegate="cancel()">Cancel</button>
+  </div>
+</template>
