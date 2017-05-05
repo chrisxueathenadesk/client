@@ -10,6 +10,7 @@ export class CheckoutVM {
   request = {
     shipping_address: {}
   };
+  DEFAULT_DESTINATION = 1;
   companyAddress = {
     line_1: '195 Pearl’s Hill Terrace',
     line_2: '#02-03A',
@@ -46,7 +47,7 @@ export class CheckoutVM {
         this.request = {
           source_id: product.source_id,
           base_price: product.price,
-          destination_id: this.user.country_id,
+          destination_id: this.user.country_id || this.DEFAULT_DESTINATION,
           collection_method: 'pickup',
           count: Number(selections.count),
           shipping_address: this.companyAddress || {}
