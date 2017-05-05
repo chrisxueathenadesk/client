@@ -2,24 +2,44 @@
   <require from="./dashboard.css"></require>
 
   <section if.bind="user">
-    <h1>Info</h1>
     <div>
-      ${user.email}
+      <img src.bind="user.avatar" alt.bind="user.name"/>
+      <label>Upload
+        <input type="file" files.bind="avatar | toArray" change.delegate="upload()" accept="image/*"/>
+      </label>
     </div>
     <div>
-      ${user.phone}
+      <editable-text store.bind="user.name" key="name" placeholder="Full Name" update.call="userUpdate(fragment)"></editable-text>
     </div>
     <div>
-      <span>${user.address.line_one}</span>
-      <span>${user.address.line_two}</span>
-      <span>${user.address.zip}</span>
+      <editable-selection choices.bind="countries.data" selection.bind="user.country_id" key="country_id" update.call="userUpdate(fragment)">
+        <template replacable-part="value">
+          ${user.country.name}
+        </template>
+      </editable-selection>
     </div>
     <div>
-      <span>${user.country.name}</span>
+      ${user.created_at | toDate:'human'}
+    </div>
+    <div>
+      <editable-text store.bind="user.phone" key="phone" placeholder="Phone" update.call="userUpdate(fragment)"></editable-text>
+    </div>
+    <div>
+      <editable-address address.bind="user.address" key="address" callback.call="userUpdate(address)"></editable-address>
+    </div>
+    <div>
+      <ul>
+        <li repeat.for="card of cards">
+          <i class="icon ion-card"></i>
+          ${card.brand} ending in ${card.last4}
+          <i class="icon ion-close-circled" click.delegate="removeCard(card.id)"></i>
+        </li>
+      </ul>
+      <button>Add a credit card</button>
     </div>
   </section>
 
-  <section if.bind="shops.data" class="shops">
+  <section if.bind="shops.data && shops.data.length" class="shops">
     <h1>Shops</h1>
     <ul>
       <li repeat.for="shop of shops.data">
@@ -30,6 +50,12 @@
 
   <section if.bind="requests.data" class="requests">
     <h1>Requests</h1>
+    <div class="request-status-selection">
+      <label repeat.for="status of requests.statuses">
+        <input type="radio" name="request-status" value.bind="status" checked.bind="requests.params.filter['status:eq']" click.delegate="getRequests()" >
+        <span class="request-status-selection__item">${status}</span>
+      </label>
+    </div>
     <table>
       <tbody>
         <tr repeat.for="request of requests.data">
