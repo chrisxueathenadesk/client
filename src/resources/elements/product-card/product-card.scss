@@ -3,11 +3,11 @@
 $border-radius: 0.2rem;
 $border-color: #f0f1f4;
 $border-width: 0.1rem;
-$bg-color-light: white;
+$bg-color-light: lighten($white, 40%);
 $body-font-color: #667189;
 $font-size-sm: 1.2rem;
 $layout-padding-lg: 1rem;
-$base-transparency: 0.8;
+$base-transparency: 0.9;
 $inverted-text-color: white;
 $padding-sm: 0.1rem;
 $padding-md: 0.5rem;
@@ -38,13 +38,18 @@ $padding-md: 0.5rem;
   .card-ribbon {
     position: absolute;
     top: 20px;
-    color: white;
-    background: $secondary-color;
+    color: $base-background-color;
+    background: $dark-gray;
     border-radius: $border-radius;
     opacity: $base-transparency;
     padding: $padding-sm;
     padding-left: $padding-md;
     padding-right: $padding-md;
+
+    i {
+      color: $secondary-color;
+      opacity: 1;
+    }
   }
 
   .card-image {
