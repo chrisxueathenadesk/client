@@ -3,7 +3,10 @@ const elements = [
   'product-card/product-card',
   'searchbar/searchbar',
   'carousel/carousel',
-  'payment/payment'
+  'payment/payment',
+  'editable-text/editable-text',
+  'editable-address/editable-address',
+  'editable-selection/editable-selection'
 ];
 
 export default elements.map(elem => `./elements/${elem}`);
