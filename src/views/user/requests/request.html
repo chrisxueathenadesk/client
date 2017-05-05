@@ -1,6 +1,24 @@
 <template>
   <require from="./request.css"></require>
   <section>
-    <a href.bind="'product/' + request.data.product.id">${request.data.product.name}</a>
+    <div>
+      <a href.bind="'product/' + request.data.product.id">
+        <img src.bind="request.data.product.gallery[0]"/>
+      </a>
+    </div>
+    <div>
+      <a href.bind="'product/' + request.data.product.id">${request.data.product.name}</a>
+    </div>
+    <div>
+      ${request.data.total_price}
+    </div>
+    <div>
+      ${request.data.status}
+    </div>
+    <div>
+      <label>Ordered Date:
+      </label>
+      ${request.data.created_at | toDate:'human'}
+    </div>
   </section>
 </template>
