@@ -1,0 +1,31 @@
+<template>
+  <label>Upload
+    <input type="file" files.bind="avatar | toArray" change.delegate="upload()" accept="image/*"/>
+  </label>
+  <div>
+    <editable-text store.bind="user.name" key="name" placeholder="Full Name" update.call="userUpdate(fragment)"></editable-text>
+  </div>
+  <div>
+    <editable-selection choices.bind="countries.data" selection.bind="user.country_id" key="country_id" update.call="userUpdate(fragment)">
+      <template replacable-part="value">
+        ${user.country.name}
+      </template>
+    </editable-selection>
+  </div>
+  <div>
+    <editable-text store.bind="user.phone" key="phone" placeholder="Phone" update.call="userUpdate(fragment)"></editable-text>
+  </div>
+  <div>
+    <editable-address address.bind="user.address" key="address" callback.call="userUpdate(address)"></editable-address>
+  </div>
+  <div>
+    <ul>
+      <li repeat.for="card of cards">
+        <i class="icon ion-card"></i>
+        ${card.brand} ending in ${card.last4}
+        <i class="icon ion-close-circled" click.delegate="removeCard(card.id)"></i>
+      </li>
+    </ul>
+    <payment-form save.call="save(token)" button-text="Save Card"></payment-form>
+  </div>
+</template>
