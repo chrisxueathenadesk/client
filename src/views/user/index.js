@@ -3,11 +3,15 @@ export class UserRouter {
 
   configureRouter(config, router) {
     config.map([
-      {route: '', moduleId: './dashboard'},
-      {route: 'trips', moduleId: './trips/index'},
+      {route: '', redirect: 'dashboard'},
+      {route: 'dashboard', name: 'dashboard', title: 'Dashboard', nav: true, moduleId: './dashboard'},
+      {route: 'profile', name: 'profile', title: 'Edit Profile', nav: true, moduleId: './profile/profile'},
+      {route: 'trips', name: '', moduleId: './trips/index'},
       {route: 'requests', moduleId: './requests/index'},
       {route: 'shops/:shop_id', moduleId: './shops/index'}
     ]);
+
+    this.router = router;
   }
 }
 

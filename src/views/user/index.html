@@ -1,3 +1,8 @@
 <template>
+  <ul class="tab tab-block">
+    <li repeat.for="row of router.navigation" class="tab-item ${row.isActive ? 'active': ''} " href.bind="row.href">
+      <a href.bind="row.href">${row.title}</a>
+    </li>
+  </ul>
   <router-view></router-view>
 </template>
