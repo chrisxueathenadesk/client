@@ -5,6 +5,7 @@ import environment from '~/environment';
 @inject(Api)
 export class PaymentForm {
   @bindable save;
+  @bindable buttonText;
   stripe = Stripe(environment.stripe_key);
 
   constructor(api) {
@@ -21,6 +22,7 @@ export class PaymentForm {
         const errorElement = document.getElementById('card-errors');
         errorElement.textContent = result.error.message;
       } else {
+        this.card.clear();
         this.save({token: result.token});
       }
     });
