@@ -1,7 +1,60 @@
 @import '../../style/base';
 
+.user-info {
+  margin-top: 0.5em;
+  &__image {
+    display: inline-block;
+    vertical-align: top;
+  }
+  &__details {
+    display: inline-block;
+    margin-left: 2em;
+    &__name {
+      font-size: 1.6rem;
+    }
+    &__logout {
+      display: block;
+      margin-top: 1rem;
+      color: $red;
+      &:hover {
+        color: lighten($red, 20%);
+      }
+    }
+  }
+}
+
+.dashboard-shops {
+  margin-top: 1em;
+}
+.dashboard-requests {
+  margin-top: 1em;
+  .dashboard-orders {
+    margin-top: 1em;
+    &__row {
+    }
+    &__container {
+      display: flex;
+      &__imagecontainer {
+        &__image {
+          height: 4rem;
+          width: 4em;
+          border-radius: 2px;
+        }
+      }
+    }
+    &-details {
+      margin-left: 1rem;
+      &__title {
+
+      }
+    }
+  }
+
+}
+
+
 .request-status-selection {
-  $large-screen: 50em !default;
+  // $large-screen: 50em !default;
 
   input {
     display: none;
@@ -10,7 +63,6 @@
   label {
     font-weight: normal;
     float: left;
-    padding: 0 0.5em;
 
     // @include media($large-screen) {
     //   float: left;
@@ -23,6 +75,8 @@
     display: inline-block;
     width: auto;
     text-transform: capitalize;
+    padding: 0.5em;
+    border-radius: 0.2em;
     // width: 100%;
 
     // @include media($large-screen) {
@@ -31,7 +85,8 @@
   }
 
   input:checked + &__item {
-    color: #ff0000;
+    background: $primary-color;
+    color: $white;
   }
 }
 

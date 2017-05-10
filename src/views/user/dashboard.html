@@ -1,45 +1,26 @@
 <template>
   <require from="./dashboard.css"></require>
-
-  <section if.bind="user">
-    <div>
-      <img src.bind="user.avatar" alt.bind="user.name"/>
-      <label>Upload
-        <input type="file" files.bind="avatar | toArray" change.delegate="upload()" accept="image/*"/>
-      </label>
+  <section class="user-info" if.bind="user">
+    <div class="user-info__image">
+      <figure class="avatar avatar-xl">
+        <img src.bind="user.avatar || 'https://api.adorable.io/avatars/285/' + user.email" alt.bind="user.name"/>
+      </figure>
     </div>
-    <div>
-      <editable-text store.bind="user.name" key="name" placeholder="Full Name" update.call="userUpdate(fragment)"></editable-text>
-    </div>
-    <div>
-      <editable-selection choices.bind="countries.data" selection.bind="user.country_id" key="country_id" update.call="userUpdate(fragment)">
-        <template replacable-part="value">
-          ${user.country.name}
-        </template>
-      </editable-selection>
-    </div>
-    <div>
-      ${user.created_at | toDate:'human'}
-    </div>
-    <div>
-      <editable-text store.bind="user.phone" key="phone" placeholder="Phone" update.call="userUpdate(fragment)"></editable-text>
-    </div>
-    <div>
-      <editable-address address.bind="user.address" key="address" callback.call="userUpdate(address)"></editable-address>
-    </div>
-    <div>
-      <ul>
-        <li repeat.for="card of cards">
-          <i class="icon ion-card"></i>
-          ${card.brand} ending in ${card.last4}
-          <i class="icon ion-close-circled" click.delegate="removeCard(card.id)"></i>
-        </li>
-      </ul>
-      <button>Add a credit card</button>
+    <div class="user-info__details">
+      <div class="user-info__details__name">
+        ${user.name || user.email}
+      </div>
+      <div class="user-info__details__country">
+        ${user.country.name}
+      </div>
+      <div class="user-info__details__created">
+        ${user.created_at | toDate:'human'}
+      </div>
+      <a class="user-info__details__logout" href="#" click.delegate="auth.logout()">Logout</a>
     </div>
   </section>
 
-  <section if.bind="shops.data && shops.data.length" class="shops">
+  <section if.bind="shops.data && shops.data.length" class="dashboard-shops">
     <h1>Shops</h1>
     <ul>
       <li repeat.for="shop of shops.data">
@@ -48,8 +29,8 @@
     </ul>
   </section>
 
-  <section if.bind="requests.data" class="requests">
-    <h1>Requests</h1>
+  <section if.bind="requests.data" class="dashboard-requests">
+    <h1>Orders</h1>
     <div class="request-status-selection">
       <label repeat.for="status of requests.statuses">
         <input type="radio" name="request-status" value.bind="status" checked.bind="requests.params.filter['status:eq']" click.delegate="getRequests()" >
@@ -57,10 +38,20 @@
       </label>
     </div>
     <table>
-      <tbody>
-        <tr repeat.for="request of requests.data">
-          <td><a href.bind="'user/requests/' + request.id" >${request.product.name}</a></td>
-          <td>${request.status}</td>
+      <tbody class="dashboard-orders">
+        <tr class="dashboard-orders__row" repeat.for="request of requests.data">
+          <td class="dashboard-orders__container">
+            <figure class="dashboard-orders__container__imagecontainer">
+              <img class="dashboard-orders__container__imagecontainer__image" src.bind="request.product.gallery[0]" alt.bind="request.product.name"/>
+            </figure>
+            <div class="dashboard-orders-details">
+              <a class="dashboard-orders-details__title" href.bind="'user/requests/' + request.id" >${request.product.name}</a>
+              <div class="dashboard-orders-details__price" if.bind="request.total_price">${request.currency} ${request.total_price}</div>
+              <div if.bind="request.color">${request.color.name}</div>
+              <div if.bind="request.size">${request.size.name}</div>
+              <div if.bind="request.edition">${request.edition.name}</div>
+            </div>
+          </td>
           <td>${request.created_at | toDate:'human'}</td>
         </tr>
       </tbody>
@@ -68,6 +59,5 @@
   </section>
 
   <section>
-    <button click.delegate="auth.logout()">Logout</button>
   </section>
 </template>
