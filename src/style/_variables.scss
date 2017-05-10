@@ -31,13 +31,14 @@ $base-z-index: 0;
 // Colors
 // $primary-color: #343681;
 // $secondary-color: #6B5001;
-$primary-color: #2F3061;
-$secondary-color: #FFE66D;
-$blue: #6ca6c1;
+$primary-color: #31487c;
+$secondary-color: #7789b2;
+// $blue: #6ca6c1;
+$blue: #274459;
 $dark-gray: #343434;
 $medium-gray: #999;
 $light-gray: #ddd;
-$red: #ff4040;
+$red: #ba3b3b;
 $white: #f7fff7;
 
 // Font Colors
@@ -64,4 +65,8 @@ $base-timing: ease;
 $spinkit-spinner-margin: 40px auto !default;
 $spinkit-size: 40px !default;
 $spinkit-spinner-color: teal;
+
+// Z Index
+$zindex-0: 0;
+$zindex-1: 100;
 
