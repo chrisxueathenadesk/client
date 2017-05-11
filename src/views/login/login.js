@@ -13,7 +13,7 @@ export class Login {
 
   login() {
     return this.auth.login(this.email, this.password)
-      .then(response => this.api.fetch('me', {include: ['country', 'shops']}))
+      .then(response => this.api.fetch('me', {include: ['country']}))
       .then(user => this.user.save(user))
       .catch(err => console.log(err));
   }

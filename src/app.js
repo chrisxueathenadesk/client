@@ -17,7 +17,7 @@ export class App {
     this.fetchConfig.configure();
 
     if (this.auth.isAuthenticated()) {
-      this.api.fetch('me', {include: ['country', 'shops']})
+      this.api.fetch('me', {include: ['country']})
       .then(profile => {
         this.user.save(profile);
       })
