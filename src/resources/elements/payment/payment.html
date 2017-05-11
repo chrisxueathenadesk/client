@@ -1,5 +1,6 @@
 <template>
-  <form submit.delegate="submit()" ref="paymentForm">
+  <require from="./payment.css"></require>
+  <form class="card-entry" submit.delegate="submit()" ref="paymentForm">
     <div class="form-row">
       <label for="card-element">
         Credit or debit card
@@ -12,6 +13,6 @@
       <div ref="cardErrors"></div>
     </div>
 
-    <button type="submit">${buttonText}</button>
+    <button class="card-entry__submit" type="submit">${buttonText}</button>
   </form>
 </template>

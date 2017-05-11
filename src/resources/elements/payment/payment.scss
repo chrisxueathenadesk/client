@@ -21,3 +21,9 @@
 .StripeElement--webkit-autofill {
   background-color: #fefde5 !important;
 }
+
+.card-entry {
+  &__submit {
+    margin-top: 0.5rem;
+  }
+}
