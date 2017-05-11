@@ -1,0 +1,19 @@
+.editable-selection-container {
+  &__display {
+    cursor: pointer;
+  }
+}
+
+.editable-selection-form {
+  display: inline-flex;
+  align-items: baseline;
+  select {
+    min-width: 12rem;;
+  }
+  &__buttons {
+    display: flex;
+    button {
+      margin-left: 0.5em;
+    }
+  }
+}

@@ -1,13 +1,18 @@
 <template>
-  <div>
-    <div if.bind="!edit" click.delegate="showInputBox()">
+  <require from="./editable-text.css"></require>
+  <div class="editable-text-container">
+    <div class="editable-text-container__display" if.bind="!edit" click.delegate="showInputBox()">
       ${store}
-      <span>Click to Edit</span>
+      <span class="editable-text-container__display__edit">
+        <i class="icon ion-edit"></i>
+      </span>
     </div>
-    <div if.bind="edit">
-      <input placeholder.bind="placeholder" value.bind="tempStore" ref="textbox">
-      <button click.delegate="execute()">Save</button>
-      <button click.delegate="cancel()">Cancel</button>
+    <div class="editable-text-form" if.bind="edit">
+      <input class="editable-text-form__input" placeholder.bind="placeholder" value.bind="tempStore" ref="textbox">
+      <div class="editable-text-form__buttons">
+        <button class="editable-text-form__buttons__save" click.delegate="execute()">Save</button>
+        <button class="editable-text-form__buttons__cancel" click.delegate="cancel()">Cancel</button>
+      </div>
     </div>
   </div>
 </template>

@@ -1,15 +1,20 @@
 <template>
-  <div>
-    <div if.bind="!edit" click.delegate="showSelectionBox()">
+  <require from="./editable-selection.css"></require>
+  <div class="editable-selection-container">
+    <div class="editable-text-container__display" if.bind="!edit" click.delegate="showSelectionBox()">
       ${displayValue.name}
-      <span>Click to Edit</span>
+      <span class="editable-selection-container__display__edit">
+        <i class="icon ion-edit"></i>
+      </span>
     </div>
-    <div if.bind="edit">
-      <select value.bind="tempSelection">
+    <div class="editable-selection-form" if.bind="edit">
+      <select class="editable-selection-form__select" value.bind="tempSelection">
         <option repeat.for="choice of choices" model.bind="choice.id">${choice.name}</option>
       </select>
-      <button click.delegate="execute()">Save</button>
-      <button click.delegate="cancel()">Cancel</button>
+      <div class="editable-selection-form__buttons">
+        <button click.delegate="execute()">Save</button>
+        <button click.delegate="cancel()">Cancel</button>
+      </div>
     </div>
   </div>
 </template>
