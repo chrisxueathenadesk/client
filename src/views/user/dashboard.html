@@ -29,7 +29,7 @@
     </ul>
   </section>
 
-  <section if.bind="requests.data" class="dashboard-requests">
+  <section if.bind="requests.data" class="dashboard-orders-container">
     <h1>Orders</h1>
     <div class="request-status-selection">
       <label repeat.for="status of requests.statuses">
@@ -37,25 +37,24 @@
         <span class="request-status-selection__item">${status}</span>
       </label>
     </div>
-    <table>
-      <tbody class="dashboard-orders">
-        <tr class="dashboard-orders__row" repeat.for="request of requests.data">
-          <td class="dashboard-orders__container">
-            <figure class="dashboard-orders__container__imagecontainer">
-              <img class="dashboard-orders__container__imagecontainer__image" src.bind="request.product.gallery[0]" alt.bind="request.product.name"/>
-            </figure>
-            <div class="dashboard-orders-details">
-              <a class="dashboard-orders-details__title" href.bind="'user/requests/' + request.id" >${request.product.name}</a>
-              <div class="dashboard-orders-details__price" if.bind="request.total_price">${request.currency} ${request.total_price}</div>
-              <div if.bind="request.color">${request.color.name}</div>
-              <div if.bind="request.size">${request.size.name}</div>
-              <div if.bind="request.edition">${request.edition.name}</div>
-            </div>
-          </td>
-          <td>${request.created_at | toDate:'human'}</td>
-        </tr>
-      </tbody>
-    </table>
+    <br>
+    <ul class="dashboard-orders">
+      <li class="dashboard-orders__row" repeat.for="request of requests.data">
+        <figure class="dashboard-orders__row__imagecontainer">
+          <img class="dashboard-orders__row__imagecontainer__image" src.bind="request.product.gallery[0]" alt.bind="request.product.name"/>
+        </figure>
+        <div class="dashboard-orders-details">
+          <a class="dashboard-orders-details__title" href.bind="'user/requests/' + request.id" >${request.product.name}</a>
+          <div class="dashboard-orders-details__price" if.bind="request.total_price">${request.currency} ${request.total_price}</div>
+          <div if.bind="request.color || request.size || request.edition">
+            <span class="chip" if.bind="request.color">${request.color.name}</span>
+            <span class="chip" if.bind="request.size">${request.size.name}</span>
+            <span if.bind="request.edition">${request.edition.name}</span>
+          </div>
+          <div>${request.created_at | toDate:'human'}</div>
+        </div>
+      </li>
+    </ul>
   </section>
 
   <section>

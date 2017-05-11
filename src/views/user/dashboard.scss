@@ -26,13 +26,13 @@
 .dashboard-shops {
   margin-top: 1em;
 }
-.dashboard-requests {
+.dashboard-orders-container {
   margin-top: 1em;
   .dashboard-orders {
-    margin-top: 1em;
+    margin-top: 2em;
     &__row {
-    }
-    &__container {
+      border-bottom: 1px solid lighten(grey, 40%);
+      margin-bottom: 0.5rem;
       display: flex;
       &__imagecontainer {
         &__image {
@@ -55,6 +55,7 @@
 
 .request-status-selection {
   // $large-screen: 50em !default;
+  margin-bottom: 1em;
 
   input {
     display: none;
