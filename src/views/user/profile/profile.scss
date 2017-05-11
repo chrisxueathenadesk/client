@@ -1,0 +1,32 @@
+@import '../../../style/base';
+
+.profile-container {
+  margin-top: 1rem;
+  &__image-upload {
+    &__image {
+      height: 20rem;
+      width: 20rem;
+      border-radius: 1rem;
+      object-fit: cover;
+    }
+  }
+
+  div {
+    margin-bottom: 0.5em;
+    label {
+      margin-bottom: 0em;
+    }
+  }
+}
+
+.card-list-container {
+  &__list {
+    &__item {
+      &__delete {
+        color: $red;
+        font-size: 1.3rem;
+        cursor: pointer;
+      }
+    }
+  }
+}
