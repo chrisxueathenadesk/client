@@ -6,7 +6,7 @@ export class EditableAddress {
   @bindable callback;
 
   attached() {
-    this.tempAddress = this.address;
+    this.tempAddress = Object.assign({}, this.address);
   }
 
   showEditable() {
@@ -17,13 +17,13 @@ export class EditableAddress {
   }
 
   cancel() {
-    this.tempAddress = this.address;
+    this.tempAddress = Object.assign({}, this.address);
     this.edit = false;
   }
 
   saveAddress() {
     this.edit = false;
-    this.address = this.tempAddress;
+    this.address = Object.assign({}, this.tempAddress);
     this.callback({address: {[this.key]: this.tempAddress}});
   }
 }
