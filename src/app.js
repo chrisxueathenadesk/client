@@ -93,7 +93,7 @@ export class App {
         name: 'auth',
         auth: false,
         nav: true,
-        moduleId: 'views/login/index',
+        moduleId: 'views/auth/index',
         title: 'Login'
       }
     ]);
