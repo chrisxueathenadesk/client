@@ -1,0 +1,21 @@
+@import '../../../style/base';
+
+.request-product-info {
+  margin-top: 1rem;
+
+  &__image {
+    a {
+      img {
+        width: 20rem;
+        height: 20rem;
+        border-radius: 1rem;
+      }
+    }
+  }
+
+  &__title {
+    a {
+      font-size: 1.3rem;
+    }
+  }
+}

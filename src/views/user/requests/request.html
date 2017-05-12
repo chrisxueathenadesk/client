@@ -1,24 +1,52 @@
 <template>
   <require from="./request.css"></require>
-  <section>
-    <div>
+  <section class="request-product-info">
+    <div class="request-product-info__image">
       <a href.bind="'product/' + request.data.product.id">
         <img src.bind="request.data.product.gallery[0]"/>
       </a>
     </div>
-    <div>
+    <div class="request-product-info__title">
+      <label>Name</label>
       <a href.bind="'product/' + request.data.product.id">${request.data.product.name}</a>
     </div>
-    <div>
-      ${request.data.total_price}
-    </div>
-    <div>
+  </section>
+  <section class="request-info">
+    <div class="request-info__status">
+      <label>Status</label>
       ${request.data.status}
     </div>
-    <div>
-      <label>Ordered Date:
-      </label>
-      ${request.data.created_at | toDate:'human'}
+    <div if.bind="request.data.size" class="request-info__size">
+      <label>Size</label>
+      ${request.data.size.name}
+    </div>
+    <div if.bind="request.data.color" class="request-info__color">
+      <label>Color</label>
+      ${request.data.color.name}
+    </div>
+    <div if.bind="request.data.edition" class="request-info__edition">
+      <label>Edition</label>
+      ${request.data.edition.name}
+    </div>
+    <div class="request-info__quantity">
+      <label>Quantity</label>
+      ${request.data.quantity}
+    </div>
+    <div class="request-info__price">
+      <label>Price</label>
+      ${request.data.currency} ${request.data.total_price}
+    </div>
+    <div if.bind="request.instructions" class="request-info__instructions">
+      <label>Instructions</label>
+      ${request.data.instructions}
+    </div>
+    <div class="request-info__orderdate">
+      <label>Ordered Date:</label>
+      ${request.data.created_at | toDate:'date'}
+    </div>
+    <div if.bind="request.delivery_date" class="request-info__deliverydate">
+      <label>Delivery Date:</label>
+      ${request.data.delivery_date | toDate:'date'}
     </div>
   </section>
 </template>
