@@ -5,6 +5,7 @@ import {UserService} from '~/services/user';
 
 @inject(AuthService, Api, UserService)
 export class Login {
+  errors = [];
   constructor(auth, api, user) {
     this.auth = auth;
     this.api = api;
@@ -15,6 +16,10 @@ export class Login {
     return this.auth.login(this.email, this.password)
       .then(response => this.api.fetch('me', {include: ['country', 'shops']}))
       .then(user => this.user.save(user))
-      .catch(err => console.log(err));
+      .catch(err => {
+        if (err.status === 422) {
+          this.errors.push('Wrong username or password');
+        }
+      });
   }
 }

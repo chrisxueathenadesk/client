@@ -1,11 +1,14 @@
 <template>
   <require from="./login.css"></require>
 
-  <form class="login" submit.delegate="login()">
+  <form class="login-container" submit.delegate="login()">
     <label for="email">Email</label>
     <input type="email" class="email" name="email" value.bind="email">
     <label for="password">Password</label>
     <input type="password" name="password" value.bind="password">
+    <ul if.bind="errors.length" class="login-container__errors">
+      <li repeat.for="error of errors">${error}</li>
+    </ul>
     <button type="submit">Login</button>
   </form>
   <div>
