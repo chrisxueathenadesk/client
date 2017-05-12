@@ -5,6 +5,7 @@ import authConfig from './auth-config';
 export function configure(aurelia) {
   aurelia.use
     .standardConfiguration()
+    .plugin('aurelia-validation')
     .plugin('aurelia-dialog', dialogConfig => dialogConfig.useDefaults())
     .plugin('aurelia-auth', baseConfig => {
       baseConfig.configure(authConfig);
