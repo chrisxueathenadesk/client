@@ -53,10 +53,10 @@
           </div>
           <div>${request.created_at | toDate:'human'}</div>
         </div>
+        <div if.bind="request.status === 'ready'" class="dashboard-orders__row__confirm">
+          <button click.delegate="confirmDelivery(request)">Got It!</button>
+        </div>
       </li>
     </ul>
-  </section>
-
-  <section>
   </section>
 </template>

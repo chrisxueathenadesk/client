@@ -47,5 +47,12 @@ export class DashboardView {
     /* required for event propagation */
     return true;
   }
+
+  confirmDelivery(request) {
+    this.api
+      .edit(`me/requests/${request.id}`, {status: 'completed'})
+      .then(() => request.status = 'completed')
+      .catch(err => this.requests.error = err);
+  }
 }
 
