@@ -2,7 +2,7 @@ import {inject} from 'aurelia-framework';
 import {FetchConfig, AuthorizeStep} from 'aurelia-auth';
 import {AuthService} from 'aurelia-auth';
 import {UserService} from '~/services/user';
-import {Api} from '~/models/api';
+import {Api} from '~/services/api';
 
 @inject(FetchConfig, AuthService, UserService, Api)
 export class App {

@@ -1,6 +1,6 @@
 import {inject} from 'aurelia-framework';
 import {Router} from 'aurelia-router';
-import {Api} from '~/models/api';
+import {Api} from '~/services/api';
 import {constants} from '~/services/constants';
 import {UserService} from '~/services/user';
 import {AuthService} from 'aurelia-auth';

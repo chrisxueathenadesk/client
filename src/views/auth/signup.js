@@ -1,5 +1,5 @@
 import {inject, NewInstance} from 'aurelia-framework';
-import {Api} from '~/models/api';
+import {Api} from '~/services/api';
 import {Signup} from '~/models/signup';
 import {Router} from 'aurelia-router';
 import {ValidationController} from 'aurelia-validation';

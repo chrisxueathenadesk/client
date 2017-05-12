@@ -1,5 +1,5 @@
 import {bindable, inject} from 'aurelia-framework';
-import {Api} from '~/models/api';
+import {Api} from '~/services/api';
 import environment from '~/environment';
 
 @inject(Api)

@@ -1,13 +1,11 @@
-import {Factory, inject} from 'aurelia-framework';
-import {Request} from '~/models/request';
-import {Api} from '~/models/api';
+import {inject} from 'aurelia-framework';
+import {Api} from '~/services/api';
 
 //factory of since we need to pass the path
-@inject(Factory.of(Request), Api)
+@inject(Api)
 export class RequestView {
-  constructor(requestFactory, api) {
+  constructor(api) {
     this.api = api;
-    this.factory = requestFactory;
     this.request = {
       params: {
         include: ['source', 'destination']
@@ -30,7 +28,6 @@ export class RequestView {
     // construct model
     // TODO: clean up mixed ways of data retrieval
     const id = Number(params.request_id);
-    this.currentRequest = this.factory(id);
     this.getRequest(id);
   }
 }

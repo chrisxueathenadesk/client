@@ -1,7 +1,7 @@
 import {inject} from 'aurelia-framework';
 import {Router} from 'aurelia-router';
-import {Api} from '~/models/api';
-import {UserService} from '../../services/user';
+import {Api} from '~/services/api';
+import {UserService} from '~/services/user';
 
 @inject(Router, Api, UserService)
 export class ProductView {
