@@ -1,21 +1,32 @@
-import {inject} from 'aurelia-framework';
+import {inject, NewInstance} from 'aurelia-framework';
 import {Api} from '~/models/api';
+import {Signup} from '~/models/signup';
 import {Router} from 'aurelia-router';
+import {ValidationController} from 'aurelia-validation';
+import {ValidationRenderer} from '~/services/validation-renderer';
 
-@inject(Api, Router)
-export class Signup {
-  user = {};
-  signup = {};
-  constructor(api, router) {
+@inject(Api, Router, NewInstance.of(ValidationController))
+export class SignupView {
+  signup = new Signup();
+  constructor(api, router, controller) {
+    this.controller = controller;
     this.api = api;
     this.router = router;
+    this.controller.addRenderer(new ValidationRenderer());
   }
 
-  login(user) {
-    this.api.create('auth/signup', { email: user.email, password: user.password })
-      .then(response => {
-        this.router.navigateToRoute('verify');
-      })
-      .catch(err => console.log(err));
+  submit(user) {
+    this.controller.validate()
+    .then(result => {
+      if (result.valid) {
+        return this.api.create('auth/signup', { email: this.signup.email, password: this.signup.password });
+      } else {
+        throw new Error('invalid form');
+      }
+    })
+    .then(response => {
+      this.router.navigateToRoute('verify');
+    })
+    .catch(err => console.log(err));
   }
 }
