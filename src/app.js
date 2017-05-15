@@ -58,13 +58,6 @@ export class App {
         title: 'Categories'
       },
       {
-        route: 'shops',
-        name: 'shops',
-        moduleId: 'views/home/index',
-        nav: true,
-        title: 'Shops'
-      },
-      {
         route: 'product/:product_id',
         name: 'product',
         moduleId: 'views/product/index'
