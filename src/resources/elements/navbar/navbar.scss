@@ -1,7 +1,7 @@
 @import "../../../style/base";
 
 .nav-container {
-  background-color: $primary-color;
+  background-color: $base-background-color;
   @include grid-container;
 }
 
@@ -19,8 +19,8 @@
 }
 
 .nav-item {
-  color: white;
-  padding: 0.3em;
+  color: $secondary-color;
+  padding: 0.5em;
   &:hover {
     background-color: white;
     color: $primary-color;
@@ -31,25 +31,31 @@
   }
   a:hover {
     color: inherit;
+    border-bottom-left-radius: 1rem;
   }
 
 }
 
 .active {
+  border-bottom-left-radius: 1rem;
   background-color: white;
   color: $primary-color;
 }
 
 .logo {
-  font-size: 1.10em;
   text-align: center;
   min-width: 2em;
   padding-left: 0.3em;
   padding-top: 0.3em;
 
   .logo-image {
-    max-height: 1.50em;
+    height: 1.50em;
+    @media screen and (min-width: $medium-screen) {
+      height: 2.4rem;
+    }
   }
+
+
 }
 
 .main-nav {
