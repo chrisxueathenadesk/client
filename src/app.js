@@ -35,13 +35,7 @@ export class App {
     config.map([
       {
         route: '',
-        redirect: 'home'
-      },
-      {
-        route: 'home',
-        name: 'home',
-        moduleId: 'views/home/index',
-        title: 'Home'
+        redirect: 'deals'
       },
       {
         route: 'deals',
