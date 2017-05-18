@@ -3,7 +3,6 @@
 
 .page-container {
   @include grid-container;
-  background-color: $base-background-color;
 }
 
 .page-host {

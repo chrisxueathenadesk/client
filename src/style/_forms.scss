@@ -27,7 +27,7 @@ textarea {
 
 #{$all-text-inputs} {
   appearance: none;
-  background-color: $base-background-color;
+  background-color: lighten($base-background-color, 90%);
   border: $base-border;
   border-radius: $base-border-radius;
   box-shadow: $form-box-shadow;
