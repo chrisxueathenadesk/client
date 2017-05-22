@@ -36,13 +36,17 @@
       <label>Price</label>
       ${request.data.currency} ${request.data.total_price}
     </div>
-    <div if.bind="request.instructions" class="request-info__instructions">
+    <div if.bind="request.data.instructions" class="request-info__instructions">
       <label>Instructions</label>
       ${request.data.instructions}
     </div>
     <div class="request-info__orderdate">
       <label>Ordered Date:</label>
       ${request.data.created_at | toDate:'date'}
+    </div>
+    <div if.bind="request.data.bank_reference" class="request-info__bank">
+      <label>Bank Reference</label>
+      ${request.data.bank_reference}
     </div>
     <div if.bind="request.delivery_date" class="request-info__deliverydate">
       <label>Delivery Date:</label>

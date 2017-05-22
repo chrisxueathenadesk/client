@@ -59,6 +59,10 @@
       <label>Collection Method</label>
       ${request.data.collection_method}
     </div>
+    <div if.bind="request.data.bank_reference" class="request-info__bank">
+      <label>Bank Reference</label>
+      ${request.data.bank_reference}
+    </div>
     <div if.bind="request.data.color">
       <label>Color</label>
       ${request.data.color.name}
