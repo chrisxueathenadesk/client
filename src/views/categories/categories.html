@@ -1,0 +1,10 @@
+<template>
+  <require from="./categories.css"></require>
+  <section>
+    <div repeat.for="category of categories.data">
+      <a href.bind="'categories/' + category.id" class="category-tab">
+        ${category.name}
+      </a>
+    </div>
+  </section>
+</template>

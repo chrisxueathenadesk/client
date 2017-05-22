@@ -2,13 +2,13 @@
   <require from="./request.css"></require>
   <section class="request-product-info">
     <div class="request-product-info__image">
-      <a href.bind="'product/' + request.data.product.id">
+      <a href.bind="'products/' + request.data.product.id">
         <img src.bind="request.data.product.gallery[0]"/>
       </a>
     </div>
     <div class="request-product-info__title">
       <label>Name</label>
-      <a href.bind="'product/' + request.data.product.id">${request.data.product.name}</a>
+      <a href.bind="'products/' + request.data.product.id">${request.data.product.name}</a>
     </div>
   </section>
   <section class="request-info">

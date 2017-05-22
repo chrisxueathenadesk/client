@@ -2,7 +2,7 @@ import {inject} from 'aurelia-framework';
 import {Api} from '~/services/api';
 
 @inject(Api)
-export class HomeVM {
+export class HomeView {
   commonParameters = {
     page: {
       size: 12,

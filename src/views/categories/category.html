@@ -1,0 +1,10 @@
+<template class="test">
+  <require from="./category.css"></require>
+  <div class="category-view">
+    <section>
+      <a href.bind="'products/' + product.id" repeat.for="product of products.data" class="category-view__product">
+        ${product.name}
+      </a>
+    </section>
+  </div>
+</template>

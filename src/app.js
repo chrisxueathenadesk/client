@@ -47,12 +47,12 @@ export class App {
       {
         route: 'categories',
         name: 'categories',
-        moduleId: 'views/home/index',
+        moduleId: 'views/categories/index',
         nav: true,
         title: 'Categories'
       },
       {
-        route: 'product/:product_id',
+        route: 'products/:product_id',
         name: 'product',
         moduleId: 'views/product/index'
       },
