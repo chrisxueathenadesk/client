@@ -41,20 +41,72 @@
         </select>
       </div>
     </section>
-    <section class="order-payment">
-      <div if.bind="cards.length && !state.addcard">
-        <label>
-          Pay using:
-          <select value.bind="selectedCard">
-            <option repeat.for="card of cards" model.bind="card.id">${card.brand} ending with ${card.last4}</option>
-          </select>
-        </label>
-        <button click.delegate="charge()">Pay $${request.total_price}</button>
-        <button if.bind="!state.addcard" click.delegate="state.addcard = true">Add New Card</button>
+    <section class="card-payment">
+      <div click.delegate="togglePaymentView('card-payment')">
+        <i show.bind="currentPaymentMethod !== 'card-payment'" class="icon ion-arrow-right-b"></i>
+        <i show.bind="currentPaymentMethod === 'card-payment'" class="icon ion-arrow-down-b"></i>
+        <i class="icon ion-card"></i>
+        Card Payment
       </div>
-      <div class="checkout-card-add" if.bind="state.addcard || !cards.length">
-        <payment-form save.call="save(token)" button-text="Pay"></payment-form>
-        <a href="#" if.bind="cards.length" click.delegate="state.addcard = false">Cancel</a>
+      <div show.bind="currentPaymentMethod === 'card-payment'" class="card-payment__content">
+        <div if.bind="cards.length && !state.addcard">
+          <label>
+            Pay using:
+            <select value.bind="selectedCard">
+              <option repeat.for="card of cards" model.bind="card.id">${card.brand} ending with ${card.last4}</option>
+            </select>
+          </label>
+          <button click.delegate="charge()">Pay $${request.total_price}</button>
+          <button if.bind="!state.addcard" click.delegate="state.addcard = true">Add New Card</button>
+        </div>
+        <div class="checkout-card-add" if.bind="state.addcard || !cards.length">
+          <payment-form save.call="save(token)" button-text="Pay"></payment-form>
+          <a href="#" if.bind="cards.length" click.delegate="state.addcard = false">Cancel</a>
+        </div>
+      </div>
+    </section>
+    <section class="bank-payment">
+      <div click.delegate="togglePaymentView('bank-payment')">
+        <i show.bind="currentPaymentMethod !== 'bank-payment'" class="icon ion-arrow-right-b"></i>
+        <i show.bind="currentPaymentMethod === 'bank-payment'" class="icon ion-arrow-down-b"></i>
+        <i class="icon ion-cash"></i>
+        Bank Payment
+      </div>
+      <div class="bank-payment__content" show.bind="currentPaymentMethod === 'bank-payment'">
+        <ol class="bank-payment__content__instructions">
+          <li class="bank-payment__content__instructions__step">
+            Log in to internet banking
+          </li>
+          <li class="bank-payment__content__instructions__step">
+            Add new Payee:
+            <div class="bank-payment__content__instructions__step__account">
+              <label>UOB Business Account</label>
+              <div>
+                <label>Account Name:</label>
+                AthenaDesk Pte Ltd
+              </div>
+              <div>
+                <label>Account No:</label>
+                388-308-863-6
+              </div>
+              <div>
+                <label>Branch Code:</label>
+                336
+              </div>
+            </div>
+          </li>
+          <li class="bank-payment__content__instructions__step">
+            Transfer ${request.currency} ${request.total_price} to the account
+          </li>
+          <li class="bank-payment__content__instructions__step">
+            For Internet Banking, please put your full name into "Your Initials"
+          </li>
+          <li class="bank-payment__content__instructions__step">
+            Paste the reference code below
+          </li>
+        </ol>
+        <input value.bind="request.bank_reference" class="bank-payment__ref-number" placeholder="Reference Number">
+        <button click.delegate="saveReferenceNumber(request.bank_refernce)">Submit Reference Number</button>
       </div>
     </section>
   </div>

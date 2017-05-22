@@ -135,6 +135,25 @@ export class CheckoutVM {
     }
   }
 
+  togglePaymentView(toggle) {
+    this.currentPaymentMethod = this.currentPaymentMethod === toggle ? '' : toggle;
+  }
+
+  saveReferenceNumber(referenceNumber) {
+    this.api.create(`products/${this.product.id}/requests`, this.request)
+      .then(() => {
+        return this.api.edit(`products/${this.product.id}`, {order_count: this.product.order_count ? this.product.order_count + 1 : 1});
+      })
+    .then(response => {
+      this.router.navigateToRoute('acknowledge');
+    })
+    .catch(error => {
+      // send error to admin
+      this.state.inflight = false;
+      console.log(error);
+    });
+  }
+
   selectOptions(selections) {
     if (selections.color) this.request.color = this.product.colors[selections.color];
     if (selections.size) this.request.size = this.product.sizes[selections.size];
