@@ -1,7 +1,7 @@
 <template>
   <require from="./signup.css"></require>
 
-  <form class="signup" submit.delegate="submit(user)">
+  <form class="signup" submit.delegate="submit()">
     <label for="email">Email</label>
     <input type="email" class="email" name="email" value.bind="signup.email & validate">
     <label for="password">Password</label>

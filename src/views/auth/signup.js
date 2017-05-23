@@ -15,13 +15,13 @@ export class SignupView {
     this.controller.addRenderer(new ValidationRenderer());
   }
 
-  submit(user) {
+  submit() {
     this.controller.validate()
     .then(result => {
       if (result.valid) {
         return this.api.create('auth/signup', { email: this.signup.email, password: this.signup.password });
       } else {
-        throw new Error('invalid form');
+        throw new Error('invalid signup');
       }
     })
     .then(response => {
