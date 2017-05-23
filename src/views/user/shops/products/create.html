@@ -3,13 +3,13 @@
 
   <form submit.delegate="create()">
     <label>Name
-      <input type="text" value.bind="product.name" />
+      <input type="text" value.bind="product.name & validate" />
     </label>
     <label>Url
       <input type="text" value.bind="product.url" />
     </label>
     <label>Description
-      <textarea type="text" value.bind="product.description">
+      <textarea type="text" value.bind="product.description & validate">
       </textarea>
     </label>
     <label>Images
@@ -17,14 +17,14 @@
     </label>
     <label>
       Source Country
-      <select value.bind="product.source_id">
+      <select value.bind="product.source_id & validate">
         <option model.bind="null">Choose</option>
         <option repeat.for="country of countries" model.bind="country.id">${country.name}</option>
       </select>
     </label>
     <label>
       Category
-      <select value.bind="product.category_id">
+      <select value.bind="product.category_id & validate">
         <option model.bind="null">Choose</option>
         <option repeat.for="category of categories" model.bind="category.id">${category.name}</option>
       </select>
@@ -36,14 +36,19 @@
         <option repeat.for="brand of brands" model.bind="brand.id">${brand.name}</option>
       </select>
     </label>
+    <label>
+      Estimated Delivery(in weeks)
+      <input type="number" value.bind="product.delivery_time | toNumber & validate" />
+    </label>
+    <label>
+      Preorder
+      <input type="checkbox" value.bind="product.preorder" />
+    </label>
     <label>Price
-      <input type="number" value.bind="product.price | toNumber" />
+      <input type="number" value.bind="product.price | toNumber & validate" />
     </label>
     <label>Seed Order Count
       <input type="number" value.bind="product.order_count | toNumber" />
-    </label>
-    <label>Estimated Delivery Time
-      <input value.bind="product.delivery" />
     </label>
     <button click.delegate="add('sizes', 'size')">Add Size</button>
       <div repeat.for="i of counter.size">

@@ -1,9 +1,12 @@
-import {inject} from 'aurelia-framework';
+import {inject, NewInstance} from 'aurelia-framework';
 import {Api} from '~/services/api';
 import {ExternalHttp} from '~/services/external-http';
 import {notify} from '~/services/notification';
+import {ValidationController} from 'aurelia-validation';
+import {ValidationRenderer} from '~/services/validation-renderer';
+import {Product} from '~/models/product';
 
-@inject(Api, ExternalHttp)
+@inject(Api, ExternalHttp, NewInstance.of(ValidationController))
 export class CreateProduct {
   counter = {
     size: 0,
@@ -11,10 +14,13 @@ export class CreateProduct {
     edition: 0
   };
   gallery = [];
-  constructor(api, http) {
+  status = {};
+  product = new Product();
+  constructor(api, http, controller) {
+    this.controller = controller;
     this.api = api;
     this.http = http;
-    this.product = {};
+    this.controller.addRenderer(new ValidationRenderer());
   }
 
   activate(params) {
@@ -52,25 +58,35 @@ export class CreateProduct {
   }
 
   create() {
-    Promise.all(this.gallery.map(file => this.getUploadUrl(file, 'product')))
-    .then(data => {
-      this.product.gallery = data.map(res => res.signed_request.split('?')[0]);
-      return Promise.all(data.map((response, index) => {
-        this.http.fetch(response.signed_request, {
-          method: 'PUT',
-          body: this.gallery[index]
-        });
-      }));
-    })
-    .then(response => this.api.create(`me/shops/${this.product.shop_id}/products`, this.product))
-    .then(response => {
-      notify().log('Successfully created!');
-      this.product = {};
-      this.gallery = [];
-    })
-    .catch(err => {
-      notify().log('Product creation failed');
-    });
+    this.controller.validate()
+      .then(result => {
+        if (result.valid) {
+          this.status.inprogress = true;
+          Promise.all(this.gallery.map(file => this.getUploadUrl(file, 'product')))
+            .then(data => {
+              this.product.gallery = data.map(res => res.signed_request.split('?')[0]);
+              return Promise.all(data.map((response, index) => {
+                this.http.fetch(response.signed_request, {
+                  method: 'PUT',
+                  body: this.gallery[index]
+                });
+              }));
+            })
+          .then(response => this.api.create(`me/shops/${this.product.shop_id}/products`, this.product))
+            .then(response => {
+              this.status.inprogress = false;
+              notify().log('Successfully created!');
+              this.product = {};
+              this.gallery = [];
+            })
+          .catch(err => {
+            this.status.inprogress = false;
+            notify().log('Product creation failed');
+          });
+        } else {
+          throw new Error('invalid product');
+        }
+      });
   }
 
   getUploadUrl(file, type) {
