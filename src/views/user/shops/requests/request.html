@@ -1,4 +1,15 @@
 <template>
+  <section class="order-actions">
+    <form submit.delegate="update(editRequest)">
+      <div>
+        <label>Change Status</label>
+        <select value.bind="editRequest.status">
+          <option repeat.for="status of statuses" model.bind="status">${status}</option>
+        </select>
+      </div>
+      <button type="submit">Save</button>
+    </form>
+  </section>
   <section class="order-user">
     <h3>
       User Information
