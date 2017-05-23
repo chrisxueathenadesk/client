@@ -140,6 +140,8 @@ export class CheckoutVM {
   }
 
   saveReferenceNumber(referenceNumber) {
+    this.request.status = 'pending';
+    this.state.inflight = true;
     this.api.create(`products/${this.product.id}/requests`, this.request)
       .then(() => {
         return this.api.edit(`products/${this.product.id}`, {order_count: this.product.order_count ? this.product.order_count + 1 : 1});
