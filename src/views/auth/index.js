@@ -5,7 +5,8 @@ export class LoginRouter {
       {route: 'login', name: 'login', moduleId: './login', nav: true},
       {route: 'signup', name: 'signup', moduleId: './signup'},
       {route: 'reset', name: 'reset', moduleId: './reset'},
-      {route: 'verify', name: 'verify', moduleId: './verify'}
+      {route: 'confirm', name: 'confirm', moduleId: './confirm'},
+      {route: 'new-password', name: 'new-password', moduleId: './new-password'}
     ]);
   }
 }
