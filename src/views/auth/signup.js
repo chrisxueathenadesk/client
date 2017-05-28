@@ -20,12 +20,11 @@ export class SignupView {
     .then(result => {
       if (result.valid) {
         return this.api.create('auth/signup', { email: this.signup.email, password: this.signup.password });
-      } else {
-        throw new Error('invalid signup');
       }
+      throw new Error('invalid signup');
     })
     .then(response => {
-      this.router.navigateToRoute('verify');
+      this.router.navigateToRoute('confirm');
     })
     .catch(err => console.log(err));
   }
