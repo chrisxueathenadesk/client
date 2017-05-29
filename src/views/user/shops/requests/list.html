@@ -28,7 +28,7 @@
       <tr repeat.for="request of requests.data">
         <td><a href.bind="'user/shops/' + shop.data.id + '/requests/' + request.id">${request.product.name}</a></td>
         <td>${request.status}</td>
-        <td>${request.created_at | toDate: 'date'}</td>
+        <td>${request.delivery_date | toDate: 'date'}</td>
       </tr>
     </table>
   </section>
