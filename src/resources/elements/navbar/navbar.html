@@ -10,7 +10,7 @@
           </picture>
         </div>
 
-        <a class="nav-container__menu__item ${row.isActive ? 'active': ''} " repeat.for="row of router.navigation | authFilter: auth.isAuthenticated()" href.bind="row.href">${row.title}</a>
+        <a class="nav-container__menu__item ${row.isActive ? 'nav-container__menu__item--active': ''} " repeat.for="row of router.navigation | authFilter: auth.isAuthenticated()" href.bind="row.href">${row.title}</a>
         <!-- <a class="nav&#45;item" href="#" click.delegate="logout()">Logout</a> -->
       </div>
     </nav>
