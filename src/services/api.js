@@ -11,7 +11,9 @@ export class Api {
   static formatFilters(filterObj) {
     const formattedFilter = {};
     Object.keys(filterObj).forEach(key => {
-      formattedFilter[`where[${key}]`] = filterObj[key];
+      if (filterObj[key] !== null && filterObj[key] !== undefined && filterObj[key] !== '') {
+        formattedFilter[`where[${key}]`] = filterObj[key];
+      }
     });
     return formattedFilter;
   }
