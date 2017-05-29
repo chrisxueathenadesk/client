@@ -1,0 +1,18 @@
+@import '../../../../style/base';
+
+.shop-products-list {
+  @include grid-container;
+  &__filter {
+    &__category, &__source {
+      @include grid-column(4);
+    }
+    &__create {
+      float: right;
+      a {
+        color: $white;
+        background: $primary-color;
+        padding: .5rem;
+      }
+    }
+  }
+}

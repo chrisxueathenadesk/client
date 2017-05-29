@@ -1,16 +1,36 @@
 <template>
-  <section>
-    <h1>Shop product list</h1>
-    <a href.bind="'user/shops/' + shop.data.id + '/products/create'">Create</a>
-  </section>
-  <section>
-    <table>
-      <tr repeat.for="product of products.data">
-        <td>
-          <a href.bind="'user/shops/' + shop.data.id + '/products/' + product.id + '/edit'" >${product.name}</a>
-        </td>
-        <td>${product.created_at | toDate:'human'}</td>
-      </tr>
-    </table>
-  </section>
+  <require from="./list.css"></require>
+  <div class="shop-products-list">
+    <section class="shop-products-list__filter">
+      <div class="shop-products-list__filter__category">
+        <label>Category</label>
+        <select value.bind="products.params.filter['category_id:eq']" change.delegate="getProducts()">
+          <option model.bind="null">Choose</option>
+          <option repeat.for="category of categories.data" model.bind="category.id">${category.name}</option>
+        </select>
+      </div>
+      <div class="shop-products-list__filter__source">
+        <label>Country</label>
+        <select value.bind="products.params.filter['source_id:eq']" change.delegate="getProducts()">
+          <option model.bind="null">Choose</option>
+          <option repeat.for="country of countries.data" model.bind="country.id">${country.name}</option>
+      </div>
+      <div class="shop-products-list__filter__create">
+        <a href.bind="'user/shops/' + shop.data.id + '/products/create'">
+          <i class="icon ion-plus"></i>
+          Create
+        </a>
+      </div>
+    </section>
+    <section>
+      <table>
+        <tr repeat.for="product of products.data">
+          <td>
+            <a href.bind="'user/shops/' + shop.data.id + '/products/' + product.id + '/edit'" >${product.name}</a>
+          </td>
+          <td>${product.created_at | toDate:'human'}</td>
+        </tr>
+      </table>
+    </section>
+  </div>
 </template>
