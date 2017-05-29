@@ -2,6 +2,9 @@ import 'humanize';
 
 export class toDateValueConverter {
   toView(dateValue, format) {
+    if (dateValue === null || dateValue === undefined) {
+      return 'unspecified';
+    }
     const date = new Date(dateValue);
     switch (format) {
     case 'human':
