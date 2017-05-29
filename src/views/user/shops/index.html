@@ -1,9 +1,12 @@
 <template>
-  <ul class="breadcrumb">
-    <li class="breadcrumb-item" repeat.for="row of router.navigation">
-      <a href.bind="row.href">${row.title}&nbsp;</a>
-    </li>
-  </ul>
+  <require from="./index.css"></require>
+  <div class="shops-routes-navigation">
+    <ul class="breadcrumb">
+      <li class="breadcrumb-item ${row.isActive ? 'breadcrumb--active': ''}" repeat.for="row of router.navigation">
+        <a href.bind="row.href">${row.title}&nbsp;</a>
+      </li>
+    </ul>
+  </div>
   <router-view></router-view>
 </template>
 

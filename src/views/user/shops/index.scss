@@ -1,0 +1,9 @@
+@import "../../../style/base";
+
+.shops-routes-navigation {
+  .breadcrumb {
+    &--active.breadcrumb-item {
+      border-bottom: 0.1rem solid $primary-color;
+    }
+  }
+}
