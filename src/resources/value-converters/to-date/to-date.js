@@ -8,10 +8,9 @@ export class toDateValueConverter {
     const date = new Date(dateValue);
     switch (format) {
     case 'human':
-      console.log(date);
       return humanize.relativeTime(date.getTime() / 1000);
     case 'date':
-      return date.toLocaleDateString();
+      return date.toDateString();
     case 'datetime':
       return date.toLocaleString();
     default:
