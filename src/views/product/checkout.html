@@ -1,122 +1,138 @@
 <template>
   <require from="./checkout.css"></require>
-  <div class="checkout-container ${state.inflight? 'blur': ''}">
-    <section class="order-info">
-      <h2>Confirm</h2>
-      <p>You are buying ${product.name}</p>
-      <p if.bind="request.size">Size: ${request.size.name}</p>
-      <p if.bind="request.color">Color: ${request.color.name}</p>
-      <p if.bind="request.edition">Edition: ${request.edition.name}</p>
-      <h4 if.bind="request.count">Quantity: ${request.count}</h4>
-      <h3>Total Cost: SGD ${request.total_price}</h3>
-    </section>
-    <section class="shipping-info">
-      <div>
-        <label>Collection Method</label>
-        <select change.delegate="toggleAddress()" value.bind="request.collection_method">
-          <option value="pickup">Pickup</option>
-          <option value="post">Post</option>
-        </select>
-      </div>
-      <div if.bind="request.collection_method === 'pickup'">
-        <label></label>
-        <p>${request.shipping_address.line_1}</p>
-        <p>${request.shipping_address.line_2}</p>
-        <p>${request.shipping_address.zip}</p>
-        <p>${request.shipping_address.city}</p>
-      </div>
-      <div if.bind="request.collection_method === 'post'" class="shipping-address">
-        <label>Address</label>
-        Line 1
-        <input value.bind="request.shipping_address.line_1" type="text" />
-        Line 2
-        <input value.bind="request.shipping_address.line_2" type="text" />
-        City
-        <input value.bind="request.shipping_address.city" type="text" />
-        Zip
-        <input value.bind="request.shipping_address.zip" type="text" />
-        <label>Destination Country</label>
-        <select value.bind="request.destination_id">
-          <option repeat.for="country of countries" model.bind="country.id">${country.name}</option>
-        </select>
-      </div>
-    </section>
-    <section class="card-payment">
-      <div click.delegate="togglePaymentView('card-payment')">
-        <i show.bind="currentPaymentMethod !== 'card-payment'" class="icon ion-arrow-right-b"></i>
-        <i show.bind="currentPaymentMethod === 'card-payment'" class="icon ion-arrow-down-b"></i>
-        <i class="icon ion-card"></i>
-        Card Payment
-      </div>
-      <div show.bind="currentPaymentMethod === 'card-payment'" class="card-payment__content">
-        <div if.bind="cards.length && !state.addcard">
-          <label>
-            Pay using:
-            <select value.bind="selectedCard">
-              <option repeat.for="card of cards" model.bind="card.id">${card.brand} ending with ${card.last4}</option>
-            </select>
-          </label>
-          <button click.delegate="charge()">Pay $${request.total_price}</button>
-          <button if.bind="!state.addcard" click.delegate="state.addcard = true">Add New Card</button>
+  <div class="checkout-container">
+    <div class="${state.inflight? 'checkout-container--blur': ''}">
+      <section class="checkout-container__order-info">
+        <div class="checkout-container__order-info__title">
+          You are buying ${product.name}
         </div>
-        <div class="checkout-card-add" if.bind="state.addcard || !cards.length">
-          <payment-form save.call="save(token)" button-text="Pay"></payment-form>
-          <a href="#" if.bind="cards.length" click.delegate="state.addcard = false">Cancel</a>
+        <div class="checkout-container__order-info__size" if.bind="request.size">
+          Size: ${request.size.name}
         </div>
-      </div>
-    </section>
-    <section class="bank-payment">
-      <div click.delegate="togglePaymentView('bank-payment')">
-        <i show.bind="currentPaymentMethod !== 'bank-payment'" class="icon ion-arrow-right-b"></i>
-        <i show.bind="currentPaymentMethod === 'bank-payment'" class="icon ion-arrow-down-b"></i>
-        <i class="icon ion-cash"></i>
-        Bank Payment
-      </div>
-      <div class="bank-payment__content" show.bind="currentPaymentMethod === 'bank-payment'">
-        <ol class="bank-payment__content__instructions">
-          <li class="bank-payment__content__instructions__step">
-            Log in to internet banking
-          </li>
-          <li class="bank-payment__content__instructions__step">
-            Add new Payee:
-            <div class="bank-payment__content__instructions__step__account">
-              <label>UOB Business Account</label>
-              <div>
-                <label>Account Name:</label>
-                AthenaDesk Pte Ltd
+        <div class="checkout-container__order-info__color" if.bind="request.color">
+          Color: ${request.color.name}
+        </div>
+        <div class="checkout-container__order-info__edition" if.bind="request.edition">
+          Edition: ${request.edition.name}
+        </div>
+        <div class="checkout-container__order-info__request" if.bind="request.count">
+          Quantity: ${request.count}
+        </div>
+        <div class="checkout-container__order-info__total-price">
+          Total Cost: SGD ${request.total_price}
+        </div>
+        <div class="checkout-container__order-info__shipping">
+          The product will be shipped within ${request.delivery_date | toDate:'date'}
+        </div>
+      </section>
+      <section class="checkout-container__shipping-info">
+        <div>
+          <label>Collection Method</label>
+          <select change.delegate="toggleAddress()" value.bind="request.collection_method">
+            <option value="pickup">Pickup</option>
+            <option value="post">Post (+${product.postage || constants.defaultPostage})</option>
+          </select>
+        </div>
+        <div if.bind="request.collection_method === 'pickup'">
+          <label></label>
+          <p>${request.shipping_address.line_1}</p>
+          <p>${request.shipping_address.line_2}</p>
+          <p>${request.shipping_address.zip}</p>
+          <p>${request.shipping_address.city}</p>
+        </div>
+        <div if.bind="request.collection_method === 'post'" class="shipping-address">
+          <label>Address</label>
+          Line 1
+          <input value.bind="request.shipping_address.line_1" type="text" />
+          Line 2
+          <input value.bind="request.shipping_address.line_2" type="text" />
+          City
+          <input value.bind="request.shipping_address.city" type="text" />
+          Zip
+          <input value.bind="request.shipping_address.zip" type="text" />
+          <label>Destination Country</label>
+          <select value.bind="request.destination_id">
+            <option repeat.for="country of countries" model.bind="country.id">${country.name}</option>
+          </select>
+        </div>
+      </section>
+      <section class="checkout-container__card-payment">
+        <div click.delegate="togglePaymentView('card-payment')">
+          <i show.bind="currentPaymentMethod !== 'card-payment'" class="icon ion-arrow-right-b"></i>
+          <i show.bind="currentPaymentMethod === 'card-payment'" class="icon ion-arrow-down-b"></i>
+          <i class="icon ion-card"></i>
+          Card Payment
+        </div>
+        <div show.bind="currentPaymentMethod === 'card-payment'" class="checkout-container__card-payment__content">
+          <div if.bind="cards.length && !state.addcard">
+            <label>
+              Pay using:
+              <select value.bind="selectedCard">
+                <option repeat.for="card of cards" model.bind="card.id">${card.brand} ending with ${card.last4}</option>
+              </select>
+            </label>
+            <button click.delegate="charge()">Pay $${request.total_price}</button>
+            <button if.bind="!state.addcard" click.delegate="state.addcard = true">Add New Card</button>
+          </div>
+          <div class="checkout-container__card-payment__content__add" if.bind="state.addcard || !cards.length">
+            <payment-form save.call="save(token)" button-text="Pay"></payment-form>
+            <a href="#" if.bind="cards.length" click.delegate="state.addcard = false">Cancel</a>
+          </div>
+        </div>
+      </section>
+      <section class="checkout-container__bank-payment">
+        <div click.delegate="togglePaymentView('bank-payment')">
+          <i show.bind="currentPaymentMethod !== 'bank-payment'" class="icon ion-arrow-right-b"></i>
+          <i show.bind="currentPaymentMethod === 'bank-payment'" class="icon ion-arrow-down-b"></i>
+          <i class="icon ion-cash"></i>
+          Bank Payment
+        </div>
+        <div class="checkout-container__bank-payment__content" show.bind="currentPaymentMethod === 'bank-payment'">
+          <ol class="checkout-container__bank-payment__content__instructions">
+            <li class="checkout-container__bank-payment__content__instructions__step">
+              Log in to internet banking
+            </li>
+            <li class="checkout-container__bank-payment__content__instructions__step">
+              Add new Payee:
+              <div class="checkout-container__bank-payment__content__instructions__step__account">
+                <label>UOB Business Account</label>
+                <div>
+                  <label>Account Name:</label>
+                  AthenaDesk Pte Ltd
+                </div>
+                <div>
+                  <label>Account No:</label>
+                  388-308-863-6
+                </div>
+                <div>
+                  <label>Branch Code:</label>
+                  336
+                </div>
               </div>
-              <div>
-                <label>Account No:</label>
-                388-308-863-6
-              </div>
-              <div>
-                <label>Branch Code:</label>
-                336
-              </div>
-            </div>
-          </li>
-          <li class="bank-payment__content__instructions__step">
-            Transfer ${request.currency} ${request.total_price} to the account
-          </li>
-          <li class="bank-payment__content__instructions__step">
-            For Internet Banking, please put your full name into "Your Initials"
-          </li>
-          <li class="bank-payment__content__instructions__step">
-            Paste the reference code below
-          </li>
-        </ol>
-        <input value.bind="request.bank_reference" class="bank-payment__ref-number" placeholder="Reference Number">
-        <button click.delegate="saveReferenceNumber(request.bank_refernce)">Submit Reference Number</button>
+            </li>
+            <li class="checkout-container__bank-payment__content__instructions__step">
+              Transfer ${request.currency} ${request.total_price} to the account
+            </li>
+            <li class="checkout-container__bank-payment__content__instructions__step">
+              For Internet Banking, please put your full name into "Your Initials"
+            </li>
+            <li class="checkout-container__bank-payment__content__instructions__step">
+              Paste the reference code below
+            </li>
+          </ol>
+          <input value.bind="request.bank_reference" class="checkout-container__bank-payment__ref-number" placeholder="Reference Number">
+          <button click.delegate="saveReferenceNumber(request.bank_refernce)">Submit Reference Number</button>
+        </div>
+      </section>
+    </div>
+    <section>
+      <div if.bind="state.inflight" class="checkout-container__loading">
+        Processing. Please do not navigate away from this page.
+        <div class="sk-wandering-cubes">
+          <div class="sk-cube sk-cube1"></div>
+          <div class="sk-cube sk-cube2"></div>
+        </div>
       </div>
     </section>
   </div>
-  <section>
-    <div if.bind="state.inflight" class="loading">
-      Processing. Please do not navigate away from this page.
-      <div class="sk-wandering-cubes">
-        <div class="sk-cube sk-cube1"></div>
-        <div class="sk-cube sk-cube2"></div>
-      </div>
-    </div>
-  </section>
 </template>

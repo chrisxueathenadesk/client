@@ -1,23 +1,27 @@
 @import '../../style/base';
 
 .checkout-container {
-
-}
-
-.blur {
-  filter: blur(2px);
-}
-
-.loading {
-  position: absolute;
-  width: 100%;
-  top: 50%;
-  text-align: center;
-}
-
-.checkout-card-add {
-  a {
-    display: inline-block;
-    padding-top: 0.5em;
+  &__order-info__header {
+    font-size: $header-font-size;
+  }
+  &__loading {
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    text-align: center;
+  }
+  &--blur {
+    filter: blur(2px);
+  }
+  &__card-payment {
+    &__content {
+      &__add {
+        a {
+          display: inline-block;
+          padding-top: 0.5em;
+        }
+      }
+    }
   }
 }
+

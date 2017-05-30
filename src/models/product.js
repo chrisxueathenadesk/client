@@ -9,6 +9,7 @@ export class Product {
   preorder;
   featured;
   price;
+  postage;
   weight;
   dimensions;
   platform_charge;

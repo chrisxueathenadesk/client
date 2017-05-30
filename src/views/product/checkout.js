@@ -1,8 +1,9 @@
 import {inject} from 'aurelia-framework';
 import {Api} from '~/services/api';
-import {UserService} from '../../services/user';
-import {Payment} from '../../services/payment';
+import {UserService} from '~/services/user';
+import {Payment} from '~/services/payment';
 import {Router} from 'aurelia-router';
+import {constants} from '~/services/constants';
 
 @inject(Router, Api, UserService, Payment)
 export class CheckoutVM {
@@ -10,18 +11,13 @@ export class CheckoutVM {
   request = {
     shipping_address: {}
   };
-  DEFAULT_DESTINATION = 1;
-  companyAddress = {
-    line_1: '195 Pearl’s Hill Terrace',
-    line_2: '#02-03A',
-    zip: 'S168976',
-    city: 'Singapore'
-  };
+
   constructor(router, api, user, payment) {
     this.router = router;
     this.api = api;
     this.user = user.user;
     this.payment = payment;
+    this.constants = constants;
 
     this.state = {
       addcard: false
@@ -29,7 +25,6 @@ export class CheckoutVM {
   }
 
   activate(params) {
-    this.getProduct(Number(params.product_id), params);
     this.api.fetch('countries')
       .then(countries => this.countries = countries.results)
       .catch(err => console.log(err));
@@ -37,6 +32,8 @@ export class CheckoutVM {
     this.api.fetch('me/cards')
       .then(cards => this.cards = cards.data)
       .catch(err => console.log(err));
+
+    this.getProduct(Number(params.product_id), params);
   }
 
   getProduct(id, selections) {
@@ -44,18 +41,23 @@ export class CheckoutVM {
       .fetch(`products/${id}`)
       .then(product => {
         this.product = product;
+        const currentDay = new Date(Date.now());
+        const deliveryDate = new Date(currentDay.setDate(currentDay.getDate() + 7 * product.delivery_time));
         this.request = {
           source_id: product.source_id,
           base_price: product.price,
-          destination_id: this.user.country_id || this.DEFAULT_DESTINATION,
+          postage: 0,
+          destination_id: this.user && this.user.country_id || constants.defaultDestination,
           collection_method: 'pickup',
           count: Number(selections.count),
-          shipping_address: this.companyAddress || {}
+          shipping_address: constants.defaultShippingAddress || {},
+          delivery_date: deliveryDate.toISOString()
         };
         this.selectOptions(selections);
         this.getPrice();
       })
       .catch(error => {
+        console.log(error);
         this.error.product = error;
       });
   }
@@ -129,10 +131,13 @@ export class CheckoutVM {
 
   toggleAddress() {
     if (this.request.collection_method === 'pickup') {
-      this.request.shipping_address = this.companyAddress;
+      this.request.shipping_address = this.constants.defaultShippingAddress;
+      this.request.postage = 0;
     } else {
-      this.request.shipping_address = this.user.address;
+      this.request.shipping_address = this.user && this.user.address;
+      this.request.postage = this.product.postage || constants.defaultPostage;
     }
+    this.getPrice();
   }
 
   togglePaymentView(toggle) {
@@ -163,7 +168,7 @@ export class CheckoutVM {
   }
 
   getPrice() {
-    this.request.total_price = this.request.count * (this.product.price + this.getDelta(this.request));
+    this.request.total_price = this.request.count * (this.product.price + this.getDelta(this.request)) + this.request.postage;
   }
 
   getDelta(request) {
