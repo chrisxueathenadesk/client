@@ -38,7 +38,7 @@ export class PaymentForm {
         lineHeight: '24px',
         fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
         fontSmoothing: 'antialiased',
-        fontSize: '1.4rem',
+        fontSize: '1rem',
         '::placeholder': {
           color: '#aab7c4'
         }
