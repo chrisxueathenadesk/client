@@ -46,6 +46,9 @@
     </label>
     <label>Price
       <input type="number" value.bind="product.price | toNumber & validate" />
+     <label>Postage
+      <input type="number" value.bind="product.postage" />
+    </label>
     </label>
     <label>Seed Order Count
       <input type="number" value.bind="product.order_count | toNumber" />
