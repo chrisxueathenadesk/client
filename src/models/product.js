@@ -37,6 +37,7 @@ ValidationRules
     .required()
   .ensure(product => product.price)
     .required()
+    .satisfiesRule('numberRange', 1, 10000)
   .ensure(product => product.currency)
     .required()
   .on(Product);

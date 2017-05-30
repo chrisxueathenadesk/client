@@ -3,6 +3,8 @@ import {FetchConfig, AuthorizeStep} from 'aurelia-auth';
 import {AuthService} from 'aurelia-auth';
 import {UserService} from '~/services/user';
 import {Api} from '~/services/api';
+import {ValidationRules} from 'aurelia-validation';
+import {customRules} from '~/services/validation-rules';
 
 @inject(FetchConfig, AuthService, UserService, Api)
 export class App {
@@ -11,6 +13,8 @@ export class App {
     this.auth = auth;
     this.user = user;
     this.api = api;
+
+    ValidationRules.customRule(...customRules.numberRange);
   }
 
   activate() {
