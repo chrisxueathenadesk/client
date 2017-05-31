@@ -5,10 +5,10 @@
 
   &__image-container {
     height: auto;
-    max-width: 100%;
-    @media screen and (min-width: $medium-screen) {
-      max-width: 60%;
-      margin: auto;
+    margin: auto;
+    &__image {
+      max-height: 40vh;
+      max-width: auto;
     }
   }
 
