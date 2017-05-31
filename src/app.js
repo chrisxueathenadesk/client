@@ -39,20 +39,18 @@ export class App {
     config.map([
       {
         route: '',
-        redirect: 'deals'
+        redirect: 'home'
       },
       {
-        route: 'deals',
-        name: 'deals',
+        route: 'home',
+        name: 'home',
         moduleId: 'views/home/index',
-        nav: true,
-        title: 'Deals'
+        title: 'Home'
       },
       {
         route: 'categories',
         name: 'categories',
         moduleId: 'views/categories/index',
-        nav: true,
         title: 'Categories'
       },
       {
