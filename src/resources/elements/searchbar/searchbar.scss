@@ -35,6 +35,7 @@ form.search-form {
   }
 
   button[type=submit] {
+    border-radius: 0;
     border-bottom: 1px solid $base-border-color;
     font-size: 1.5em;
     padding: 5px 10px;

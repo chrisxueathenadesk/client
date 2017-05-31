@@ -2,20 +2,21 @@
 
 .nav-container {
   background-color: white;
-  justify-content:space-around;
   display: flex;
-  position: fixed;
-  z-index: 500;
   font-size: 1.2em;
+  justify-content: space-around;
+  position: fixed;
   width: 100%;
+  z-index: 500;
+
   &__logo {
-    text-align: center;
     min-width: 2em;
-    padding-left: 0.3em;
-    padding-top: 0.6em;
+    padding-left: .3em;
+    padding-top: .6em;
+    text-align: center;
 
     .logo-image {
-      height: 1.50em;
+      height: 1.5em;
       @media screen and (min-width: $medium-screen) {
         height: 2.4rem;
       }
@@ -28,12 +29,15 @@
 
   &__item {
     color: $secondary-color;
-    padding: 0.5em;
+    padding: .6em;
+
     &:hover {
       background-color: $primary-color;
-      color: $white;
+      color: white;
     }
+
     &:focus {
+      background-color: white;
       color: $primary-color;
     }
 
