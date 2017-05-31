@@ -4,7 +4,7 @@ import Hammer from 'hammerjs';
 export class Carousel {
   @bindable images = [];
 
-  activeimage = 0;
+  activeImage = 0;
 
   attached() {
     this.hammer = new Hammer(this.carousel);
@@ -25,6 +25,6 @@ export class Carousel {
   }
 
   goTo(index) {
-    this.activeimage = Math.min(Math.max(index, 0), this.images.length);
+    this.activeImage = (index >= 0 && index < this.images.length) ? index : 0;
   }
 }

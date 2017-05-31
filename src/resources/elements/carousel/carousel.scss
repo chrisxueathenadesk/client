@@ -1,47 +1,31 @@
 @import "../../../style/base";
 
-// .carousel-container {
-//   position: relative;
-// }
-
-.carousel {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+.carousel-element {
   position: relative;
 
-  .icon {
-    cursor: pointer;
-    font-size: 2em;
-  }
-  .carousel-image {
-    height: 40vh;
-  }
-}
-
-.carousel-dots {
-  margin-top: 0.5em;
-  position: absolute;
-  bottom: 1em;
-  .carousel-dot {
-    display: inline-block;
-    width: 0.5em;
-    height: 0.5em;
-    margin-left: 0.5em;
-    border-radius: 50%;
-    opacity: 0.4;
-    background-color: grey;
-
-    .active {
-      opacity: 1;
-      border: 1px solid black;
+  &__image-container {
+    height: auto;
+    max-width: 100%;
+    @media screen and (min-width: $medium-screen) {
+      max-width: 60%;
+      margin: auto;
     }
   }
-}
 
-.carousel-preview {
-  img {
-    height: 10vh;
+  &__navigation {
+    margin-top: 0.5em;
+    position: absolute;
+    bottom: 1em;
+  }
+
+  &__preview {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    img {
+      height: 10vh;
+    }
+
   }
 }
 

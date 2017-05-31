@@ -1,18 +1,12 @@
 <template>
   <require from="./carousel.css"></require>
-  <div class="carousel-container">
-    <div class="carousel" ref="carousel">
-      <div repeat.for="image of images">
-        <img class="carousel-image" src.bind="image" show.bind="$index === activeimage" />
-      </div>
-      <ul class="carousel-dots">
-        <li repeat.for="image of images" class="carousel-dot ${$index === activeimage ? 'active': null}" click.delegate="goTo($index)"></li>
-      </ul>
+
+  <div class="carousel-element" ref="carousel">
+    <div class="carousel-element__image-container">
+      <img class="carousel-element__image-container__image" src.bind="images[activeImage]"/>
     </div>
-    <div class="carousel-preview-container">
-      <span repeat.for="image of images" class="carousel-preview ${$index === activeimage ? active: null}">
-        <img click.delegate="goTo($index)" src.bind="image" alt=""/>
-      </span>
+    <div class="carousel-element__preview">
+      <img repeat.for="image of images" click.delegate="goTo($index)" src.bind="image" alt=""/>
     </div>
   </div>
 </template>
