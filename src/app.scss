@@ -10,6 +10,14 @@
       @include grid-shift(1);
       @include grid-column(10);
     }
+    &__footer {
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+      &__copyright {
+        text-align: center;
+      }
+    }
+
   }
 }
 
