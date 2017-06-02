@@ -1,24 +1,62 @@
 @import '../../style/base';
 
-.cards {
+$categories: (
+  columns: 12,
+  gutter: 5px,
+);
+
+.home-page {
   @include grid-container;
-}
-.card {
-  @include grid-column(12);
-  @include grid-media($tablet) {
-    @include grid-column(4);
+
+  &__gallery {
+    display: flex;
+    justify-content: center;
   }
-  @include grid-media($desktop) {
-    @include grid-column(3);
+
+  &__categories {
+    margin-top: 1rem;
+    @include grid-media($tablet) {
+      @include grid-column(4, $categories);
+    }
+    &__category {
+      @include grid-column(6, $categories);
+      @include grid-media($tablet) {
+        @include grid-column(6, $categories);
+      }
+      @include grid-media($desktop) {
+        @include grid-column(6, $categories);
+      }
+      position: relative;
+      &__image {
+      }
+
+      &__title {
+        bottom: calc(50% - 1.6em/2);
+        color: $white;
+        font-size: $header-font-size;
+        font-weight: 500;
+        left: 0;
+        position: absolute;
+        right: 0;
+        text-align: center;
+      }
+    }
+  }
+
+  &__most-popular {
+    margin-top: 1rem;
+    @include grid-container;
+    &__cards {
+      @include grid-media($tablet) {
+        @include grid-column(8);
+      }
+      &__card {
+        @include grid-column(12);
+        @include grid-media($tablet) {
+          @include grid-column(6);
+        }
+      }
+    }
   }
 }
 
-.latest,
-.most-popular,
-.featured {
-
-  label {
-    font-size: 1.5rem;
-    text-align: center;
-  }
-}

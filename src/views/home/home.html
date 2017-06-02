@@ -1,34 +1,26 @@
 <template>
   <require from="./home.css"></require>
 
+  <div class="home-page">
 
-  <!-- featured products -->
-  <!-- gallery -->
-  <!-- <section class="featured"> -->
-  <!--   <label for="featured">Featured</label> -->
-  <!--   <div class="cards"> -->
-  <!--     <product&#45;card repeat.for="product of featured.data" class="product&#45;card" product.bind="product"></product&#45;card> -->
-  <!--   </div> -->
-  <!-- </section> -->
-
-  <!-- popular products -->
-  <section class="most-popular">
-    <label for="popular">Most Popular</label>
-    <div class="cards">
-      <product-card repeat.for="product of popular.data" class="product-card" product.bind="product"></product-card>
+    <div class="home-page__gallery">
+      <gallery images.bind="announcements.data"></gallery>
     </div>
-  </section>
 
-  <!-- latest products -->
-  <section class="latest">
-    <label for="latest">Latest</label>
-    <div class="cards">
-      <product-card repeat.for="product of latest.data" class="product-card" product.bind="product"></product-card>
-    </div>
-  </section>
-
-  <!-- categories (like newegg)-->
-  <!-- <section class="categories"> -->
-  <!--   <label for="categories">Categories</label> -->
-  <!-- </section> -->
+    <section class="home-page__categories">
+      <a class="home-page__categories__category" repeat.for="category of categories.data" route-href="route:filter; params.bind:{category: category.id}">
+        <img class="home-page__categories__category__image" src.bind="category.image" alt="">
+        <div class="home-page__categories__category__title">
+          ${category.name}
+        </div>
+      </a>
+    </section>
+    <section class="home-page__most-popular">
+      <div class="home-page__most-popular__cards">
+        <div class="home-page__most-popular__cards__card" repeat.for="product of popular.data" >
+          <product-card class="product-card" product.bind="product"></product-card>
+        </div>
+      </div>
+    </section>
+  </div>
 </template>

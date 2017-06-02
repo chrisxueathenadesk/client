@@ -5,26 +5,17 @@ import {Api} from '~/services/api';
 export class HomeView {
   commonParameters = {
     page: {
-      size: 12,
+      size: 6,
       number: 0
     }
   };
   countries = {};
+  categories = {};
+  announcements = {};
 
   constructor(api, router) {
     this.api = api;
 
-    this.featured = {
-      params: {
-        filter: {
-          'featured:eq': true
-        },
-        include: ['source'],
-        sort: '-id'
-      }
-    };
-
-    // popular over a period of time?
     this.popular = {
       params: {
         filter: {
@@ -35,16 +26,37 @@ export class HomeView {
         sort: '-order_count'
       }
     };
+  }
 
-    this.latest = {
-      params: {
-        filter: {
-          'active:eq': true
-        },
-        include: ['source'],
-        sort: '-created_at'
-      }
-    };
+  activate() {
+    this.getProducts(this.popular);
+    this.getCountries();
+    this.getCategories();
+    this.getAnnouncements();
+  }
+
+  getCategories() {
+    this.api
+      .fetch('categories')
+      .then(response => {
+        this.categories.data = response.results;
+      })
+      .catch(error => {
+        console.log(error);
+        this.categories.error = error;
+      });
+  }
+
+  getAnnouncements() {
+    this.api
+      .fetch('announcements')
+      .then(response => {
+        this.announcements.data = response.results;
+      })
+      .catch(error => {
+        console.log(error);
+        container.error = error;
+      });
   }
 
   getProducts(container) {
@@ -67,12 +79,5 @@ export class HomeView {
       .catch(error => {
         this.countries.error = error;
       });
-  }
-
-  activate() {
-    this.getProducts(this.featured);
-    this.getProducts(this.popular);
-    this.getProducts(this.latest);
-    this.getCountries();
   }
 }
