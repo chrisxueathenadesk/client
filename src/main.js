@@ -6,6 +6,7 @@ export function configure(aurelia) {
   aurelia.use
     .standardConfiguration()
     .plugin('aurelia-validation')
+    .plugin('aurelia-animator-css')
     .plugin('aurelia-dialog', dialogConfig => dialogConfig.useDefaults())
     .plugin('aurelia-auth', baseConfig => {
       baseConfig.configure(authConfig);

@@ -162,7 +162,13 @@
             "main": "aurelia-validation",
             "path": "../node_modules/aurelia-validation/dist/amd",
             "resources": []
-          }
+          },
+          {
+            "name": "aurelia-animator-css",
+            "main": "aurelia-animator-css",
+            "path": "../node_modules/aurelia-animator-css/dist/amd",
+            "resources": []
+          },
         ]
       }
     ]
