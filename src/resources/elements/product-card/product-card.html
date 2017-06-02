@@ -1,41 +1,30 @@
 <template>
   <require from="./product-card.css"></require>
 
-  <div class="card">
-    <!-- a card will have a product picture on the left-->
-    <!--  product title on the right -->
-    <!--  product price below the name -->
-    <!--  product price below the name -->
-    <div class="card-image">
+  <div class="card-element">
+    <div class="card-element__image">
       <a route-href="route: product; params.bind: {product_id: product.id}">
         <img src.bind="product.gallery[0]" alt="">
       </a>
     </div>
-    <div if.bind="product.order_count" class="card-ribbon">
+    <div if.bind="product.order_count" class="card-element__ribbon">
       <i class="icon ion-flame"></i>
-      ${product.order_count} people ordered this
+      ${product.order_count} sold
     </div>
-    <div class="card-header">
-      <div class="card-title">
+    <div class="card-element__header">
+      <div class="card-element__header__title">
         <a route-href="route: product; params.bind: {product_id: product.id}">
           ${product.name}
         </a>
       </div>
-      <div class="card-subtitle">
-      </div>
     </div>
-    <div class="card-body">
-      <div class="card-price">
+    <div class="card-element__body">
+      <div class="card-element__body__price">
         ${product.price} SGD
       </div>
-      <div class="card-source">
+      <div class="card-element__source">
         <i class="icon ion-ios-location"></i>
         From ${product.source.name}
-      </div>
-    </div>
-    <div class="card-footer">
-      <div class="card-cta">
-        <button click.delegate="router.navigateToRoute('product', {product_id: product.id})">Show Details</button>
       </div>
     </div>
   </div>

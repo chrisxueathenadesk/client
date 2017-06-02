@@ -6,12 +6,12 @@ $border-width: 0.1rem;
 $bg-color-light: lighten($white, 40%);
 $body-font-color: #667189;
 $font-size-sm: 1.2rem;
-$layout-padding-lg: 1rem;
+$layout-padding-lg: 0.5rem;
 $base-transparency: 0.9;
 $inverted-text-color: white;
 $padding-sm: 0.1rem;
 $padding-md: 0.5rem;
-.card {
+.card-element {
   background: $bg-color-light;
   border: $border-width solid $border-color;
   border-radius: $border-radius;
@@ -19,28 +19,26 @@ $padding-md: 0.5rem;
   display: block;
   margin-bottom: 0.5rem;
   position: relative;
+  padding: $layout-padding-lg;
 
-  .card-header,
-  .card-body,
-  .card-footer {
+  &__header,
+  &__body {
     padding: $layout-padding-lg;
-    padding-bottom: 0;
+  }
 
-    &:last-child {
-      padding-bottom: $layout-padding-lg;
+  &__body {
+    &__price {
+      font-weight: bold;
     }
   }
 
-  .card-price {
-    font-weight: bold;
-  }
-
-  .card-ribbon {
+  &__ribbon {
     position: absolute;
     top: 20px;
     color: $base-background-color;
     background: $dark-gray;
     border-radius: $border-radius;
+    left: 0px;
     opacity: $base-transparency;
     padding: $padding-sm;
     padding-left: $padding-md;
@@ -52,47 +50,23 @@ $padding-md: 0.5rem;
     }
   }
 
-  .card-image {
+  &__image {
     padding-top: $layout-padding-lg;
-
-    &:first-child {
-      padding-top: 0;
-
-      img {
-        object-fit: cover;
-        height: 20rem;
-        width: 100%;
-        border-top-left-radius: $border-radius;
-        border-top-right-radius: $border-radius;
-      }
-    }
-
-    &:last-child {
-      img {
-        border-bottom-left-radius: $border-radius;
-        border-bottom-right-radius: $border-radius;
-      }
+    text-align: center;
+    img {
+      object-fit: cover;
+      height: 10rem;
+      border-top-left-radius: $border-radius;
+      border-top-right-radius: $border-radius;
     }
   }
 
-  .card-title {
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    font-size: 1.2rem;
-  }
-
-  .card-subtitle {
-    color: lighten($body-font-color, 40%);
-    font-size: $font-size-sm;
-  }
-
-  .card-footer {
-    .card-cta {
-      button {
-        width: 100%;
-      }
+  &__header {
+    &__title {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      font-size: 1.2rem;
     }
   }
-
 }
