@@ -52,14 +52,10 @@ export class FilterView {
       });
   }
 
-  // processParams() {
-  //   this.products.params
-  // }
-
   activate(params) {
-    if (this.products.params) {
-      this.products.params.filter['name:search'] = params.search;
-    }
+    this.products.params.filter['name:search'] = params.search && params.search;
+    this.products.params.filter['category_id:eq'] = params.category && Number(params.category);
+    this.products.params.filter['source_id:eq'] = params.source && Number(params.source);
     this.getProducts();
     this.getCategories();
     this.getCountries();
