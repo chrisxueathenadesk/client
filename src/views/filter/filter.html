@@ -1,9 +1,6 @@
 <template>
   <require from="./filter.css"></require>
   <div class="filter-container">
-    <section class="filter-search-container">
-      <input change.delegate="getProducts()" class="filter-search-container__search" type="search" placeholder="Search" value.bind="products.params.filter['name:search'] & debounce">
-    </section>
     <section class="filters">
       <label class="filters__origin">
         Origin

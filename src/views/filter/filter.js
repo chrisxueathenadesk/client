@@ -1,7 +1,8 @@
 import {inject} from 'aurelia-framework';
 import {Api} from '~/services/api';
+import {EventAggregator} from 'aurelia-event-aggregator';
 
-@inject(Api)
+@inject(Api, EventAggregator)
 export class FilterView {
   errors = {};
   products = {
@@ -15,8 +16,12 @@ export class FilterView {
       sort: '-id'
     }
   };
-  constructor(api) {
+  constructor(api, ea) {
     this.api = api;
+    ea.subscribe('filter__search', payload => {
+      this.products.params.filter['name:search'] = payload;
+      this.getProducts();
+    });
   }
 
   getProducts() {
