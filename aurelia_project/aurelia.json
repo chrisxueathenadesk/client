@@ -168,7 +168,7 @@
             "main": "aurelia-animator-css",
             "path": "../node_modules/aurelia-animator-css/dist/amd",
             "resources": []
-          },
+          }
         ]
       }
     ]
