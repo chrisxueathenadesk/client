@@ -5,7 +5,7 @@
       <div class="gallery-element__title" css.bind="images[activeImage].description_style">
         ${images[activeImage].description}
       </div>
-      <div class="gallery-element__c2a">
+      <div if.bind="images[activeImage].c2a" class="gallery-element__c2a">
         <button click.delegate="goToRoute(images[activeImage].url)">${images[activeImage].c2a}</button>
       </div>
       <a class="gallery-element__left-arrow" click.delegate="prev()">
