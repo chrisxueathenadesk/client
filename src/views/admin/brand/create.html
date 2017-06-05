@@ -1,0 +1,26 @@
+<template>
+  <require from="./create.css"></require>
+
+  <div class="brand-create">
+    <form submit.delegate="create()">
+      <div class="brand-create__name">
+        <label>
+          Name
+        </label>
+        <input value.bind="brand.name">
+      </div>
+      <div class="brand-create__logo">
+        <label>
+          Logo
+        </label>
+        <input type="file" files.bind="image | toArray" accept="image/*" />
+      </div>
+      <div class="brand-create__description">
+        <label>Description</label>
+        <textarea value.bind="brand.description"></textarea>
+      </div>
+      <button type="submit">Create</button>
+    </form>
+  </div>
+</template>
+
