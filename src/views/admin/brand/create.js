@@ -11,13 +11,6 @@ export class BrandCreateView {
     this.http = http;
   }
 
-  activate() {
-    this.api
-      .fetch('brands')
-      .then(data => this.categories = data.results)
-      .catch(err => console.log(err));
-  }
-
   create() {
     (this.image ? this.getUploadUrl(this.image[0], 'brand') : Promise.resolve())
       .then(res => {
