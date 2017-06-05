@@ -30,7 +30,11 @@ export class CheckoutVM {
       .catch(err => console.log(err));
 
     this.api.fetch('me/cards')
-      .then(cards => this.cards = cards.data)
+      .then(cards => {
+        if (cards) {
+          this.cards = cards.data;
+        }
+      })
       .catch(err => console.log(err));
 
     this.getProduct(Number(params.product_id), params);
