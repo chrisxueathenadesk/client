@@ -1,0 +1,20 @@
+<template>
+  <require from="./list.css"></require>
+
+  <div class="brand-list">
+    <a route-href="route: create">
+      <i class="icon ion-plus"></i>
+      Create
+    </a>
+    <table>
+      <tr repeat.for="brand of brands.data">
+        <td>
+          <img src.bind="brand.image" alt=""/>
+        </td>
+        <td>
+          ${brand.name}
+        </td>
+      </tr>
+    </table>
+  </div>
+</template>
