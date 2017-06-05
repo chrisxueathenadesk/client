@@ -1,0 +1,27 @@
+<template>
+  <require from="./list.css"></require>
+
+  <div class="category-list">
+    <a route-href="route: create">
+      <i class="icon ion-plus"></i>
+      Create
+    </a>
+    <table>
+      <tr repeat.for="category of categories.data">
+        <td>
+          <img src.bind="category.image" alt=""/>
+        </td>
+        <td>
+          ${category.name}
+        </td>
+        <td>
+          <i click.delegate="edit(category)" class="icon ion-edit"></i>
+        </td>
+        <td>
+          <i click.delegate="delete(category.id)" class="icon ion-trash-b"></i>
+        </td>
+      </tr>
+    </table>
+  </div>
+</template>
+
