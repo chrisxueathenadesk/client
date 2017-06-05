@@ -1,0 +1,18 @@
+<template>
+  <require from="./list.css"></require>
+
+  <div class="country-list">
+    <a route-href="route: create">
+      <i class="icon ion-plus"></i>
+      Create
+    </a>
+    <table>
+      <tr repeat.for="country of countries.data">
+        <td>
+          ${country.name}
+        </td>
+      </tr>
+    </table>
+  </div>
+</template>
+
