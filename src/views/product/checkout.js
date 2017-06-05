@@ -31,7 +31,7 @@ export class CheckoutVM {
 
     this.api.fetch('me/cards')
       .then(cards => {
-        if (cards) {
+        if (cards.data) {
           this.cards = cards.data;
         }
       })
