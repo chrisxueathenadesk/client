@@ -1,0 +1,24 @@
+<template>
+  <require from="./update.css"></require>
+  <div class="category-update">
+    <div>
+      <i class="icon ion-close" click.delegate="controller.cancel()"></i>
+    </div>
+    <form submit.delegate="update()">
+      <div class="category-update__title">
+        <label>Name</label>
+        <input value.bind="newCategory.name"/>
+      </div>
+      <div class="category-update__image">
+        <label>Image</label>
+        <input type="file" files.bind="image | toArray"/>
+      </div>
+      <div class="category-update__parent">
+        <label>Parent</label>
+        <select value.bind="newCategory.parent_id">
+          <option model.bind="null">Choose</option>
+          <option repeat.for="cat of categories" model.bind="cat.id">${cat.name}</option>
+      <button type="submit">Edit</button>
+    </form>
+  </div>
+</template>
