@@ -1,0 +1,29 @@
+<template>
+  <require from="./create.css"></require>
+
+  <div class="category-create">
+    <form submit.delegate="create()">
+      <div class="category-create__title">
+        <label>
+          Title
+        </label>
+        <input value.bind="category.name">
+      </div>
+      <div class="category-create__image">
+        <label>
+          Image
+        </label>
+        <input type="file" files.bind="image | toArray" accept="image/*" />
+      </div>
+      <div class="category-create__parent">
+        <label>Parent</label>
+        <select value.bind="category.parent_id">
+          <option model.bind="null">Choose</option>
+          <option repeat.for="cat of categories" model.bind="cat.id">${cat.name}</option>
+        </select>
+      </div>
+      <button type="submit">Create</button>
+    </form>
+  </div>
+</template>
+
