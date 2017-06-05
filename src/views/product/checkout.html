@@ -64,7 +64,7 @@
           Card Payment
         </div>
         <div show.bind="currentPaymentMethod === 'card-payment'" class="checkout-container__card-payment__content">
-          <div if.bind="cards.length && !state.addcard">
+          <div if.bind="cards && cards.length && !state.addcard">
             <label>
               Pay using:
               <select value.bind="selectedCard">
@@ -74,9 +74,9 @@
             <button click.delegate="charge()">Pay $${request.total_price}</button>
             <button if.bind="!state.addcard" click.delegate="state.addcard = true">Add New Card</button>
           </div>
-          <div class="checkout-container__card-payment__content__add" if.bind="state.addcard || !cards.length">
+          <div class="checkout-container__card-payment__content__add" if.bind="state.addcard || (cards && !cards.length)">
             <payment-form save.call="save(token)" button-text="Pay"></payment-form>
-            <a href="#" if.bind="cards.length" click.delegate="state.addcard = false">Cancel</a>
+            <a href="#" if.bind="cards && cards.length" click.delegate="state.addcard = false">Cancel</a>
           </div>
         </div>
       </section>
