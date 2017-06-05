@@ -1,0 +1,26 @@
+<template>
+  <require from="./list.css"></require>
+
+  <div class="announcement-list">
+    <a route-href="route: create">
+      <i class="icon ion-plus"></i>
+      Create
+    </a>
+    <table>
+      <tr repeat.for="announcement of announcements.data">
+        <td>
+          <img src.bind="announcement.image" alt=""/>
+        </td>
+        <td>
+          <a route-href="route: show; params.bind: {announcement_id: announcement.id}">${announcement.description}</a>
+        </td>
+        <td>
+          <i click.delegate="edit(announcement)" class="icon ion-edit"></i>
+        </td>
+        <td>
+          <i click.delegate="delete(announcement.id)" class="icon ion-trash-b"></i>
+        </td>
+      </tr>
+    </table>
+  </div>
+</template>
