@@ -1,10 +1,12 @@
 export class AdminRouter {
-  heading = 'User';
-
   configureRouter(config, router) {
     config.map([
-      { route: '', redirect: 'requests' },
-      {route: '/requests', moduleId: './requests/index', nav: true }
+      { route: '', redirect: 'announcements' },
+      {route: '/announcements', moduleId: './announcement/index', nav: true },
+      {route: '/brands', moduleId: './brand/index', nav: true },
+      {route: '/categories', moduleId: './category/index', nav: true },
+      {route: '/countries', moduleId: './country/index', nav: true },
+      {route: '/shops', moduleId: './shop/index', nav: true }
     ]);
   }
 }
