@@ -1,0 +1,27 @@
+<template>
+  <require from="./update.css"></require>
+  <div class="announcement-update">
+    <div>
+      <i class="icon ion-close" click.delegate="controller.cancel()"></i>
+    </div>
+    <form submit.delegate="update()">
+      <div class="announcement-update__title">
+        <label>Title</label>
+        <input value.bind="newAnnouncement.description"/>
+      </div>
+      <div class="announcement-update__image">
+        <label>Image</label>
+        <input type="file" files.bind="image | toArray"/>
+      </div>
+      <div class="announcement-update__url">
+        <label>Url</label>
+        <input value.bind="newAnnouncement.url"/>
+      </div>
+      <div class="announcement-update__c2a">
+        <label>Call to Action</label>
+        <input value.bind="newAnnouncement.c2a"/>
+      </div>
+      <button type="submit">Edit</button>
+    </form>
+  </div>
+</template>
