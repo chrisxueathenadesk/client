@@ -1,0 +1,29 @@
+<template>
+  <require from="./create.css"></require>
+
+  <div class="shops-create">
+    <form submit.delegate="create()">
+      <div class="shops-create__title">
+        <label>
+          Name
+        </label>
+        <input value.bind="shop.name">
+      </div>
+      <div class="shops-create__logo">
+        <label>
+          Logo
+        </label>
+        <input type="file" files.bind="image | toArray" accept="image/*" />
+      </div>
+      <div class="shops-create__owner">
+        <label>Owner</label>
+        <select value.bind="shop.owner_id">
+          <option model.bind="null">Choose</option>
+          <option repeat.for="user of users" model.bind="user.id">${user.name || user.email}</option>
+        </select>
+      </div>
+      <button type="submit">Create</button>
+    </form>
+  </div>
+</template>
+
