@@ -1,0 +1,20 @@
+<template>
+  <require from="./create.css"></require>
+
+  <div class="country-create">
+    <form submit.delegate="create()">
+      <div class="country-create__name">
+        <label>
+          Name
+        </label>
+        <input value.bind="country.name">
+      </div>
+      <div class="country-create__currency">
+        <label>Currency</label>
+        <input value.bind="country.currency"></input>
+      </div>
+      <button type="submit">Create</button>
+    </form>
+  </div>
+</template>
+
