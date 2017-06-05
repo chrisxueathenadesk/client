@@ -1,0 +1,37 @@
+<template>
+  <require from="./create.css"></require>
+
+  <div class="announcement-create">
+    <div class="announcement-preview">
+      <!--    show preview of the announcement    -->
+    </div>
+
+    <form submit.delegate="create()">
+      <div class="announcement-create__title">
+        <label>
+          Title
+        </label>
+        <input value.bind="announcement.description">
+      </div>
+      <div class="announcement-create__description">
+        <label>
+          Image
+        </label>
+        <input type="file" files.bind="image | toArray" accept="image/*" />
+      </div>
+      <div class="announcement-create__url">
+        <label>
+          Url
+        </label>
+        <input value.bind="announcement.url">
+      </div>
+      <div class="announcement-create__c2a">
+        <label>
+          Call to Action
+        </label>
+        <input value.bind="announcement.c2a">
+      </div>
+      <button type="submit">Create</button>
+    </form>
+  </div>
+</template>
