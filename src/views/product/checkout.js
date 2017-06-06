@@ -11,6 +11,7 @@ export class CheckoutVM {
   request = {
     shipping_address: {}
   };
+  cards = [];
 
   constructor(router, api, user, payment) {
     this.router = router;
