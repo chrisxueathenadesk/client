@@ -18,6 +18,7 @@
         <select value.bind="newCategory.parent_id">
           <option model.bind="null">Choose</option>
           <option repeat.for="cat of categories" model.bind="cat.id">${cat.name}</option>
+        </select>
       <button type="submit">Edit</button>
     </form>
   </div>
