@@ -1,13 +1,9 @@
 <template>
   <require from="./gallery.css"></require>
     <section class="gallery-element">
-      <img class="gallery-element__image" animate-on-change="gallery-element__image--animate" ref="galleryElement" src.bind="images[activeImage].image" alt="">
-      <div class="gallery-element__title" css.bind="images[activeImage].description_style">
-        ${images[activeImage].description}
-      </div>
-      <div if.bind="images[activeImage].c2a" class="gallery-element__c2a">
-        <button click.delegate="goToRoute(images[activeImage].url)">${images[activeImage].c2a}</button>
-      </div>
+      <a href.bind="images[activeImage].url">
+        <img class="gallery-element__image" animate-on-change="gallery-element__image--animate" ref="galleryElement" src.bind="images[activeImage].image" alt="">
+      </a>
       <a class="gallery-element__left-arrow" click.delegate="prev()">
         <i class="icon ion-chevron-left"></i>
       </a>
