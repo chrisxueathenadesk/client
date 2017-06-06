@@ -45,9 +45,9 @@
       <input type="checkbox" value.bind="product.preorder" />
     </label>
     <label>Price
-      <input type="number" value.bind="product.price | toNumber & validate" />
+      <input type="number" step="any" value.bind="product.price | toNumber & validate" />
      <label>Postage
-      <input type="number" value.bind="product.postage | toNumber" />
+      <input type="number" step="any" value.bind="product.postage | toNumber" />
     </label>
     </label>
     <label>Seed Order Count
@@ -59,7 +59,7 @@
         <input placeholder="name" type="text" value.bind="product.sizes[$index].name" />
         <input placeholder="size" type="text" value.bind="product.sizes[$index].size" />
         <input placeholder="height, weight, length" type="text" value.bind="product.sizes[$index].dimensions" />
-        <input placeholder="delta" type="number" value.bind="product.sizes[$index].delta | toNumber" />
+        <input placeholder="delta" step="any" type="number" value.bind="product.sizes[$index].delta | toNumber" />
         <button click.delegate="remove($index, 'sizes', 'size')">Remove Size</button>
       </div>
     </label>
@@ -71,7 +71,7 @@
           <input placeholder="pictures" type="file" value.bind="product.colors[$index].gallery" />
         </div>
         <input placeholder="hex" type="text" value.bind="product.colors[$index].color" />
-        <input placeholder="delta" type="number" value.bind="product.colors[$index].delta | toNumber" />
+        <input placeholder="delta" step="any" type="number" value.bind="product.colors[$index].delta | toNumber" />
         <button click.delegate="remove($index, 'colors', 'color')">Remove Color</button>
       </label>
     </div>
