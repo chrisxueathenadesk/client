@@ -3,12 +3,6 @@ import {Api} from '~/services/api';
 
 @inject(Api)
 export class HomeView {
-  commonParameters = {
-    page: {
-      size: 6,
-      number: 0
-    }
-  };
   countries = {};
   categories = {};
   announcements = {};
@@ -23,7 +17,11 @@ export class HomeView {
           'order_count:gt': 0
         },
         include: ['source'],
-        sort: '-order_count'
+        sort: '-order_count',
+        page: {
+          size: 6,
+          number: 0
+        }
       }
     };
   }
