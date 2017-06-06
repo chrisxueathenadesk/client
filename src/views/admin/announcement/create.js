@@ -5,6 +5,7 @@ import {notify} from '~/services/notification';
 
 @inject(Api, ExternalHttp)
 export class AnnouncementCreateView {
+  announcement = {};
   constructor(api, http) {
     //TODO: Create a model for validation
     this.api = api;
