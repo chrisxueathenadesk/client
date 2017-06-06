@@ -10,9 +10,6 @@
     <section class="home-page__categories">
       <a class="home-page__categories__category" repeat.for="category of categories.data" route-href="route:filter; params.bind:{category: category.id}">
         <img class="home-page__categories__category__image" src.bind="category.image" alt="">
-        <div class="home-page__categories__category__title">
-          ${category.name}
-        </div>
       </a>
     </section>
     <section class="home-page__most-popular">
