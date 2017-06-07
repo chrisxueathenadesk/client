@@ -11,7 +11,7 @@ export class CreateProduct {
   counter = {
     size: 0,
     color: 0,
-    edition: 0
+    variation: 0
   };
   gallery = [];
   status = {};
@@ -65,35 +65,66 @@ export class CreateProduct {
       .then(result => {
         if (result.valid) {
           this.status.inprogress = true;
-          Promise.all(this.gallery.map(file => this.getUploadUrl(file, 'product')))
-            .then(data => {
-              this.product.gallery = data.map(res => res.signed_request.split('?')[0]);
-              return Promise.all(data.map((response, index) => {
-                this.http.fetch(response.signed_request, {
-                  method: 'PUT',
-                  body: this.gallery[index]
-                });
-              }));
+          this.uploadImages(this.gallery, 'product')
+            .then(images => {
+              this.product.gallery = images.map(image => image.url.split('?')[0]);
+              return Promise.resolve();
             })
-          .then(response => this.api.create(`me/shops/${this.product.shop_id}/products`, this.product))
+            .then(() => {
+              if (this.product.colors && this.product.colors.some(color => color.images && color.images.length)) {
+                return Promise.all(this.product.colors.map(color => {
+                  if (color.images && color.images.length) {
+                    return this.uploadImages(color.images, 'product');
+                  }
+                  return Promise.resolve();
+                }));
+              }
+            })
+            .then(response => {
+              if (!response) {
+                return Promise.resolve();
+              }
+
+              this.product.colors.forEach((color, idx) => {
+                if (color.images && color.images.length) {
+                  color.gallery = response[idx].map(res => res.url.split('?')[0]);
+                  delete color.images;
+                }
+              });
+              return Promise.resolve();
+            })
+            .then(response => this.api.create(`me/shops/${this.product.shop_id}/products`, this.product))
             .then(response => {
               this.status.inprogress = false;
               notify().log('Successfully created!');
-              this.product = {};
-              this.gallery = [];
+              this.product = {shop_id: this.product.shop_id};
+              this.gallery = null;
             })
-          .catch(err => {
-            this.status.inprogress = false;
-            notify().log('Product creation failed');
-          });
+            .catch(err => {
+              console.log(err);
+              this.status.inprogress = false;
+              notify().log('Product creation failed');
+            });
         } else {
           throw new Error('invalid product');
         }
       });
   }
 
-  getUploadUrl(file, type) {
+  uploadImages(files, folder) {
+    return Promise.all(files.map(file => this.getUploadUrl(file, folder)))
+    .then(data => {
+      return Promise.all(data.map((response, index) => {
+        return this.http.fetch(response.signed_request, {
+          method: 'PUT',
+          body: files[index]
+        });
+      }));
+    });
+  }
+
+  getUploadUrl(file, folder) {
     return this.api
-      .fetch('upload', {file_name: file.name, folder_name: type, file_type: file.type});
+      .fetch('upload', {file_name: file.name, folder_name: folder, file_type: file.type});
   }
 }
