@@ -24,17 +24,20 @@ export class CreateProduct {
   }
 
   activate(params) {
-    this.api.fetch('countries')
-    .then(countries => this.countries = countries.results)
-    .catch(err => console.log(err));
+    this.api
+      .fetch('countries')
+      .then(countries => this.countries = countries.results)
+      .catch(err => console.log(err));
 
-    this.api.fetch('brands')
-    .then(brands => this.brands = brands.results)
-    .catch(err => console.log(err));
+    this.api
+      .fetch('brands', {page: {size: 100}, sort: 'name'})
+      .then(brands => this.brands = brands.results)
+      .catch(err => console.log(err));
 
-    this.api.fetch('categories')
-    .then(categories => this.categories = categories.results)
-    .catch(err => console.log(err));
+    this.api
+      .fetch('categories', {page: {size: 100}, sort: 'name'})
+      .then(categories => this.categories = categories.results)
+      .catch(err => console.log(err));
 
     this.product.shop_id = Number(params.shop_id);
   }
