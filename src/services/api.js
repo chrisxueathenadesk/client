@@ -35,8 +35,8 @@ export class Api {
     }
 
     if (params.page) {
-      const number = params.page.number ? params.page.number : 0;
-      const size = params.page.size ? params.page.size : 10;
+      const number = params.page.number !== undefined ? params.page.number : 0;
+      const size = params.page.size !== undefined ? params.page.size : 10;
       query = `${query}&page[number]=${number}&page[size]=${size}`;
     }
 
