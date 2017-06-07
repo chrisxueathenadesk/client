@@ -35,7 +35,9 @@ export class Api {
     }
 
     if (params.page) {
-      query = `${query}&page[number]=${params.page.number}&page[size]=${params.page.size}`;
+      const number = params.page.number ? params.page.number : 0;
+      const size = params.page.size ? params.page.size : 10;
+      query = `${query}&page[number]=${number}&page[size]=${size}`;
     }
 
     if (params.sort) {
