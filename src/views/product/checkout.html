@@ -117,11 +117,13 @@
               For Internet Banking, please put your full name into "Your Initials"
             </li>
             <li class="checkout-container__bank-payment__content__instructions__step">
-              Paste the reference code below
+              Take a picture of the reciept
             </li>
           </ol>
-          <input value.bind="request.bank_reference" class="checkout-container__bank-payment__ref-number" placeholder="Reference Number">
-          <button click.delegate="saveReferenceNumber(request.bank_refernce)">Submit Reference Number</button>
+          <div>
+            <input type="file" files.bind="proof | toArray" class="checkout-container__bank-payment__ref-number">
+            <button click.delegate="saveProof()">Submit Proof</button>
+          </div>
         </div>
       </section>
     </div>

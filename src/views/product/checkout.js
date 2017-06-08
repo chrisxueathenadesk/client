@@ -3,8 +3,9 @@ import {Api} from '~/services/api';
 import {UserService} from '~/services/user';
 import {Router} from 'aurelia-router';
 import {constants} from '~/services/constants';
+import {UploadService} from '~/services/upload';
 
-@inject(Router, Api, UserService)
+@inject(Router, Api, UserService, UploadService)
 export class CheckoutVM {
   error = {};
   request = {
@@ -12,10 +13,11 @@ export class CheckoutVM {
   };
   cards = [];
 
-  constructor(router, api, user) {
+  constructor(router, api, user, upload) {
     this.router = router;
     this.api = api;
     this.user = user.user;
+    this.upload = upload;
     this.constants = constants;
 
     this.state = {
@@ -79,17 +81,18 @@ export class CheckoutVM {
         this.request.stripe_charge_id = response.id;
         return this.api.create(`products/${this.product.id}/requests`, this.request);
       })
-      .then(() => {
-        return this.api.edit(`products/${this.product.id}`, {order_count: this.product.order_count ? this.product.order_count + 1 : 1});
-      })
-      .then(response => {
-        // redirect to payment confirmation page
-        this.router.navigateToRoute('acknowledge');
-      })
+      .then(this.confirmPurchase.bind(this))
       .catch(error => {
         this.state.inflight = false;
         // send error to admin
         console.log(error);
+      });
+  }
+
+  confirmPurchase() {
+    return this.api.edit(`products/${this.product.id}`, {order_count: this.product.order_count ? this.product.order_count + 1 : 1})
+      .then(response => {
+        this.router.navigateToRoute('acknowledge');
       });
   }
 
@@ -128,21 +131,16 @@ export class CheckoutVM {
     this.currentPaymentMethod = this.currentPaymentMethod === toggle ? '' : toggle;
   }
 
-  saveReferenceNumber(referenceNumber) {
+  saveProof() {
     this.request.status = 'pending';
     this.state.inflight = true;
-    this.api.create(`products/${this.product.id}/requests`, this.request)
-      .then(() => {
-        return this.api.edit(`products/${this.product.id}`, {order_count: this.product.order_count ? this.product.order_count + 1 : 1});
+    this.upload.uploadImages(this.proof, 'proof')
+      .then(streams => {
+        this.request.proof = streams.map(stream => stream.url.split('?')[0]);
+        return this.api.create(`products/${this.product.id}/requests`, this.request);
       })
-    .then(response => {
-      this.router.navigateToRoute('acknowledge');
-    })
-    .catch(error => {
-      // send error to admin
-      this.state.inflight = false;
-      console.log(error);
-    });
+      .then(this.confirmPurchase.bind(this))
+      .catch(err => console.log(err));
   }
 
   selectOptions(selections) {
