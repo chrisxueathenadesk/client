@@ -1,11 +1,10 @@
 import {inject} from 'aurelia-framework';
 import {Api} from '~/services/api';
 import {UserService} from '~/services/user';
-import {Payment} from '~/services/payment';
 import {Router} from 'aurelia-router';
 import {constants} from '~/services/constants';
 
-@inject(Router, Api, UserService, Payment)
+@inject(Router, Api, UserService)
 export class CheckoutVM {
   error = {};
   request = {
@@ -13,11 +12,10 @@ export class CheckoutVM {
   };
   cards = [];
 
-  constructor(router, api, user, payment) {
+  constructor(router, api, user) {
     this.router = router;
     this.api = api;
     this.user = user.user;
-    this.payment = payment;
     this.constants = constants;
 
     this.state = {
@@ -67,38 +65,15 @@ export class CheckoutVM {
       });
   }
 
-  // TODO: consolidate charge and save
-  charge() {
+  charge(token) {
     this.state.inflight = true;
     this.saveAddress(this.request.shipping_address);
     this.saveCountry(this.request.destination_id);
-    this.payment
-      .charge(this.request.total_price, 'SGD', this.card)
-      .then(response => {
-        this.request.stripe_charge_id = response.id;
-        return this.api.create(`products/${this.product.id}/requests`, this.request);
-      })
-      .then(() => {
-        return this.api.edit(`products/${this.product.id}`, {order_count: this.product.order_count ? this.product.order_count + 1 : 1});
-      })
-      .then(response => {
-        this.router.navigateToRoute('acknowledge');
-      })
-      .catch(error => {
-        // send error to admin
-        this.state.inflight = false;
-        console.log(error);
-      });
-  }
-
-  save(token) {
-    this.state.inflight = true;
-    this.saveAddress(this.request.shipping_address);
-    this.saveCountry(this.request.destination_id);
-    this.payment.saveCard(token)
-      .then(response => {
-        const currency = 'SGD';
-        return this.payment.charge(this.request.total_price, currency);
+    (token ? this.api.create('me/cards', {token}) : Promise.resolve())
+      .then(res => {
+        const cardId = (res && res.card_id) || this.card;
+        return this.api
+          .create('me/charge', {amount: this.request.total_price, currency: 'SGD', source: cardId});
       })
       .then(response => {
         this.request.stripe_charge_id = response.id;
@@ -119,7 +94,11 @@ export class CheckoutVM {
   }
 
   saveAddress(address) {
-    if (!this.user.address) {
+    if (address.line_1 === constants.defaultShippingAddress.line_1) {
+      return;
+    }
+
+    if (this.user && !this.user.address) {
       this.user.address = address;
       this.api.edit('me', { address: address })
         .then(success => console.log(success));

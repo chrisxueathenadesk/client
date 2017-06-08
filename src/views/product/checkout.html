@@ -75,7 +75,7 @@
             <button if.bind="!state.addcard" click.delegate="state.addcard = true">Add New Card</button>
           </div>
           <div class="checkout-container__card-payment__content__add" if.bind="state.addcard || !cards.length">
-            <payment-form save.call="save(token)" button-text="Pay"></payment-form>
+            <payment-form save.call="charge(token)" button-text="Pay"></payment-form>
             <a href="#" if.bind="cards.length" click.delegate="state.addcard = false">Cancel</a>
           </div>
         </div>
