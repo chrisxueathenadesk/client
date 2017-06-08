@@ -62,7 +62,8 @@ export class Api {
       .fetch(path, {
         method: 'POST',
         body: json(body)
-      });
+      })
+      .then(response => response.json());
   }
 
   edit(path, body) {
@@ -70,13 +71,15 @@ export class Api {
       .fetch(path, {
         method: 'PUT',
         body: json(body)
-      });
+      })
+      .then(response => response.json());
   }
 
   remove(path) {
     return this.http
       .fetch(path, {
         method: 'DELETE'
-      });
+      })
+      .then(response => response.json());
   }
 }
