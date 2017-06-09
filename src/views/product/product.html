@@ -47,8 +47,7 @@
   <section class="product-details">
     <div class="product-description">
       <h2>Description</h2>
-      <div class="product-description-content">
-        ${product.data.description}
+      <div innerhtml.bind="product.data.description | markdown" class="product-description-content">
       </div>
     </div>
 
