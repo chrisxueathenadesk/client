@@ -1,7 +1,7 @@
 const valueConverters = [
-  'to-array/to-array',
-  'to-number/to-number',
-  'to-date/to-date'
+  'to-array',
+  'to-number',
+  'to-date'
 ];
 
 export default valueConverters.map(vc => `./value-converters/${vc}`);
