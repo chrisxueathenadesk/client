@@ -1,6 +1,6 @@
 import 'humanize';
 
-export class toDateValueConverter {
+export class ToDateValueConverter {
   toView(dateValue, format) {
     if (dateValue === null || dateValue === undefined) {
       return 'unspecified';
