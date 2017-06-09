@@ -1,4 +1,28 @@
 <template>
   <require from="./edit.css"></require>
-  <h1>shop product details and edit</h1>
+  <form class="edit-product" submit.delegate="edit()">
+    <div class="edit-product__description">
+      <label>Description</label>
+      <div class="edit-product__description__preview" innerhtml.bind="newProduct.description | markdown">
+      </div>
+      <textarea value.bind="newProduct.description"></textarea>
+      <button click.delegate="cancel('description')">Cancel</button>
+    </div>
+
+    <div class="edit-product__gallery">
+      <label>Gallery</label>
+      <div repeat.for="image of newProduct.gallery">
+        <img src.bind="image">
+        <div if.bind="newProduct.gallery.length > 1">
+          <button if.bind="$index !== 0" click.delegate="swap($index, 0)">Make Cover Image</button>
+          <a href="#" if.bind="$index !== 0" click.delegate="swap($index, $index - 1)"><i class="icon ion-arrow-up-b"></i>Push Up</a>
+          <a href="#" if.bind="$index !== newProduct.gallery.length - 1" click.delegate="swap($index, $index + 1)"><i class="icon ion-arrow-down-b"></i>Pull Down</a>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <button type="submit">Update</button>
+    </div>
+  </form>
 </template>

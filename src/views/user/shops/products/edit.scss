@@ -1,0 +1,10 @@
+@import '../../../../style/base';
+
+.edit-product {
+  &__description {
+    textarea {
+      min-height: 20rem;
+    }
+  }
+}
+
