@@ -3,17 +3,7 @@ import {Api} from '~/services/api';
 import {notify} from '~/services/notification';
 import {DialogController} from 'aurelia-dialog';
 import {ExternalHttp} from '~/services/external-http';
-
-function filterUntouchedProperties(main, updated) {
-  const result = {};
-  Object.keys(main).forEach(key => {
-    if (main[key] !== updated[key]) {
-      result[key] = updated[key];
-    }
-  });
-
-  return result;
-}
+import {utilities} from '~/services/utilities';
 
 @inject(Api, DialogController, ExternalHttp)
 export class AnnouncementUpdateView {
@@ -29,7 +19,7 @@ export class AnnouncementUpdateView {
   }
 
   update() {
-    const updatedValues = filterUntouchedProperties(this.announcement, this.newAnnouncement);
+    const updatedValues = utilities.filterUntouchedProperties(this.announcement, this.newAnnouncement);
     (this.image ? this.getUploadUrl(this.image[0], 'announcement') : Promise.resolve())
       .then(res => {
         if (!res) {
