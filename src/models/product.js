@@ -15,7 +15,7 @@ export class Product {
   platform_charge;
   delivery_time;
   colors;
-  editions;
+  variations;
   sizes;
   gallery;
   currency;

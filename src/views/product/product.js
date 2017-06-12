@@ -45,8 +45,8 @@ export class ProductView {
     if (request.color && request.color.delta) {
       delta = delta + request.color.delta;
     }
-    if (request.edition && request.edition.delta) {
-      delta = delta + request.edition.delta;
+    if (request.variation && request.variation.delta) {
+      delta = delta + request.variation.delta;
     }
     return delta;
   }
@@ -59,8 +59,8 @@ export class ProductView {
     if (product.sizes) {
       params.size = product.sizes.map(size => size.name).indexOf(request.size.name);
     }
-    if (product.editions) {
-      params.edition = product.editions.map(edition => edition.name).indexOf(request.edition.name);
+    if (product.variations) {
+      params.variation = product.variations.map(variation => variation.name).indexOf(request.variation.name);
     }
     params.count = this.count;
     return params;
