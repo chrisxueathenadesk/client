@@ -1,12 +1,12 @@
 import {inject, NewInstance} from 'aurelia-framework';
 import {Api} from '~/services/api';
-import {ExternalHttp} from '~/services/external-http';
 import {notify} from '~/services/notification';
+import {UploadService} from '~/services/upload';
 import {ValidationController} from 'aurelia-validation';
 import {ValidationRenderer} from '~/services/validation-renderer';
 import {Product} from '~/models/product';
 
-@inject(Api, ExternalHttp, NewInstance.of(ValidationController))
+@inject(Api, UploadService, NewInstance.of(ValidationController))
 export class CreateProduct {
   counter = {
     size: 0,
@@ -16,10 +16,10 @@ export class CreateProduct {
   gallery = [];
   status = {};
   product = new Product();
-  constructor(api, http, controller) {
+  constructor(api, upload, controller) {
     this.controller = controller;
     this.api = api;
-    this.http = http;
+    this.upload = upload;
     this.controller.addRenderer(new ValidationRenderer());
   }
 
@@ -65,7 +65,7 @@ export class CreateProduct {
       .then(result => {
         if (result.valid) {
           this.status.inprogress = true;
-          this.uploadImages(this.gallery, 'product')
+          this.upload.uploadImages(this.gallery, 'product')
             .then(images => {
               this.product.gallery = images.map(image => image.url.split('?')[0]);
               return Promise.resolve();
@@ -74,7 +74,17 @@ export class CreateProduct {
               if (this.product.colors && this.product.colors.some(color => color.images && color.images.length)) {
                 return Promise.all(this.product.colors.map(color => {
                   if (color.images && color.images.length) {
-                    return this.uploadImages(color.images, 'product');
+                    return this.upload.uploadImages(color.images, 'product');
+                  }
+                  return Promise.resolve();
+                }));
+              }
+            })
+            .then(() => {
+              if (this.product.varations && this.product.varations.some(varation => varation.images && varation.images.length)) {
+                return Promise.all(this.product.varations.map(varation => {
+                  if (varation.images && varation.images.length) {
+                    return this.upload.uploadImages(varation.images, 'product');
                   }
                   return Promise.resolve();
                 }));
@@ -109,22 +119,5 @@ export class CreateProduct {
           throw new Error('invalid product');
         }
       });
-  }
-
-  uploadImages(files, folder) {
-    return Promise.all(files.map(file => this.getUploadUrl(file, folder)))
-    .then(data => {
-      return Promise.all(data.map((response, index) => {
-        return this.http.fetch(response.signed_request, {
-          method: 'PUT',
-          body: files[index]
-        });
-      }));
-    });
-  }
-
-  getUploadUrl(file, folder) {
-    return this.api
-      .fetch('upload', {file_name: file.name, folder_name: folder, file_type: file.type});
   }
 }

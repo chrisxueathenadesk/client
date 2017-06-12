@@ -70,7 +70,7 @@
         <div>
           <input type="file" files.bind="product.colors[$index].images | toArray" multiple/>
         </div>
-        <input placeholder="hex" type="text" value.bind="product.colors[$index].color" />
+        <input placeholder="hex" type="color" value.bind="product.colors[$index].color" />
         <input placeholder="delta" step="any" type="number" value.bind="product.colors[$index].delta | toNumber" />
         <button click.delegate="remove($index, 'colors', 'color')">Remove Color</button>
       </label>
@@ -82,8 +82,8 @@
         <div>
           <input type="file" files.bind="product.variations[$index].images | toArray" multiple/>
         </div>
-        <input placeholder="hex" type="text" value.bind="product.variations[$index].variation" />
-        <input placeholder="delta" step="any" type="number" value.bind="product.variations[$index].delta | toNumber" />
+        <input placeholder="Description" type="text" value.bind="product.variations[$index].description" />
+        <input placeholder="Delta" step="any" type="number" value.bind="product.variations[$index].delta | toNumber" />
         <button click.delegate="remove($index, 'variations', 'variation')">Remove Variation</button>
       </label>
     </div>
