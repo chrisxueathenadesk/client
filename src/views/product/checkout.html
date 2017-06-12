@@ -34,7 +34,7 @@
         </div>
         <hr>
         <div class="checkout-container__order-info__total-price">
-          <label>Total Cost: SGD ${request.total_price}</label>
+          <label>Total Cost: SGD ${request.total_price | toCurrency}</label>
         </div>
         <hr>
       </section>
@@ -85,7 +85,7 @@
                 <option repeat.for="card of cards" model.bind="card.id">${card.brand} ending with ${card.last4}</option>
               </select>
             </label>
-            <button click.delegate="charge()">Pay $${request.total_price}</button>
+            <button click.delegate="charge()">Pay $${request.total_price | toCurrency}</button>
             <button if.bind="!state.addcard" click.delegate="state.addcard = true">Add New Card</button>
           </div>
           <div class="checkout-container__card-payment__content__add" if.bind="state.addcard || !cards.length">
@@ -128,7 +128,7 @@
             </li>
             <li class="checkout-container__bank-payment__content__instructions__step">
               <i class="icon ion-checkmark-circled"></i>
-              Transfer ${request.currency} ${request.total_price} to the account
+              Transfer ${request.currency} ${request.total_price | toCurrency} to the account
             </li>
             <li class="checkout-container__bank-payment__content__instructions__step">
               <i class="icon ion-checkmark-circled"></i>
