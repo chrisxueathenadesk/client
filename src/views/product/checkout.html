@@ -3,27 +3,40 @@
   <div class="checkout-container">
     <div class="${state.inflight? 'checkout-container--blur': ''}">
       <section class="checkout-container__order-info">
-        <div class="checkout-container__order-info__title">
-          You are buying ${product.name}
+        <div class="checkout-container__order-info__image">
+          <img src.bind="request.color.images[0] || product.gallery[0]" alt="">
         </div>
-        <div class="checkout-container__order-info__size" if.bind="request.size">
-          Size: ${request.size.name}
+        <div class="checkout-container__order-details">
+          <div class="checkout-container__order-details__title">
+            ${product.name}
+          </div>
+          <div class="checkout-container__order-detail__size" if.bind="request.size">
+            Size: ${request.size.name}
+          </div>
+          <div class="checkout-container__order-details__color" if.bind="request.color">
+            Color: ${request.color.name}
+          </div>
+          <div class="checkout-container__order-details__variation" if.bind="request.variation">
+            Edition: ${request.variation.name}
+          </div>
+          <div class="checkout-container__order-details__count" if.bind="request.count">
+            <label>
+              Quantity:
+              <select value.bind="request.count" change.delegate="getPrice()">
+                <option repeat.for="i of 9" model.bind="i+1">${i+1}</option>
+              </select>
+            </label>
+          </div>
+          <div class="checkout-container__order-details__arrival">
+            <label>Arrival</label>
+            ${request.delivery_date | toDate:'date'}
+          </div>
         </div>
-        <div class="checkout-container__order-info__color" if.bind="request.color">
-          Color: ${request.color.name}
-        </div>
-        <div class="checkout-container__order-info__edition" if.bind="request.edition">
-          Edition: ${request.edition.name}
-        </div>
-        <div class="checkout-container__order-info__request" if.bind="request.count">
-          Quantity: ${request.count}
-        </div>
+        <hr>
         <div class="checkout-container__order-info__total-price">
-          Total Cost: SGD ${request.total_price}
+          <label>Total Cost: SGD ${request.total_price}</label>
         </div>
-        <div class="checkout-container__order-info__shipping">
-          The product will be shipped within ${request.delivery_date | toDate:'date'}
-        </div>
+        <hr>
       </section>
       <section class="checkout-container__shipping-info">
         <div>
@@ -56,8 +69,9 @@
           </select>
         </div>
       </section>
+      <hr>
       <section class="checkout-container__card-payment">
-        <div click.delegate="togglePaymentView('card-payment')">
+        <div class="checkout-container__card-payment__button" click.trigger="togglePaymentView('card-payment')">
           <i show.bind="currentPaymentMethod !== 'card-payment'" class="icon ion-arrow-right-b"></i>
           <i show.bind="currentPaymentMethod === 'card-payment'" class="icon ion-arrow-down-b"></i>
           <i class="icon ion-card"></i>
@@ -81,7 +95,7 @@
         </div>
       </section>
       <section class="checkout-container__bank-payment">
-        <div click.delegate="togglePaymentView('bank-payment')">
+        <div class="checkout-container__bank-payment__button" click.trigger="togglePaymentView('bank-payment')">
           <i show.bind="currentPaymentMethod !== 'bank-payment'" class="icon ion-arrow-right-b"></i>
           <i show.bind="currentPaymentMethod === 'bank-payment'" class="icon ion-arrow-down-b"></i>
           <i class="icon ion-cash"></i>
@@ -90,9 +104,11 @@
         <div class="checkout-container__bank-payment__content" show.bind="currentPaymentMethod === 'bank-payment'">
           <ol class="checkout-container__bank-payment__content__instructions">
             <li class="checkout-container__bank-payment__content__instructions__step">
+              <i class="icon ion-checkmark-circled"></i>
               Log in to internet banking
             </li>
             <li class="checkout-container__bank-payment__content__instructions__step">
+              <i class="icon ion-checkmark-circled"></i>
               Add new Payee:
               <div class="checkout-container__bank-payment__content__instructions__step__account">
                 <label>UOB Business Account</label>
@@ -111,17 +127,20 @@
               </div>
             </li>
             <li class="checkout-container__bank-payment__content__instructions__step">
+              <i class="icon ion-checkmark-circled"></i>
               Transfer ${request.currency} ${request.total_price} to the account
             </li>
             <li class="checkout-container__bank-payment__content__instructions__step">
+              <i class="icon ion-checkmark-circled"></i>
               For Internet Banking, please put your full name into "Your Initials"
             </li>
             <li class="checkout-container__bank-payment__content__instructions__step">
-              Take a picture of the reciept
+              <i class="icon ion-checkmark-circled"></i>
+              Take a picture of the reciept and submit the photo as proof
             </li>
           </ol>
-          <div>
-            <input type="file" files.bind="proof | toArray" class="checkout-container__bank-payment__ref-number">
+          <div class="checkout-container__bank-payment__ref">
+            <input type="file" files.bind="proof | toArray">
             <button click.delegate="saveProof()">Submit Proof</button>
           </div>
         </div>

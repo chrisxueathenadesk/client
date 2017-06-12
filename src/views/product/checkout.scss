@@ -1,24 +1,80 @@
 @import '../../style/base';
 
 .checkout-container {
-  &__order-info__header {
-    font-size: $header-font-size;
+  &__order-info {
+    &__image {
+      display: inline-block;
+      vertical-align: top;
+      img {
+        height: 6rem;
+      }
+    }
+    &__total-price {
+      font-size: $subheader-font-size;
+    }
   }
+
+  &__order-details {
+    display: inline-block;
+    margin-left: 1em;
+    &__title {
+      font-size: $subheader-font-size;
+    }
+  }
+
   &__loading {
     position: absolute;
-    width: 100%;
-    top: 50%;
     text-align: center;
+    top: 50%;
+    width: 100%;
   }
+
   &--blur {
     filter: blur(2px);
   }
+
+  &__card-payment, &__bank-payment {
+    &__button {
+      padding: .5rem;
+      cursor: pointer;
+      border: 1px solid black;
+      margin-bottom: 0.5rem;
+    }
+  }
+
   &__card-payment {
     &__content {
       &__add {
         a {
           display: inline-block;
           padding-top: 0.5em;
+        }
+      }
+    }
+  }
+
+  &__bank-payment {
+    margin-top: .5rem;
+    &__header {
+
+    }
+    &__ref {
+      margin-top: 1.5em;
+    }
+    &__content {
+      &__instructions {
+        &__step {
+          margin-bottom: 0.5rem;
+          &__account {
+            padding: .5em;
+            border: 1px solid;
+            div {
+              label {
+                display: inline-block;
+                min-width: 9rem;
+              }
+            }
+          }
         }
       }
     }

@@ -146,11 +146,11 @@ export class CheckoutVM {
   selectOptions(selections) {
     if (selections.color) this.request.color = this.product.colors[selections.color];
     if (selections.size) this.request.size = this.product.sizes[selections.size];
-    if (selections.edition) this.request.edition = this.product.editions[selections.edition];
+    if (selections.variation) this.request.variation = this.product.variations[selections.variation];
   }
 
   getPrice() {
-    this.request.total_price = this.request.count * (this.product.price + this.getDelta(this.request)) + this.request.postage;
+    this.request.total_price = (this.request.count * (this.product.price + this.getDelta(this.request))) + this.request.postage;
   }
 
   getDelta(request) {
@@ -161,8 +161,8 @@ export class CheckoutVM {
     if (request.color && request.color.delta) {
       delta = delta + request.color.delta;
     }
-    if (request.edition && request.edition.delta) {
-      delta = delta + request.edition.delta;
+    if (request.variation && request.variation.delta) {
+      delta = delta + request.variation.delta;
     }
     return delta;
   }
