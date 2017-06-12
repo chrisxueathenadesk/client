@@ -6,7 +6,7 @@
       <img class="carousel-element__image-container__image" src.bind="images[activeImage]"/>
     </div>
     <div class="carousel-element__preview">
-      <img repeat.for="image of images" click.delegate="goTo($index)" src.bind="image" alt=""/>
+      <img repeat.for="image of images" click.trigger="goTo($index)" src.bind="image" alt=""/>
     </div>
   </div>
 </template>
