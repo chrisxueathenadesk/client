@@ -29,7 +29,7 @@
 }
 
 .filter-result {
-  display: table;
+  display: flex;
   margin-bottom: 1rem;
 
   &__image {
@@ -45,6 +45,11 @@
     vertical-align: top;
     display: inline-block;
     margin-left: 1rem;
+    &__title {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-size: $subheader-font-size;
+    }
     &__shop {
       font-size: 0.7rem;
     }
