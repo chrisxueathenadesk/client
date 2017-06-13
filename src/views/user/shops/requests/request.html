@@ -92,7 +92,11 @@
     </div>
     <div class="request-info__price">
       <label>Price</label>
-      ${request.data.currency} ${request.data.total_price - request.data.platform_charge - request.data.postage}
+      ${request.data.currency} ${request.data.total_price}
+    </div>
+    <div if.bind="request.data.proof.length" class="request-info__proof">
+      <label>Price</label>
+      <img src.bind="request.data.proof[0]" alt="">
     </div>
     <div if.bind="request.data.instructions">
       <label>Additional Notes</label>

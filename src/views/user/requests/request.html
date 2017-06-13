@@ -24,31 +24,31 @@
       <label>Color</label>
       ${request.data.color.name}
     </div>
-    <div if.bind="request.data.edition" class="request-info__edition">
-      <label>Edition</label>
-      ${request.data.edition.name}
+    <div if.bind="request.data.variation" class="request-info__edition">
+      <label>Variation</label>
+      ${request.data.variation.name}
     </div>
     <div class="request-info__quantity">
       <label>Quantity</label>
-      ${request.data.quantity}
+      ${request.data.count}
     </div>
     <div class="request-info__price">
       <label>Price</label>
-      ${request.data.currency} ${request.data.total_price}
+      SGD ${request.data.total_price | toCurrency}
     </div>
     <div if.bind="request.data.instructions" class="request-info__instructions">
       <label>Instructions</label>
       ${request.data.instructions}
     </div>
     <div class="request-info__orderdate">
-      <label>Ordered Date:</label>
+      <label>Date of Purchase:</label>
       ${request.data.created_at | toDate:'date'}
     </div>
     <div if.bind="request.data.bank_reference" class="request-info__bank">
       <label>Bank Reference</label>
       ${request.data.bank_reference}
     </div>
-    <div if.bind="request.delivery_date" class="request-info__deliverydate">
+    <div if.bind="request.data.delivery_date" class="request-info__deliverydate">
       <label>Delivery Date:</label>
       ${request.data.delivery_date | toDate:'date'}
     </div>
