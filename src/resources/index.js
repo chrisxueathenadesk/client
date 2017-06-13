@@ -8,7 +8,7 @@ const resources = {
   attributes
 };
 
-const allResources = Object.values(resources).reduce((all, resource) => all.concat(resource), []);
+const allResources = Object.keys(resources).map(key => resources[key]).reduce((all, resource) => all.concat(resource), []);
 
 export function configure(config) {
   config.globalResources(allResources);
