@@ -1,6 +1,7 @@
 import environment from './environment';
 import {HttpClient} from 'aurelia-fetch-client';
 import authConfig from './auth-config';
+import 'whatwg-fetch';
 
 export function configure(aurelia) {
   aurelia.use

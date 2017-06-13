@@ -173,7 +173,8 @@
             "name": "markdown-it",
             "main": "markdown-it.min.js",
             "path": "../node_modules/markdown-it/dist/"
-          }
+          },
+          "whatwg-fetch"
         ]
       }
     ]

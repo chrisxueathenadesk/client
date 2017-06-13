@@ -26,7 +26,8 @@
     "humanize": "0.0.9",
     "markdown-it": "^8.3.1",
     "requirejs": "^2.3.3",
-    "text": "github:requirejs/text#latest"
+    "text": "github:requirejs/text#latest",
+    "whatwg-fetch": "^2.0.3"
   },
   "peerDependencies": {},
   "devDependencies": {
