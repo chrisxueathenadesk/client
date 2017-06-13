@@ -7,7 +7,8 @@ const elements = [
   'editable-text/editable-text',
   'editable-address/editable-address',
   'editable-selection/editable-selection',
-  'gallery/gallery'
+  'gallery/gallery',
+  'pagination/pagination'
 ];
 
 export default elements.map(elem => `./elements/${elem}`);
