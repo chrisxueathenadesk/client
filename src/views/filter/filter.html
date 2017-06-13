@@ -1,22 +1,22 @@
 <template>
   <require from="./filter.css"></require>
   <div class="filter-container">
-    <section class="filters">
-      <label class="filters__origin">
-        Origin
+    <section class="filter-container__filters">
+      <label class="filter-container__filters__origin">
+        Country
         <select value.bind="products.params.filter['source_id:eq']" change.delegate="getProducts()">
           <option model.bind="null">Choose</option>
           <option repeat.for="country of countries" model.bind="country.id">${country.name}</option>
         </select>
       </label>
-      <label class="filters__category">
+      <label class="filter-container__filters__category">
         Category
         <select value.bind="products.params.filter['category_id:eq']" change.delegate="getProducts()">
           <option model.bind="null">Choose</option>
           <option repeat.for="category of categories" model.bind="category.id">${category.name}</option>
         </select>
       </label>
-      <label class="filters__order">
+      <label class="filter-container__filters__order">
         Order By
         <select value.bind="products.params.sort" change.delegate="getProducts()">
           <option model.bind="-id">Latest</option>
@@ -25,8 +25,8 @@
         </select>
       </label>
     </section>
-    <section >
-      <ul class="filter-result-container">
+    <section class="filter-result-container">
+      <ul>
         <li class="filter-result" repeat.for="product of products.data">
           <div class="filter-result__image">
             <a route-href="route: product; params.bind: {product_id: product.id}"><img src.bind="product.gallery[0]" alt=""/></a>
@@ -39,7 +39,7 @@
               By ${product.shop.name}
             </div>
             <div class="filter-result__content__price">
-              ${product.currency} ${product.price}
+              SGD ${product.price | toCurrency}
             </div>
             <div class="filter-result__content__from">
               From ${product.source.name}
@@ -47,7 +47,9 @@
           </div>
         </li>
       </ul>
+      <div class="filter-result-container__pagination">
+        <pagination total.bind="products.total" page.bind="products.params.page" fetcher.call="getProducts()"></pagination>
+      </div>
     </section>
-
   </div>
 </template>

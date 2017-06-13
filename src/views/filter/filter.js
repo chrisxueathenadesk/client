@@ -28,6 +28,7 @@ export class FilterView {
     this.api
       .fetch('products', this.products.params)
       .then(items => {
+        this.products.total = items.total;
         this.products.data = items.results;
       })
       .catch(error => {

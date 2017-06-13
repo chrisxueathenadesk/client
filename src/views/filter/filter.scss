@@ -1,38 +1,31 @@
 @import '../../style/base';
 
 .filter-container {
-  @include grid-container();
+  @include grid-container;
+  margin-top: 1rem;
+
+  &__filters {
+    display: flex;
+    label {
+      min-width: 7rem;
+    }
+    @include grid-media($tablet) {
+      display: block;
+      @include grid-column(4);
+    }
+  }
 }
 
 .filter-search-container {
   margin-top: 0.5rem;
   margin-left: 20px;
-  @media screen and (min-width: $medium-screen) {
-    @include grid-shift(4);
-    max-width: 30rem;
-  }
-}
-
-.filters {
-  @include grid-container();
-  @include grid-media($tablet) {
-    @include grid-column(4);
-  }
-
-  &__order, &__category, &__origin {
-    @include grid-column(4);
-    @include grid-media($tablet) {
-      @include grid-column(12);
-    }
-  }
 }
 
 .filter-result-container {
-  @include grid-column(12);
-  margin-top: 1.4rem;
   @include grid-media($tablet) {
     @include grid-column(8);
   }
+  margin-top: 1.4rem;
 }
 
 .filter-result {
@@ -40,17 +33,18 @@
   margin-bottom: 1rem;
 
   &__image {
-    display: table-cell;
-    padding-right: 1rem;
+    display: inline-block;
     img {
-      height: 5rem;
-      width: auto;
+      height: 8rem;
+      width: 8rem;
+      object-fit: cover;
     }
   }
 
   &__content {
-    display: table-cell;
     vertical-align: top;
+    display: inline-block;
+    margin-left: 1rem;
     &__shop {
       font-size: 0.7rem;
     }
