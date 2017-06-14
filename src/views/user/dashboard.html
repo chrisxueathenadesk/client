@@ -45,7 +45,7 @@
         </figure>
         <div class="dashboard-orders-details">
           <a class="dashboard-orders-details__title" href.bind="'user/requests/' + request.id" >${request.product.name}</a>
-          <div class="dashboard-orders-details__price" if.bind="request.total_price">${request.currency} ${request.total_price}</div>
+          <div class="dashboard-orders-details__price" if.bind="request.total_price">SGD ${request.total_price | toCurrency}</div>
           <div if.bind="request.color || request.size || request.edition">
             <span class="chip" if.bind="request.color">${request.color.name}</span>
             <span class="chip" if.bind="request.size">${request.size.name}</span>
