@@ -32,12 +32,8 @@ export class EditProductView {
   }
 
   swap(from, to) {
-    console.log(from, to);
-    const temp = this.newProduct.gallery[to];
-    this.newProduct.gallery[to] = this.newProduct.gallery[from];
-    this.newProduct.gallery[from] = temp;
-    console.log(this.newProduct.gallery);
-    console.log(this.product.gallery);
+    const temp = this.newProduct.gallery.splice(from, 1, this.newProduct.gallery[to]);
+    this.newProduct.gallery.splice(to, 1, temp[0]);
   }
 
   cancel(property) {

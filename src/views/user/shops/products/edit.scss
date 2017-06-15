@@ -2,8 +2,33 @@
 
 .edit-product {
   &__description {
-    textarea {
-      min-height: 20rem;
+    @include grid-container;
+    &__editor {
+      @include grid-column(6);
+      textarea {
+        min-height: 20rem;
+      }
+    }
+    &__preview {
+      @include grid-column(6);
+    }
+  }
+
+  &__gallery {
+    display: flex;
+    margin-top: 2rem;
+    label {
+    }
+    &__image {
+      margin-left: .5rem;
+      img {
+        max-height: 20rem;
+      }
+      &__control {
+        button {
+          display: block;
+        }
+      }
     }
   }
 }
