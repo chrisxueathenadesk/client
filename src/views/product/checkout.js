@@ -4,6 +4,7 @@ import {UserService} from '~/services/user';
 import {Router} from 'aurelia-router';
 import {constants} from '~/services/constants';
 import {UploadService} from '~/services/upload';
+import {PriceService} from '~/services/price';
 
 @inject(Router, Api, UserService, UploadService)
 export class CheckoutVM {
@@ -19,6 +20,7 @@ export class CheckoutVM {
     this.user = user.user;
     this.upload = upload;
     this.constants = constants;
+    this.priceService = PriceService;
 
     this.state = {
       addcard: false
@@ -59,12 +61,16 @@ export class CheckoutVM {
           delivery_date: deliveryDate.toISOString()
         };
         this.selectOptions(selections);
-        this.getPrice();
+        this.request.total_price = PriceService.getPrice(this.request, this.product);
       })
       .catch(error => {
         console.log(error);
         this.error.product = error;
       });
+  }
+
+  getPrice() {
+    this.request.total_price = PriceService.getPrice(this.request, this.product);
   }
 
   charge(token) {
@@ -124,7 +130,7 @@ export class CheckoutVM {
       this.request.shipping_address = this.user && this.user.address;
       this.request.postage = this.product.postage || constants.defaultPostage;
     }
-    this.getPrice();
+    this.request.total_price = PriceService.getPrice(this.request, this.product);
   }
 
   togglePaymentView(toggle) {
@@ -147,23 +153,5 @@ export class CheckoutVM {
     if (selections.color) this.request.color = this.product.colors[selections.color];
     if (selections.size) this.request.size = this.product.sizes[selections.size];
     if (selections.variation) this.request.variation = this.product.variations[selections.variation];
-  }
-
-  getPrice() {
-    this.request.total_price = (this.request.count * (this.product.price + this.getDelta(this.request))) + this.request.postage;
-  }
-
-  getDelta(request) {
-    let delta = 0;
-    if (request.size && request.size.delta) {
-      delta = delta + request.size.delta;
-    }
-    if (request.color && request.color.delta) {
-      delta = delta + request.color.delta;
-    }
-    if (request.variation && request.variation.delta) {
-      delta = delta + request.variation.delta;
-    }
-    return delta;
   }
 }
