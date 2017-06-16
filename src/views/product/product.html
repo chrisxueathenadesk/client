@@ -19,7 +19,7 @@
       <button type="submit" click.delegate="confirm()">Buy Now</button>
       <label>
         Quantity:
-        <input change.trigger="getPrice()" type="number" value.bind="count" min="1" max="99">
+        <input change.trigger="getPrice()" type="number" value.bind="request.count" min="1" max="99">
       </label>
     </div>
   </section>

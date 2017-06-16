@@ -2,6 +2,7 @@ import {inject} from 'aurelia-framework';
 import {Router} from 'aurelia-router';
 import {Api} from '~/services/api';
 import {UserService} from '~/services/user';
+import {PriceService} from '~/services/price';
 
 @inject(Router, Api, UserService)
 export class ProductView {
@@ -12,7 +13,6 @@ export class ProductView {
   };
   request = {};
   selections = {};
-  count = 1;
 
   constructor(router, api) {
     this.router = router;
@@ -25,30 +25,13 @@ export class ProductView {
     .then(product => {
       this.product.data = product;
       this.request = {
-        total_price: product.price
+        total_price: product.price,
+        count: 1
       };
     })
     .catch(error => {
       this.product.error = error;
     });
-  }
-
-  getPrice() {
-    this.request.total_price = this.count * this.product.data.price + this.getDelta(this.request);
-  }
-
-  getDelta(request) {
-    let delta = 0;
-    if (request.size && request.size.delta) {
-      delta = delta + request.size.delta;
-    }
-    if (request.color && request.color.delta) {
-      delta = delta + request.color.delta;
-    }
-    if (request.variation && request.variation.delta) {
-      delta = delta + request.variation.delta;
-    }
-    return delta;
   }
 
   getParameters(product, request) {
@@ -62,8 +45,12 @@ export class ProductView {
     if (product.variations) {
       params.variation = product.variations.map(variation => variation.name).indexOf(request.variation.name);
     }
-    params.count = this.count;
+    params.count = this.request.count;
     return params;
+  }
+
+  getPrice() {
+    this.request.total_price = PriceService.getPrice(this.request, this.product.data);
   }
 
   confirm() {
