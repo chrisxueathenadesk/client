@@ -174,7 +174,14 @@
             "main": "markdown-it.min.js",
             "path": "../node_modules/markdown-it/dist/"
           },
-          "whatwg-fetch"
+          "whatwg-fetch",
+          "deepmerge",
+          {
+            "name": "aurelia-google-analytics",
+            "main": "index",
+            "path": "../node_modules/aurelia-google-analytics/dist/amd",
+            "resources": []
+          }
         ]
       }
     ]
