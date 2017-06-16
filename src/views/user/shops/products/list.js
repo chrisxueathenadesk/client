@@ -6,7 +6,11 @@ export class ShopProductListVM {
   shop = {};
   products = {
     params: {
-      filter: {}
+      filter: {},
+      page: {
+        size: 10,
+        number: 0
+      }
     }
   };
   countries = {};
@@ -17,7 +21,10 @@ export class ShopProductListVM {
 
   getProducts() {
     this.api.fetch(`me/shops/${this.params.shop_id}/products`, this.products.params)
-      .then(products => this.products.data = products.results)
+      .then(products => {
+        this.products.data = products.results;
+        this.products.total = products.total;
+      })
       .catch(err => console.log(err));
   }
 

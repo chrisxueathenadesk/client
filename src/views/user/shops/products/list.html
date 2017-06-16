@@ -31,6 +31,9 @@
           <td>${product.created_at | toDate:'human'}</td>
         </tr>
       </table>
+    <div>
+      <pagination page.bind="products.params.page" total.bind="products.total" fetcher.call="getProducts()"></pagination>
+    </div>
     </section>
   </div>
 </template>
