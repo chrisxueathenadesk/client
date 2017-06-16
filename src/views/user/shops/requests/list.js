@@ -9,6 +9,10 @@ export class ShopRequestListVM {
       include: ['product', 'customer'],
       filter: {
         'status:eq': 'pending'
+      },
+      page: {
+        size: 10,
+        number: 0
       }
     }
   }
@@ -21,7 +25,10 @@ export class ShopRequestListVM {
 
   getOrders() {
     this.api.fetch(`me/shops/${this.params.shop_id}/requests`, this.requests.params)
-      .then(requests => this.requests.data = requests.results)
+      .then(requests => {
+        this.requests.data = requests.results;
+        this.requests.total = requests.total;
+      })
       .catch(err => console.log(err));
   }
 

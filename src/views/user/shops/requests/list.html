@@ -31,5 +31,8 @@
         <td>${request.delivery_date | toDate: 'date'}</td>
       </tr>
     </table>
+    <div>
+      <pagination page.bind="requests.params.page" total.bind="requests.total" fetcher.call="getOrders()"></pagination>
+    </div>
   </section>
 </template>
