@@ -5,8 +5,9 @@ import {Router} from 'aurelia-router';
 import {constants} from '~/services/constants';
 import {UploadService} from '~/services/upload';
 import {PriceService} from '~/services/price';
+import {AdwordsService} from '~/services/adwords';
 
-@inject(Router, Api, UserService, UploadService)
+@inject(Router, Api, UserService, UploadService, AdwordsService)
 export class CheckoutVM {
   error = {};
   request = {
@@ -14,11 +15,12 @@ export class CheckoutVM {
   };
   cards = [];
 
-  constructor(router, api, user, upload) {
+  constructor(router, api, user, upload, adwords) {
     this.router = router;
     this.api = api;
     this.user = user.user;
     this.upload = upload;
+    this.adwords = adwords;
     this.constants = constants;
     this.priceService = PriceService;
 
@@ -98,6 +100,7 @@ export class CheckoutVM {
   confirmPurchase() {
     return this.api.edit(`products/${this.product.id}`, {order_count: this.product.order_count ? this.product.order_count + 1 : 1})
       .then(response => {
+        this.adwords.reportSales(this.request.total_price);
         this.router.navigateToRoute('acknowledge');
       });
   }

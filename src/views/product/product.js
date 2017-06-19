@@ -1,10 +1,10 @@
 import {inject} from 'aurelia-framework';
 import {Router} from 'aurelia-router';
 import {Api} from '~/services/api';
-import {UserService} from '~/services/user';
 import {PriceService} from '~/services/price';
+import {AdwordsService} from '~/services/adwords';
 
-@inject(Router, Api, UserService)
+@inject(Router, Api, AdwordsService)
 export class ProductView {
   product = {
     params: {
@@ -14,9 +14,10 @@ export class ProductView {
   request = {};
   selections = {};
 
-  constructor(router, api) {
+  constructor(router, api, adwords) {
     this.router = router;
     this.api = api;
+    this.adwords = adwords;
   }
 
   getProduct(id) {
@@ -55,10 +56,14 @@ export class ProductView {
 
   confirm() {
     const selections = this.getParameters(this.product.data, this.request);
+    this.adwords.reportBuyNowAction();
     this.router.navigateToRoute('checkout', selections);
   }
 
   activate(params) {
     this.getProduct(params.product_id);
+    if (params.gclid) {
+      this.adwords.gclid = params.gclid;
+    }
   }
 }

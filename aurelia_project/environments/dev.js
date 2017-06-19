@@ -5,7 +5,7 @@ export default {
   stripe_key: 'pk_test_y6c6G7emK6M5t1tfURhHiWQz',
   ga_tracking_id: 'UA-101140118-1',
   ga_tracking_enabled: false,
-  adwordtracking: true,
+  adwordtracking: false,
   adwords: {
     google_conversion_id: 873334207,
     google_conversion_language: 'en',
