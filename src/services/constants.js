@@ -11,6 +11,10 @@ export const constants = {
     zip: 'S168976',
     city: 'Singapore'
   },
+  adwordsConversionLabels: {
+    buyNow: 'rt_xCOK2-XEQv4u4oAM',
+    purchase: 'NArACKa5-XEQv4u4oAM'
+  },
   defaultDestination: 1,
   defaultPostage: 2.5
 };
