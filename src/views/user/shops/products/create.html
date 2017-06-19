@@ -58,7 +58,7 @@
         <label>Size ${i + 1}
         <input placeholder="name" type="text" value.bind="product.sizes[$index].name" />
         <input placeholder="size" type="text" value.bind="product.sizes[$index].size" />
-        <input placeholder="height, weight, length" type="text" value.bind="product.sizes[$index].dimensions" />
+        <input placeholder="height, weight, length" type="text" value.bind="product.sizes[$index].dimensions | toList" />
         <input placeholder="delta" step="any" type="number" value.bind="product.sizes[$index].delta | toNumber" />
         <button click.delegate="remove($index, 'sizes', 'size')">Remove Size</button>
       </div>
