@@ -18,9 +18,11 @@ export class Api {
     return formattedFilter;
   }
 
-  _getQuery(path, params) {
-    if (!params) {
-      return path;
+  _getQuery(path, params = {}) {
+    if (params.filter) {
+      params.filter['active:eq'] = params.filter['active:eq'] === false ? false : true;
+    } else {
+      params.filter = {'active:eq': true};
     }
 
     let query = path + '?';
