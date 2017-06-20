@@ -43,7 +43,8 @@
           <label>Collection Method</label>
           <select change.delegate="toggleAddress()" value.bind="request.collection_method">
             <option value="pickup">Pickup</option>
-            <option value="post">Post (+${product.postage || constants.defaultPostage})</option>
+            <option value="courier">Courier (+$${product.courier || constants.defaultCourier})</option>
+            <option value="post">Post (+$${product.postage || constants.defaultPostage})</option>
           </select>
         </div>
         <div if.bind="request.collection_method === 'pickup'">
@@ -53,7 +54,7 @@
           <p>${request.shipping_address.zip}</p>
           <p>${request.shipping_address.city}</p>
         </div>
-        <div if.bind="request.collection_method === 'post'" class="shipping-address">
+        <div if.bind="request.collection_method === 'post' || request.collection_method === 'courier'" class="shipping-address">
           <label>Address</label>
           Line 1
           <input value.bind="request.shipping_address.line_1" type="text" />

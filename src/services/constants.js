@@ -3,7 +3,7 @@ export const constants = {
     'pending', 'confirmed', 'processing', 'ready', 'completed'
   ],
   deliveryOptions: [
-    'pickup', 'post'
+    'pickup', 'courier', 'post'
   ],
   defaultShippingAddress: {
     line_1: '195 Pearl’s Hill Terrace',
@@ -16,5 +16,6 @@ export const constants = {
     purchase: 'NArACKa5-XEQv4u4oAM'
   },
   defaultDestination: 1,
-  defaultPostage: 2.5
+  defaultPostage: 5,
+  defaultCourier: 4
 };

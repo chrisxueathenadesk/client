@@ -55,11 +55,11 @@ export class CheckoutVM {
         this.request = {
           source_id: product.source_id,
           base_price: product.price,
-          postage: 0,
+          postage: product.courier || constants.defaultCourier,
           destination_id: this.user && this.user.country_id || constants.defaultDestination,
-          collection_method: 'pickup',
+          collection_method: 'courier',
           count: Number(selections.count),
-          shipping_address: constants.defaultShippingAddress || {},
+          shipping_address: (this.user && this.user.address) || {line_1: '', line_2: '', zip: '', city: ''},
           delivery_date: deliveryDate.toISOString()
         };
         this.selectOptions(selections);
@@ -129,9 +129,12 @@ export class CheckoutVM {
     if (this.request.collection_method === 'pickup') {
       this.request.shipping_address = this.constants.defaultShippingAddress;
       this.request.postage = 0;
-    } else {
+    } else if (this.request.collection_method === 'post') {
       this.request.shipping_address = this.user && this.user.address;
       this.request.postage = this.product.postage || constants.defaultPostage;
+    } else if (this.request.collection_method === 'courier') {
+      this.request.shipping_address = this.user && this.user.address;
+      this.request.postage = this.product.courier || constants.defaultCourier;
     }
     this.request.total_price = PriceService.getPrice(this.request, this.product);
   }

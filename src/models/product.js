@@ -1,26 +1,27 @@
 import {ValidationRules} from 'aurelia-validation';
 
 export class Product {
-  name;
-  category_id;
   brand_id;
-  source_id;
-  order_count;
-  preorder;
-  featured;
-  price;
-  postage;
-  weight;
-  dimensions;
-  platform_charge;
-  delivery_time;
+  category_id;
   colors;
-  variations;
-  sizes;
-  gallery;
+  courier;
   currency;
-  url;
+  delivery_time;
   description;
+  dimensions;
+  featured;
+  gallery;
+  name;
+  order_count;
+  platform_charge;
+  postage;
+  preorder;
+  price;
+  sizes;
+  source_id;
+  url;
+  variations;
+  weight;
 }
 
 ValidationRules
