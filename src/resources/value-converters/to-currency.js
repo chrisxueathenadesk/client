@@ -1,3 +1,5 @@
+import {PriceService} from '~/services/price';
+
 export class ToCurrencyValueConverter {
   toView(input) {
     if (!input) {
@@ -10,6 +12,10 @@ export class ToCurrencyValueConverter {
     }
     if (postDecimal.length === 0) {
       result = input.toString() + '.' + '00';
+    }
+    if (postDecimal.length > 1 ) {
+      const ceilValue = PriceService.getCeiling(input, -1);
+      result = ceilValue.toString();
     }
     return result;
   }
