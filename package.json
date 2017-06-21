@@ -19,6 +19,7 @@
     "aurelia-fetch-client": "^1.1.1",
     "aurelia-google-analytics": "^2.3.0",
     "aurelia-validation": "^1.0.0",
+    "babel-polyfill": "^6.23.0",
     "bluebird": "^3.5.0",
     "bourbon": "^5.0.0-beta.7",
     "bourbon-neat": "^2",
