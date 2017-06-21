@@ -5,8 +5,10 @@ import {UploadService} from '~/services/upload';
 import {ValidationController} from 'aurelia-validation';
 import {ValidationRenderer} from '~/services/validation-renderer';
 import {Product} from '~/models/product';
+import {constants} from '~/services/constants';
+import {PriceService} from '~/services/price';
 
-@inject(Api, UploadService, NewInstance.of(ValidationController))
+@inject(Api, UploadService, PriceService, NewInstance.of(ValidationController))
 export class CreateProduct {
   counter = {
     size: 0,
@@ -16,10 +18,11 @@ export class CreateProduct {
   gallery = [];
   status = {};
   product = new Product();
-  constructor(api, upload, controller) {
+  constructor(api, upload, price, controller) {
     this.controller = controller;
     this.api = api;
     this.upload = upload;
+    this.price = price;
     this.controller.addRenderer(new ValidationRenderer());
   }
 
@@ -40,6 +43,12 @@ export class CreateProduct {
       .catch(err => console.log(err));
 
     this.product.shop_id = Number(params.shop_id);
+    this.product.postage = constants.defaultPostage;
+    this.product.courier = constants.defaultCourier;
+  }
+
+  async getPrice() {
+    this.product.price = await this.price.calculatePrice(this.product);
   }
 
   add(property, counter) {
@@ -107,7 +116,12 @@ export class CreateProduct {
             .then(response => {
               this.status.inprogress = false;
               notify().log('Successfully created!');
-              this.product = {shop_id: this.product.shop_id};
+              this.product = {
+                shop_id: this.product.shop_id,
+                source_id: this.product.source_id,
+                postage: constants.defaultPostage,
+                courier: constants.defaultCourier
+              };
               this.gallery = null;
             })
             .catch(err => {
