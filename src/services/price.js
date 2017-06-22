@@ -6,7 +6,7 @@ function marginCalculator(cost, tiers) {
     const rate = tier.rate / 100;
     if (cost > tier.min && cost < tier.max) {
       // if it's greater than min but less than max
-      return Math.abs(cost - tier.max) * rate;
+      return (cost - tier.min) * rate;
     } else if (cost <= tier.min) {
       // if the product is lower than the price bracket
       return 0;
