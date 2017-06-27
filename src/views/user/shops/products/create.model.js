@@ -4,19 +4,22 @@ export class Product {
   brand_id;
   category_id;
   colors;
+  cost;
   courier;
   currency;
   delivery_time;
+  delta;
   description;
   dimensions;
   featured;
   gallery;
+  local_delivery_fee;
   name;
   order_count;
   platform_charge;
   postage;
-  preorder;
   price;
+  preorder;
   sizes;
   source_id;
   url;
@@ -29,6 +32,9 @@ ValidationRules
     .required()
   .ensure(product => product.name)
     .required()
+  .ensure(product => product.price)
+    .required()
+    .satisfiesRule('numberRange', 1, 10000)
   .ensure(product => product.source_id)
     .required()
   .ensure(product => product.delivery_time)
@@ -37,9 +43,6 @@ ValidationRules
   .ensure(product => product.description)
     .minLength(100)
     .required()
-  .ensure(product => product.price)
-    .required()
-    .satisfiesRule('numberRange', 1, 10000)
   .ensure(product => product.currency)
     .required()
   .on(Product);
