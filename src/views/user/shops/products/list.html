@@ -14,6 +14,11 @@
         <select value.bind="products.params.filter['source_id:eq']" change.delegate="getProducts()">
           <option model.bind="null">Choose</option>
           <option repeat.for="country of countries.data" model.bind="country.id">${country.name}</option>
+        </select>
+      </div>
+      <div class="shop-products-list__filter__source">
+        <label>Requires Price Breakdown</label>
+        <input type="checkbox" checked.bind="products.params.filter['cost:isNull']" change.delegate="getProducts()"/>
       </div>
       <div class="shop-products-list__filter__create">
         <a href.bind="'user/shops/' + shop.data.id + '/products/create'">
@@ -24,6 +29,10 @@
     </section>
     <section>
       <table>
+        <tr>
+          <th>Name</th>
+          <th>Created At</th>
+        </tr>
         <tr repeat.for="product of products.data">
           <td>
             <a href.bind="'user/shops/' + shop.data.id + '/products/' + product.id + '/edit'" >${product.name}</a>

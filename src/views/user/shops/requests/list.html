@@ -25,6 +25,11 @@
   </section>
   <section>
     <table>
+      <tr>
+        <th>Name</th>
+        <th>Status</th>
+        <th>Due Date</th>
+      </tr>
       <tr repeat.for="request of requests.data">
         <td><a href.bind="'user/shops/' + shop.data.id + '/requests/' + request.id">${request.product.name}</a></td>
         <td>${request.status}</td>
