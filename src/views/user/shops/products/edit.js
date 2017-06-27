@@ -2,6 +2,7 @@ import {inject} from 'aurelia-framework';
 import {Api} from '~/services/api';
 import {notify} from '~/services/notification';
 import {utilities} from '~/services/utilities';
+import {PriceService} from '~/services/price';
 
 @inject(Api)
 export class EditProductView {
@@ -20,6 +21,10 @@ export class EditProductView {
       .catch(err => {
         console.log(err);
       });
+  }
+
+  getPrice() {
+    this.newProduct.price = PriceService.calculatePrice(this.newProduct);
   }
 
   edit() {
