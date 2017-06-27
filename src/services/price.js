@@ -1,5 +1,4 @@
-import {inject} from 'aurelia-framework';
-import {Api} from '~/services/api';
+import {CountryStore} from '~/stores/country';
 
 function marginCalculator(cost, tiers) {
   const marginSpread = tiers.map(tier => {
@@ -42,15 +41,12 @@ function decimalAdjust(type, value, exp) {
   return +(value[0] + 'e' + (value[1] ? (+value[1] + exp) : exp));
 }
 
-@inject(Api)
 export class PriceService {
-  constructor(api) {
-    this.api = api;
-  }
 
-  async calculatePrice(product) {
-    const country = await this.api.fetch(`countries/${product.source_id}`);
-    return PriceService.getCeiling(product.cost + marginCalculator(product.cost, country.tiers) + (product.cost * 0.07) + (product.weight * country.ems_fee) + (product.local_delivery_fee || 0) + (product.price_override || 0), -1);
+  static calculatePrice(product) {
+    const country = CountryStore.countries.find((cntry) => cntry.id === product.source_id);
+    const price = PriceService.getCeiling(product.cost + marginCalculator(product.cost, country.tiers) + (product.cost * 0.07) + (product.weight * country.ems_fee) + (product.local_delivery_fee || 0) + (product.price_override || 0), -1);
+    return price || product.price;
   }
 
   static getCeiling(value, exp) {
@@ -72,7 +68,7 @@ export class PriceService {
   }
 
   static getPrice(request, product) {
-    return request.count * (product.price + this.getDelta(request)) + (request.postage || 0);
+    return request.count * (PriceService.calculatePrice(product) + this.getDelta(request)) + (request.postage || 0);
   }
 }
 
