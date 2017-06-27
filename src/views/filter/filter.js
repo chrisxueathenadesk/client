@@ -1,6 +1,7 @@
 import {inject} from 'aurelia-framework';
 import {Api} from '~/services/api';
 import {EventAggregator} from 'aurelia-event-aggregator';
+import {PriceService} from '~/services/price';
 
 @inject(Api, EventAggregator)
 export class FilterView {
@@ -28,8 +29,11 @@ export class FilterView {
     this.api
       .fetch('products', this.products.params)
       .then(items => {
+        this.products.data = items.results.map(product => {
+          product.price = PriceService.calculatePrice(product);
+          return product;
+        });
         this.products.total = items.total;
-        this.products.data = items.results;
       })
       .catch(error => {
         this.products.error = error;
