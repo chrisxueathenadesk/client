@@ -4,11 +4,11 @@ import {notify} from '~/services/notification';
 import {UploadService} from '~/services/upload';
 import {ValidationController} from 'aurelia-validation';
 import {ValidationRenderer} from '~/services/validation-renderer';
-import {Product} from '~/models/product';
+import {Product} from './create.model';
 import {constants} from '~/services/constants';
 import {PriceService} from '~/services/price';
 
-@inject(Api, UploadService, PriceService, NewInstance.of(ValidationController))
+@inject(Api, UploadService, NewInstance.of(ValidationController))
 export class CreateProduct {
   counter = {
     size: 0,
@@ -18,11 +18,10 @@ export class CreateProduct {
   gallery = [];
   status = {};
   product = new Product();
-  constructor(api, upload, price, controller) {
+  constructor(api, upload, controller) {
     this.controller = controller;
     this.api = api;
     this.upload = upload;
-    this.price = price;
     this.controller.addRenderer(new ValidationRenderer());
   }
 
@@ -47,8 +46,8 @@ export class CreateProduct {
     this.product.courier = constants.defaultCourier;
   }
 
-  async getPrice() {
-    this.product.price = await this.price.calculatePrice(this.product);
+  getPrice() {
+    this.product.price = PriceService.calculatePrice(this.product);
   }
 
   add(property, counter) {
