@@ -4,6 +4,7 @@ import {AuthService} from 'aurelia-auth';
 import {UserService} from '~/services/user';
 import {Api} from '~/services/api';
 import {ValidationRules} from 'aurelia-validation';
+import {CountryStore} from '~/stores/country';
 import {customRules} from '~/services/validation-rules';
 
 @inject(FetchConfig, AuthService, UserService, Api)
@@ -17,8 +18,9 @@ export class App {
     ValidationRules.customRule(...customRules.numberRange);
   }
 
-  activate() {
+  async activate() {
     this.fetchConfig.configure();
+    CountryStore.countries = (await this.api.fetch('countries')).results;
 
     if (this.auth.isAuthenticated()) {
       this.api.fetch('me', {include: ['country', 'shops']})
