@@ -50,10 +50,10 @@ export class App {
         title: 'Home'
       },
       {
-        route: 'categories',
-        name: 'categories',
-        moduleId: 'views/categories/index',
-        title: 'Categories'
+        route: 'collections',
+        name: 'collections',
+        moduleId: 'views/collection/index',
+        title: 'Collections'
       },
       {
         route: 'products/:product_id',

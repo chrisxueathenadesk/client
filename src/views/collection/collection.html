@@ -1,0 +1,10 @@
+<template>
+  <require from="./collection.css"></require>
+  <div>
+    <section>
+      <a href.bind="'products/' + collectionproduct.product.id" repeat.for="collectionproduct of collectionproducts.data">
+        ${collectionproduct.product.name}
+      </a>
+    </section>
+  </div>
+</template>
