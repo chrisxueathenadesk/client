@@ -47,7 +47,7 @@ export class CheckoutVM {
 
   getProduct(id, selections) {
     this.api
-      .fetch(`products/${id}`)
+      .fetch(`products/${id}`, {include: ['source']})
       .then(product => {
         this.product = product;
         const currentDay = new Date(Date.now());
@@ -55,6 +55,12 @@ export class CheckoutVM {
         this.request = {
           source_id: product.source_id,
           base_price: product.price,
+          cost: product.cost,
+          tiers: product.source.tiers,
+          local_delivery_fee: product.local_delivery_fee,
+          delta: product.price_override,
+          ems_fee: product.source.ems_fee,
+          weight: product.weight,
           postage: product.courier || constants.defaultCourier,
           destination_id: this.user && this.user.country_id || constants.defaultDestination,
           collection_method: 'courier',
