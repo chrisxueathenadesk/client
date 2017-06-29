@@ -2,6 +2,7 @@
 
 .carousel-element {
   position: relative;
+  overflow: hidden;
 
   &__image-container {
     height: auto;
@@ -22,6 +23,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    overflow-x: scroll;
     img {
       height: 10vh;
     }
