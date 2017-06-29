@@ -11,6 +11,15 @@ $categories: (
   &__gallery {
     display: flex;
     justify-content: center;
+    width: 100vw;
+    margin-left: -20px;
+    @include grid-media($desktop) {
+      width: 100%;
+    }
+    img {
+      width: 100vw;
+      object-fit: cover;
+    }
   }
 
   &__categories {
