@@ -38,6 +38,7 @@ export class App {
     config.options.pushState = true;
     config.options.root = '/';
     config.addPipelineStep('authorize', AuthorizeStep);
+    config.addPipelineStep('postcomplete', PostCompleteStep);
     config.map([
       {
         route: '',
@@ -93,3 +94,12 @@ export class App {
   }
 }
 
+class PostCompleteStep {
+  run(instruction, next) {
+    if (!instruction.config.settings.noScrollToTop) {
+      window.scrollTo(0, 0);
+    }
+
+    return next();
+  }
+}
