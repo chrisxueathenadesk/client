@@ -1,4 +1,5 @@
 import {bindable} from 'aurelia-framework';
+import animateScrollTo from 'animated-scroll-to';
 
 export class Pagination {
   @bindable total;
@@ -8,6 +9,7 @@ export class Pagination {
   paginate(pageNumber) {
     this.page.number = pageNumber;
     this.fetcher();
+    animateScrollTo(0);
   }
 }
 

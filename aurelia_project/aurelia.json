@@ -182,7 +182,8 @@
             "main": "index",
             "path": "../node_modules/aurelia-google-analytics/dist/amd",
             "resources": []
-          }
+          },
+          "animated-scroll-to"
         ]
       }
     ]

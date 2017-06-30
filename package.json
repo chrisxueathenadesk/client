@@ -12,6 +12,7 @@
     "build": "au build --env prod"
   },
   "dependencies": {
+    "animated-scroll-to": "^1.1.1",
     "aurelia-animator-css": "^1.0.2",
     "aurelia-auth": "^3.0.5",
     "aurelia-bootstrapper": "^2.1.1",
