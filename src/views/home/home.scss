@@ -23,22 +23,25 @@ $categories: (
     }
   }
 
+  &__collections {
+    margin-top: 1rem;
+    &__collection {
+      &__image {
+        width: 100%;
+        height: 20vh;
+        object-fit: cover;
+      }
+    }
+  }
+
   &__categories {
     margin-top: 1rem;
-    @include grid-media($tablet) {
-      @include grid-column(4, $categories);
-    }
     &__category {
-      @include grid-column(6, $categories);
+      @include grid-column(4, $categories);
       @include grid-media($tablet) {
-        @include grid-column(6, $categories);
-      }
-      @include grid-media($desktop) {
-        @include grid-column(6, $categories);
+        @include grid-column(2, $categories);
       }
       position: relative;
-      &__image {
-      }
 
       &__title {
         bottom: calc(50% - 1.6em/2);
@@ -57,13 +60,10 @@ $categories: (
     margin-top: 1rem;
     @include grid-container;
     &__cards {
-      @include grid-media($tablet) {
-        @include grid-column(8);
-      }
       &__card {
         @include grid-column(12);
         @include grid-media($tablet) {
-          @include grid-column(6);
+          @include grid-column(4);
         }
       }
     }

@@ -7,6 +7,7 @@ export class HomeView {
   countries = {};
   categories = {};
   announcements = {};
+  collections = {};
 
   constructor(api, router) {
     this.api = api;
@@ -14,13 +15,12 @@ export class HomeView {
     this.popular = {
       params: {
         filter: {
-          'active:eq': true,
           'order_count:gt': 0
         },
         include: ['source'],
         sort: '-order_count',
         page: {
-          size: 6,
+          size: 12,
           number: 0
         }
       }
@@ -32,6 +32,7 @@ export class HomeView {
     this.getCountries();
     this.getCategories();
     this.getAnnouncements();
+    this.getCollections();
   }
 
   getCategories() {
@@ -43,6 +44,18 @@ export class HomeView {
       .catch(error => {
         console.log(error);
         this.categories.error = error;
+      });
+  }
+
+  getCollections() {
+    this.api
+      .fetch('collections', {page: {size: 4, number: 0}})
+      .then(response => {
+        this.collections.data = response.results;
+      })
+      .catch(error => {
+        console.log(error);
+        this.collections.error = error;
       });
   }
 
