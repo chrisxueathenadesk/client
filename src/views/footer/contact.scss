@@ -1,0 +1,14 @@
+.contact {
+    &__header {
+        font-weight: bold;
+    }
+    &__title {
+        padding-top: 1rem;
+    }
+    &__paragraph {
+        &__link {
+            text-decoration: underline;
+        }
+    }
+}
+

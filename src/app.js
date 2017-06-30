@@ -87,6 +87,22 @@ export class App {
         nav: true,
         moduleId: 'views/auth/index',
         title: 'Login'
+      },
+      {
+        route: 'refunds',
+        name: 'refunds',
+        auth: false,
+        nav: false,
+        moduleId: 'views/footer/refunds',
+        title: 'Refunds'
+      },
+      {
+        route: 'contact',
+        name: 'contact',
+        auth: false,
+        nav: false,
+        moduleId: 'views/footer/contact',
+        title: 'Contact'
       }
     ]);
 
