@@ -23,6 +23,13 @@
     </div>
 
     <div class="edit-product__description">
+      <label>
+        Collection
+        <select value.bind="collectionId" change.delegate="updateCollection(collectionId)">
+          <option model.bind="null">Choose</option>
+          <option repeat.for="collection of collections" model.bind="collection.id">${collection.name}</option>
+        </select>
+      </label>
       <label>Description</label>
       <div class="edit-product__description__editor">
         <textarea value.bind="newProduct.description"></textarea>

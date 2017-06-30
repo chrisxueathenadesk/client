@@ -21,6 +21,22 @@ export class EditProductView {
       .catch(err => {
         console.log(err);
       });
+
+    this.api
+      .fetch('collections')
+      .then(data => {
+        this.collections = data.results;
+      })
+      .catch(err => {
+        notify.log(err.message);
+      });
+  }
+
+  updateCollection(collectionId) {
+    this.api
+      .create(`collections/${collectionId}/collectionproducts`, { product_id: this.product.id })
+      .then(success => notify().log('Successfully Updated'))
+      .catch(err => notify().log(err.message));
   }
 
   getPrice() {
