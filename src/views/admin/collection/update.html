@@ -1,0 +1,19 @@
+<template>
+  <require from="./update.css"></require>
+  <div class="collection-update">
+    <div>
+      <i class="icon ion-close" click.delegate="controller.cancel()"></i>
+    </div>
+    <form submit.delegate="update()">
+      <div class="collection-update__title">
+        <label>Name</label>
+        <input value.bind="newCollection.name"/>
+      </div>
+      <div class="collection-update__image">
+        <label>Image</label>
+        <input type="file" files.bind="image | toArray"/>
+      </div>
+      <button type="submit">Edit</button>
+    </form>
+  </div>
+</template>

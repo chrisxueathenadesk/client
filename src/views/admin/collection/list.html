@@ -1,0 +1,27 @@
+<template>
+  <require from="./list.css"></require>
+
+  <div class="collection-list">
+    <a route-href="route: create">
+      <i class="icon ion-plus"></i>
+      Create
+    </a>
+    <table>
+      <tr repeat.for="collection of collections.data">
+        <td>
+          <img src.bind="collection.banner" alt=""/>
+        </td>
+        <td>
+          ${collection.name}
+        </td>
+        <td>
+          <i click.delegate="edit(collection)" class="icon ion-edit"></i>
+        </td>
+        <td>
+          <i click.delegate="delete(collection.id)" class="icon ion-trash-b"></i>
+        </td>
+      </tr>
+    </table>
+  </div>
+</template>
+
