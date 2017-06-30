@@ -17,7 +17,7 @@ export class BrandCreateView {
         if (!res) {
           return Promise.resolve();
         }
-        this.brand.image = res.signed_request.split('?')[0];
+        this.brand.logo = res.signed_request.split('?')[0];
         return this.http.fetch(res.signed_request, {
           method: 'PUT',
           body: this.image[0]
