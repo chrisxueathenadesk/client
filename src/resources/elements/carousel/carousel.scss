@@ -20,10 +20,9 @@
   }
 
   &__preview {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    overflow-x: scroll;
+    display: inline-block;
+    white-space: nowrap;
+    overflow-x: auto;
     img {
       height: 10vh;
     }
