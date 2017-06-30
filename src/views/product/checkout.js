@@ -45,13 +45,21 @@ export class CheckoutVM {
     this.getProduct(Number(params.product_id), params);
   }
 
+  getBufferDays(countryId) {
+    if (countryId === 1) {
+      return 3;
+    } else if (countryId === 2) {
+      return 4;
+    }
+  }
+
   getProduct(id, selections) {
     this.api
       .fetch(`products/${id}`, {include: ['source']})
       .then(product => {
         this.product = product;
-        const currentDay = new Date(Date.now());
-        const deliveryDate = new Date(currentDay.setDate(currentDay.getDate() + 7 * product.delivery_time));
+        const currentDay = new Date();
+        const deliveryDate = new Date(currentDay.setDate(currentDay.getDate() + 4 + this.getBufferDays(product.source_id)));
         this.request = {
           source_id: product.source_id,
           base_price: product.price,
