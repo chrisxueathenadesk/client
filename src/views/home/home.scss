@@ -15,6 +15,7 @@ $categories: (
     margin-left: -20px;
     @include grid-media($desktop) {
       width: 100%;
+      margin-left: 0px;
     }
     img {
       width: 100vw;

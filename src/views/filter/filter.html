@@ -19,9 +19,9 @@
       <label class="filter-container__filters__order">
         Order By
         <select value.bind="products.params.sort" change.delegate="getProducts()">
-          <option model.bind="-id">Latest</option>
-          <option model.bind="-order_count">Popularity</option>
-          <option value="price">Price</option>
+          <option value="-id">Latest</option>
+          <option value="-order_count">Popularity</option>
+          <option value="-price">Price</option>
         </select>
       </label>
     </section>
