@@ -8,7 +8,7 @@ export class ShopProductListVM {
     params: {
       filter: {},
       page: {
-        size: 10,
+        size: 20,
         number: 0
       }
     }

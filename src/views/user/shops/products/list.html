@@ -2,6 +2,11 @@
   <require from="./list.css"></require>
   <div class="shop-products-list">
     <section class="shop-products-list__filter">
+      <div class="shop-products-list__filter__search">
+        <form submit.delegate="getProducts()">
+          <input placeholder="Search Products" value.bind="products.params.filter['name:search']">
+        </form>
+      </div>
       <div class="shop-products-list__filter__category">
         <label>Category</label>
         <select value.bind="products.params.filter['category_id:eq']" change.delegate="getProducts()">
