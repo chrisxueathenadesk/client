@@ -1,1 +1,36 @@
 @import '../../style/base';
+
+.collection {
+  &__header {
+    &__banner {
+      width: 100vw;
+      margin-left: -20px;
+
+      @include grid-media($desktop) {
+        width: 100%;
+        margin-left: 0px;
+      }
+
+      img {
+        width: 100vw;
+        height: 40vh;
+        object-fit: cover;
+      }
+    }
+    h1 {
+      text-align: center;
+      font-size: 2rem;
+    }
+  }
+  &__products > ul {
+    @include grid-container;
+
+    li {
+    @include grid-column(12);
+    @include grid-media($desktop) {
+      @include grid-column(4);
+    }
+
+    }
+  }
+}

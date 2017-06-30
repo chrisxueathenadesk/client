@@ -1,10 +1,18 @@
 <template>
   <require from="./collection.css"></require>
-  <div>
-    <section>
-      <a href.bind="'products/' + collectionproduct.product.id" repeat.for="collectionproduct of collectionproducts.data">
-        ${collectionproduct.product.name}
-      </a>
+  <div class="collection">
+    <section class="collection__header">
+      <div class="collection__header__banner">
+        <img src.bind="collection.data.banner" alt=""/>
+      </div>
+      <h1>${collection.data.name}</h1>
+    </section>
+    <section class="collection__products">
+      <ul>
+        <li repeat.for="collectionproduct of collectionproducts.data">
+          <product-card class="product-card" product.bind="collectionproduct.product"></product-card>
+        </li>
+      </ul>
     </section>
   </div>
 </template>
