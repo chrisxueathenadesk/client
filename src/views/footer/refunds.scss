@@ -1,5 +1,12 @@
 .refunds {
     li {
-        list-style-type: disc
+        list-style-type: disc;
+    }
+    
+    ul {
+        margin-left: 1rem;
+    }
+    .refunds__header {
+        padding-top: 1rem;
     }
 }
