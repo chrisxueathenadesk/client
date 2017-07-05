@@ -24,6 +24,12 @@
 
 .card-entry {
   &__submit {
+    margin-top: 0.8rem;
+  }
+  &__accept {
     margin-top: 0.5rem;
+    max-height: 3rem;
+    float: right;
+    display: inline-block;
   }
 }
