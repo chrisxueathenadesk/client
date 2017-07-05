@@ -89,20 +89,11 @@ export class App {
         title: 'Login'
       },
       {
-        route: 'refunds',
-        name: 'refunds',
+        route: 'info',
+        name: 'info',
         auth: false,
         nav: false,
-        moduleId: 'views/footer/refunds',
-        title: 'Refunds'
-      },
-      {
-        route: 'contact',
-        name: 'contact',
-        auth: false,
-        nav: false,
-        moduleId: 'views/footer/contact',
-        title: 'Contact'
+        moduleId: 'views/info/index'
       }
     ]);
 
