@@ -21,7 +21,7 @@ export class CollectionView {
       .catch(err => this.collection.error = err);
 
     this.api
-      .fetch(`collections/${param.collection_id}/collectionproducts`, {include: ['product']})
+      .fetch(`collections/${param.collection_id}/collectionproducts`, {include: ['product', 'product.source']})
       .then(products => {
         this.collectionproducts.data = products.results;
       })
