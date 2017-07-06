@@ -29,18 +29,17 @@ export class CollectionUpdateView {
   }
 
   update() {
-    const updatedValues = filterUntouchedProperties(this.collection, this.newCollection);
     (this.image ? this.upload.uploadImages(this.image, 'collection') : Promise.resolve())
       .then(res => {
         if (!res) {
           return Promise.resolve();
         }
-        this.newCollection.banner = uploads.map(file => file.url.split('?')[0])[0];
-        return this.api.edit(`collections/${this.collection.id}`, updatedValues);
+        this.newCollection.banner = res.map(file => file.url.split('?')[0])[0];
+        return this.api.edit(`collections/${this.collection.id}`, filterUntouchedProperties(this.collection, this.newCollection));
       })
     .then(success => {
       notify().log('Successfully updated');
-      this.controller.ok(Object.assign({}, this.collection, updatedValues));
+      this.controller.ok();
     })
     .catch(err => {
       this.controller.cancel();
